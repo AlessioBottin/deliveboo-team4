@@ -1,0 +1,18 @@
+@import 'variabili';
+@import url('http://fonts.cdnfonts.com/css/american-purpose-stripe-1-4');
+@import url('http://fonts.cdnfonts.com/css/maximum-impact');
+@import url('http://fonts.cdnfonts.com/css/gadugi');
+
+.main-color {
+    color: $main_color;
+}
+
+.logo {
+    font-family: 'American Purpose';
+    color: $main_color;
+}
+
+.title {
+    font-family: 'Maximum Impact';
+}
+
