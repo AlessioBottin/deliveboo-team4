@@ -1,4 +1,17 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(http://fonts.cdnfonts.com/css/american-purpose-stripe-1-4);@import url(http://fonts.cdnfonts.com/css/maximum-impact);@import url(http://fonts.cdnfonts.com/css/gadugi);@charset "UTF-8";
+
+.main-color {
+  color: #ffce08;
+}
+
+.logo {
+  font-family: "American Purpose";
+  color: #ffce08;
+}
+
+.title {
+  font-family: "Maximum Impact";
+}
 
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
