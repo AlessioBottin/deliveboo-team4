@@ -28,5 +28,9 @@ export default {
 
     }
 
-
+@media screen and (max-width: 768px) {
+    .bg-jumbo{
+        height: 400px;
+    }
+}
 </style>
