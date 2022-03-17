@@ -36,15 +36,14 @@ header {
 
     padding: 15px;
 
+    .logo {
+        font-size: 50px;
+    }
+    
     .title {
         font-size: 24px;
         margin: 0 10px;
     }
-
-    .logo {
-        font-size: 50px;
-    }
-
 
     }
 
