@@ -5,8 +5,8 @@ Vue.use(VueRouter);
 
 import Home from './pages/Home.vue';
 import AdvanceResearch from './pages/AdvanceResearch.vue';
-import RestaurantDetails from './pages/RestaurantDetails.vue';
 import Payment from './pages/Payment.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = new VueRouter({
     mode: "history",
@@ -19,12 +19,12 @@ const router = new VueRouter({
         {
             path: "/advanceResearch",
             name: "advanceResearch",
-            component: About
+            component: AdvanceResearch
         },
         {
             path: "/payment",
             name: "payment",
-            component: Blog
+            component: Payment
         },
         {
             path: "/*",
