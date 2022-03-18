@@ -3,8 +3,8 @@
 
 // Variables
 @import 'variables';
-@import 'variabili';
-@import 'utilities';
+@import './partials/variables';
+@import './partials/utilities';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
