@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="body">
         <Header />
         <Jumbotron />
         <Footer />
@@ -23,6 +23,8 @@ export default {
 </script>
 
 <style lang="scss">
-   
+   .body {
+       background-color: white;
+   }
 
 </style>
