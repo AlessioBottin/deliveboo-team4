@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(http://fonts.cdnfonts.com/css/american-purpose-stripe-1-4);@import url(http://fonts.cdnfonts.com/css/maximum-impact);@import url(http://fonts.cdnfonts.com/css/gadugi);@charset "UTF-8";
+@import url(http://fonts.cdnfonts.com/css/american-purpose-stripe-1-4);@import url(http://fonts.cdnfonts.com/css/maximum-impact);@import url(http://fonts.cdnfonts.com/css/gadugi);@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 .main-color {
   color: #ffce08;
 }
@@ -18,6 +18,24 @@
 
 .body {
   background-color: white;
+}
+
+img {
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /*!
