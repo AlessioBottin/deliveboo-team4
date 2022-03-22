@@ -51,8 +51,19 @@
 
                         <!-- list  -->
                         <ul class="list">
-                            <li class="restaurant-card" v-for="(restaurant, index) in restaurants" :key="index">
-                                Ciao
+                            <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurants" :key="index">
+                                <div class="row row-cols-sm-1 row-cols-md-3">
+                                    <!-- Img  -->
+                                    <div class="col"><img src="https://www.villacrespi.it/wp-content/uploads/2018/10/Villa-Crespi-San-Valentino-1-uai-1000x666.jpg" :alt="restaurant.name"></div>
+                                    <!-- Restaurant Info  -->
+                                    <div class="col">
+                                        <h4>{{restaurant.name}}</h4>
+                                    </div>
+                                    <!-- Delivery Info  -->
+                                    <div class="col">
+                                        <p>Consegna GRATIS</p>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
