@@ -1,6 +1,7 @@
 <template>
-    <div class="d-flex justify-content-lg-center mt-5">
-        <div class="row row-xl-cols-6 row-md-cols-3 row-sm-cols-2 justify-content-start">
+    <div class="d-flex justify-content-lg-center">
+
+        <div class="row row-xl-cols-6 row-md-cols-3 row-sm-cols-2">
             <div class="col test">
                 <div class="card" style="width: 9rem;">
                     <img src="https://banner2.cleanpng.com/20180424/cgw/kisspng-mcdonald-s-big-mac-hamburger-big-n-tasty-cheesebu-mcdonalds-5adef6fb6fd888.4092768115245616594581.jpg" class="card-img-top" alt="">
