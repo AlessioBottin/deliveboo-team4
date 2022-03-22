@@ -3,6 +3,7 @@
         <Header />
         <Jumbotron />
         <Category />
+        
     </div>
 </template>
 

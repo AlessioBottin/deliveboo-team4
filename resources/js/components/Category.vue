@@ -77,5 +77,20 @@ export default {
     justify-content: center;
 }
 
+.card {
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
+}
+
+.card:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.37);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.37);
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.37);
+
+}
+
 
 </style>
