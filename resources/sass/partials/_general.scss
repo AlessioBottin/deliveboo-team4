@@ -11,6 +11,12 @@ ul {
 // A reset 
 a {
     color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 // General reset 

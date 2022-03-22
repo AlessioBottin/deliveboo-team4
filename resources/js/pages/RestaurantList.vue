@@ -30,11 +30,23 @@
                 </div>
 
                 <!-- Content  -->
-                <div class="content d-flex justify-content-between">
+                <div class="content d-md-flex justify-content-md-between">
 
                     <!-- Filters  -->
-                    <div class="filters">
-                        Filtri
+                    <div class="filters d-sm-none d-md-block">
+                        <h4 class="mb-4">Filtri</h4>
+
+                        <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
+                        fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
+                        <ul class="categories-aside">
+                            <li class="category mb-4 d-flex justify-content-between" v-for="n in 10" :key="n">
+                                <!-- Al click sulla categoria deve essere settato il filtro  -->
+                                <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
+                                <span>Categoria</span>
+                                <span class="check"><i class="fa-solid fa-check"></i></span>
+                            </li>
+                        </ul>
+
                     </div>
 
                     <!-- results -->
@@ -52,27 +64,29 @@
                         <!-- list  -->
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurants" :key="index">
-                                <div class="row">
+                                <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.name } }">
+                                    <div class="row">
 
-                                    <!-- Img  -->
-                                    <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img src="https://www.villacrespi.it/wp-content/uploads/2018/10/Villa-Crespi-San-Valentino-1-uai-1000x666.jpg" :alt="restaurant.name"></div>
-                                    
-                                    <!-- Restaurant Info  -->
-                                    <div class="col-sm-12 col-md-6 restaurant-info">
-                                        <h4 class="mb-0">{{restaurant.name}}</h4>
-                                        <span class="restaurant-categories">Categorie: Dolci, Gelato</span>
-                                        <div class="rating d-flex">
-                                            <span class="stars d-inline-block" v-for="star in ratingForTesting" :key="star"><i class="fa-solid fa-star"></i></span>
-                                            <span class="gray-stars d-inline-block" v-for="star in (5 - ratingForTesting)" :key="star+restaurant.name"><i class="fa-solid fa-star"></i></span>
-                                            <span class="voters ml-2">2345</span>
+                                        <!-- Img  -->
+                                        <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img src="https://www.villacrespi.it/wp-content/uploads/2018/10/Villa-Crespi-San-Valentino-1-uai-1000x666.jpg" :alt="restaurant.name"></div>
+                                        
+                                        <!-- Restaurant Info  -->
+                                        <div class="col-sm-12 col-md-6 restaurant-info">
+                                            <h4 class="mb-0">{{restaurant.name}}</h4>
+                                            <span class="restaurant-categories">Categorie: Dolci, Gelato</span>
+                                            <div class="rating d-flex">
+                                                <span class="stars d-inline-block" v-for="star in ratingForTesting" :key="star"><i class="fa-solid fa-star"></i></span>
+                                                <span class="gray-stars d-inline-block" v-for="star in (5 - ratingForTesting)" :key="star+restaurant.name"><i class="fa-solid fa-star"></i></span>
+                                                <span class="voters ml-2">2345</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Delivery Info  -->
+                                        <div class="col-sm-12 col-md-4 delivery-info">
+                                            <p>Consegna: <span class="delivery">GRATIS</span></p>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Delivery Info  -->
-                                    <div class="col-sm-12 col-md-4 delivery-info">
-                                        <p>Consegna: <span class="delivery">GRATIS</span></p>
-                                    </div>
-                                </div>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
@@ -262,6 +276,7 @@ section {
     }
     .container {
 
+        // Cateogries Slider
         .categories {
             padding: 30px 0;
         }
@@ -347,8 +362,33 @@ section {
 
                 // Filters 
                 .filters {
-                    background-color: lightcoral;
                     width: 22%;
+
+                    // Categories list aside 
+                    .categories-aside {
+                        .category {
+                            padding: 5px 10px;
+                            border-radius: 15px;
+                            border: 1px solid $main_color; 
+                            display: inline-block;
+
+                            &:hover {
+                                background-color: $main_color;
+                                color: white;
+                    
+                            }
+
+                            .check {
+                                color: $main_color;
+                                display: none;
+
+                                &.active {
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
 
                 // Results 
@@ -385,7 +425,7 @@ section {
                                 img {
                                     width: 100%;
                                     display: inline-block;
-                                    border-radius: 10px;
+                                    border-radius: 10px;                            
                                 }
                             }
 
@@ -411,6 +451,10 @@ section {
                                 }
                             }
                         }
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        width: 100%;
                     }
                 }
             }
