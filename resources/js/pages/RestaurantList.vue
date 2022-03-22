@@ -4,7 +4,7 @@
         <div class="container">
             <!-- Categories  -->
             <div class="categories">
-                Categorie
+                <Category />
             </div>
 
             <!-- List  -->
@@ -16,7 +16,7 @@
                     <!-- User Location  -->
                     <div class="user-location d-sm-flex d-md-block justify-content-sm-between">
                         <i class="fas fa-map-marker-alt"></i> <span>Via Corso, Roma 00187</span>
-                        <router-link class="change-zone" :to="{ name: 'home' }">Cambia Zona</router-link>
+                        <router-link class="change-zone" :to="{ name: 'home' }">Aree Coperte</router-link>
                     </div>
 
                     <!-- Input  -->
@@ -42,7 +42,7 @@
 
                         <!-- Results Info  -->
                         <div class="results-info d-flex justify-content-between">
-                            <span class="n-results">5 ristoranti aperti</span>
+                            <span class="n-results">{{restaurants.length}} ristoranti aperti</span>
                             <div class="order">
                                 <span class="order-by">Ordina per: Rating</span>
                                 <span class="order-by-icon"><i class="fas fa-sort-amount-down"></i></span>
@@ -52,16 +52,25 @@
                         <!-- list  -->
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurants" :key="index">
-                                <div class="row row-cols-sm-1 row-cols-md-3">
+                                <div class="row">
+
                                     <!-- Img  -->
-                                    <div class="col"><img src="https://www.villacrespi.it/wp-content/uploads/2018/10/Villa-Crespi-San-Valentino-1-uai-1000x666.jpg" :alt="restaurant.name"></div>
+                                    <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img src="https://www.villacrespi.it/wp-content/uploads/2018/10/Villa-Crespi-San-Valentino-1-uai-1000x666.jpg" :alt="restaurant.name"></div>
+                                    
                                     <!-- Restaurant Info  -->
-                                    <div class="col">
-                                        <h4>{{restaurant.name}}</h4>
+                                    <div class="col-sm-12 col-md-6 restaurant-info">
+                                        <h4 class="mb-0">{{restaurant.name}}</h4>
+                                        <span class="restaurant-categories">Categorie: Dolci, Gelato</span>
+                                        <div class="rating d-flex">
+                                            <span class="stars d-inline-block" v-for="star in ratingForTesting" :key="star"><i class="fa-solid fa-star"></i></span>
+                                            <span class="gray-stars d-inline-block" v-for="star in (5 - ratingForTesting)" :key="star+restaurant.name"><i class="fa-solid fa-star"></i></span>
+                                            <span class="voters ml-2">2345</span>
+                                        </div>
                                     </div>
+                                    
                                     <!-- Delivery Info  -->
-                                    <div class="col">
-                                        <p>Consegna GRATIS</p>
+                                    <div class="col-sm-12 col-md-4 delivery-info">
+                                        <p>Consegna: <span class="delivery">GRATIS</span></p>
                                     </div>
                                 </div>
                             </li>
@@ -76,10 +85,16 @@
 </template>
 
 <script>
+import Category from '../components/Category.vue';
+
 export default {
     name: 'RestaurantList',
+    components: {
+        Category
+    },
     data: function() {
         return {
+            ratingForTesting: 4,
             researchInput: '',
             restaurants: [ 
                 {
@@ -241,12 +256,14 @@ export default {
 
 section {
     margin-top: 98px;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 125px;
+    }
     .container {
 
-        // Categories 
         .categories {
-            height: 200px;
-            background-color: lightblue; //!TEST 
+            padding: 30px 0;
         }
 
         // Restaurant List 
@@ -311,7 +328,7 @@ section {
                         top: 100px;
                         left: 50%;
                         transform: translate(-50%);
-                        width: 100%;
+                        width: 80%;
 
                         .research-input {
                             
@@ -362,6 +379,37 @@ section {
                             -o-box-shadow: 0px -1px 15px -5px #000000;
                             box-shadow: 0px -1px 15px -5px #000000;
                             margin-bottom: 20px;
+                            
+                            // Image 
+                            .restaurant-img {        
+                                img {
+                                    width: 100%;
+                                    display: inline-block;
+                                    border-radius: 10px;
+                                }
+                            }
+
+                            // Restaurant info 
+                            .restaurant-info {
+                                
+                                .rating {
+                                    .stars { 
+                                        color: $main_color;                                
+                                    }
+
+                                    .gray-stars { 
+                                        color: gray;
+                                        
+                                    }
+                                }
+                            }
+
+                            // Delivery nfo 
+                            .delivery-info {
+                                .delivery {
+                                    font-weight: bold;
+                                }
+                            }
                         }
                     }
                 }
