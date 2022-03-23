@@ -1,6 +1,7 @@
 <template>
     <div class="d-flex justify-content-center">
-        <div class="searchbox">
+       
+        <div class="searchbox mb-5">
             <h2 class="title">Il bello è prenderci gusto</h2>
             <p class="text">Ordina online dai tuoi ristoranti preferiti</p>
            
@@ -10,14 +11,17 @@
                     <form>
                         <label for="name">
                             <input type="text" id="address" placeholder="address">
-                            <span>Indirizzo di consegna</span>
+                            <span>Scegli una categoria</span>
                         </label>
                         <button class="text-button" type="button">Trova i ristoranti!</button>
-                        <i class="fa-solid fa-location-arrow"></i>
+                        
+                        <!-- <i class="fa-solid fa-location-arrow"></i> -->
                         <button class="icon-button" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        
+                        
                     </form>
                 </div>
-                <!-- d-sm-none d-md-block  d-none d-sm-block-->
+                
             </div>
         </div>
     </div>
@@ -30,6 +34,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/app';
+
+.title {
+    // font-size: 2.7vw;
+    font-size: 48px;
+    font-weight: 700;
+    color: $main_color;
+    @media screen and (max-width: 768px) {
+        font-size: 34px;
+    }
+}
 
 .searchbox {
     display: flex;
@@ -37,11 +52,14 @@ export default {
     background-color: white;
     width: 60vw;
     max-width: 800px;
-    height: 210px;
-    border: 1px solid black;
+    height: 234px;
+    // border: 1px solid black;
     border-radius: 15px;
     align-items: center;
     justify-content: center;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
 
     @media screen and (max-width: 1200px) {
         width:95vw;
@@ -49,23 +67,24 @@ export default {
 }
 
 form{
-    border: 1px solid black;
+    position: relative;
+    border: 1px solid #8a8786;
     border-radius: 50px;
     width:45vw;
     max-width: 610px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    
+    justify-content: space-between;    
     // max-width:768px;  
     // padding:3vw;
     // display:flex;
     // flex-direction:column;
-    @media screen and (max-width: 1200px) {
-        width:70vw;
-    }
+        @media screen and (max-width: 1200px) {
+            width:70vw;
+        }
     
 }
+
 
 label{
     // margin-bottom:15px;
@@ -80,6 +99,11 @@ input{
     border:none;
     outline:none;
     font-weight: 600;
+    @media screen and (min-width: 768px) {
+       input {
+         width:50%;  
+       }
+    }
 }
 input::placeholder{
     opacity:0;
@@ -100,16 +124,44 @@ input:not(:placeholder-shown) + span{
 .text-button{
     padding: 10px 22px; 
     margin: 4px;
-    background:#fb6100;
+    background-color:$main_color;
     color:#fff;
-    border:1px solid #fb6100;
+    border:1px solid $main_color;
     cursor:pointer;
     font-size: 20px;
     font-weight: 600;
     border-radius:50px;
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
+        @media screen and (max-width: 767.98px) {
+            display: none;
+        }
 }
+
+.text-button:hover {
+    background-color: #f0c002;
+}
+
+.icon-button{
+    padding: 10px 16px; 
+    margin: 4px;
+    background:$main_color;
+    color:#fff;
+    border:1px solid $main_color;
+    cursor:pointer;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius:50px;
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+}
+
+// .fa-location-arrow {
+//     position: absolute;
+//     font-size: 20px;
+//     color:#fb6100;
+//     @media screen and (min-width: 768px) {
+//         display: none;
+//     }
+// }
 
 </style>
