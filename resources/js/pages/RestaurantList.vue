@@ -4,7 +4,7 @@
         <div class="container">
             <!-- Categories  -->
             <div class="categories">
-                <Category />
+                <Slider />
             </div>
 
             <!-- List  -->
@@ -33,7 +33,7 @@
                 <div class="content d-md-flex justify-content-md-between">
 
                     <!-- Filters  -->
-                    <div class="filters d-sm-none d-md-block">
+                    <div class="filters d-none d-md-block">
                         <h4 class="mb-4">Filtri</h4>
 
                         <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
@@ -99,12 +99,12 @@
 </template>
 
 <script>
-import Category from '../components/Category.vue';
+import Slider from '../components/Slider.vue';
 
 export default {
     name: 'RestaurantList',
     components: {
-        Category
+        Slider
     },
     data: function() {
         return {
