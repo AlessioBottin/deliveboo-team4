@@ -9,15 +9,17 @@
                 </div>
 
                 <div class="flex-grow-1">
-                    <h1 class="logo">DELIVEBOO</h1>
+                    <router-link :to="{ name: 'home' }">
+                        <h1 class="logo">DELIVEBOO</h1>
+                    </router-link>
                 </div>
 
                 <div class="d-md-block d-none">
                     <span class="title main-color">
-                        Accedi
+                        <a href="http://127.0.0.1:8000/login">Accedi</a>  
                     </span>
                     <span class="title main-color">
-                        Registrati
+                        <a href="http://127.0.0.1:8000/register">Registrati</a> 
                     </span>
                 </div>
             </div>
