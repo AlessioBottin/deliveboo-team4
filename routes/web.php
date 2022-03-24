@@ -24,7 +24,9 @@ Route::middleware('auth')
 ->name('admin.')  //this is how routes "->name()" have to start
 ->prefix('admin') //all urls have to start with /admin/
 ->group(function(){
-    Route::get('/', 'HomeController@index')->name('homepage');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/save', 'HomeController@saveCategories')->name('save-categories');
+
 });
 
 

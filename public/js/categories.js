@@ -93,7 +93,26 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
+var categoryBox = document.querySelectorAll(".category");
+categoryBox.forEach(function (element) {
+  element.style.backgroundColor = "white";
+  element.style.color = "black";
+  element.addEventListener('click', function () {
+    // Change color and Bg color at click
+    element.style.backgroundColor = element.style.backgroundColor === "white" ? "green" : "white";
+    element.style.color = element.style.color === "black" ? "white" : "black"; // Add or remove "selected" class at click
+
+    if (element.classList.contains("selected")) {
+      element.classList.remove("selected");
+    } else {
+      element.classList.add("selected");
+    }
+  });
+});
+=======
 throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\MAMP\\htdocs\\laravel-projects\\deliveboo-team4\\resources\\js\\categories.js'");
+>>>>>>> frontoffice-definitivo
 
 /***/ }),
 
