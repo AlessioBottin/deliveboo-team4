@@ -1,7 +1,7 @@
 <template>
    
         <vueper-slides
-        
+            :fixed-height="isFixed"
             style="border-radius: 20px; padding: 30px 0 30px 0; overflow:visible"
             class="no-shadow"
             :visible-slides="6"
@@ -11,7 +11,7 @@
             :gap="3"
             :slide-ratio="1 / 8"
             :dragging-distance="200"
-            :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+            :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2, } }">
             <vueper-slide v-for="(slide, i) in slides" :key="i" :title="slide.title"
             :image="slide.image"
             :link="slide.link"
@@ -38,6 +38,8 @@ export default {
     },
     data: function() {
         return {
+            viewportWidth: 0,
+            isFixed: false,
             slides: [
                 {
                     title: '<p class="title" style="position: absoulte;bottom: -16px;left: 0px;position: absolute;background-color: #ffce08;border-radius: 0 0 20px 20px;width: 100%;">Categoria</p>',
@@ -114,6 +116,19 @@ export default {
                 
             ]
         }
+    },
+    methods: {
+        getDeviceHeight: function() {
+            this.viewportWidth = screen.width;
+            console.log(this.viewportWidth);
+            if (this.viewportWidth < 768) {
+                this.isFixed = true;
+            }
+            
+        }
+    },
+    created: function() {
+        this.getDeviceHeight();
     }
 }
 </script>
@@ -141,7 +156,7 @@ a {
     -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
     -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
     box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
-    margin: 10px 0 10px 0;
+    margin: 5px 0 5px 0;
    
 
     &:hover {
@@ -151,11 +166,15 @@ a {
         box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.37);
 
     }
+
+    @media screen and (max-width: 768px) {
+        margin: -5px 0 5px 0;
+    }
 }
 
 .vueperslides--fixed-height { 
-        height: 1000px;
-    }
+        height: 220px;
+}
 
 </style>
 
