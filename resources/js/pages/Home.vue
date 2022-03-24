@@ -19,6 +19,7 @@
 </template>
 
 <script>
+// import axios from 'Axios';
 import Header from '../components/Header.vue';
 import Jumbotron from '../components/Jumbotron.vue';
 import SearchBanner from '../components/SearchBanner.vue';
@@ -38,7 +39,7 @@ export default {
     },
     methods:{
         getCategories : function(){
-            axios.get('http://127.0.0.1:8000/api/categories')
+            axios.get('http://127.0.0.1:8000/api/restaurants/1')
             .then((response)=>{
                 console.log(response);
             })
@@ -46,6 +47,7 @@ export default {
     },
     created: function(){
         this.getCategories;
+        // console.log('ciao');
     }
 }
 </script>

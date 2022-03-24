@@ -2322,6 +2322,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+// import axios from 'Axios';
 
 
 
@@ -2338,13 +2339,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCategories: function getCategories() {
-      axios.get('http://127.0.0.1:8000/api/categories').then(function (response) {
+      axios.get('http://127.0.0.1:8000/api/restaurants/1').then(function (response) {
         console.log(response);
       });
     }
   },
   created: function created() {
-    this.getCategories;
+    this.getCategories; // console.log('ciao');
   }
 });
 
