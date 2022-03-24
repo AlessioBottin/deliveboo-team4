@@ -5,7 +5,7 @@
 
         <SearchBanner />
 
-        <div class="container mt-5">
+        <div class="container">
             <h3 class="title">Le cucine più amate</h3>
             <p class="text">Trova le cucine più amate dai ristoranti nella tua zona e ordina online a domicilio.</p>
         </div>
