@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex justify-content-center">
        
-        <div class="searchbox mb-5">
+        <div class="searchbox">
             <h2 class="title">Il bello è prenderci gusto</h2>
             <p class="text">Ordina online dai tuoi ristoranti preferiti</p>
            
@@ -37,9 +37,7 @@ export default {
 @import '../../sass/app';
 
 .title {
-    // font-size: 2.7vw;
     font-size: 48px;
-    font-weight: 700;
     color: $main_color;
     @media screen and (max-width: 768px) {
         font-size: 34px;
@@ -49,6 +47,7 @@ export default {
 .searchbox {
     display: flex;
     flex-direction: column;
+    transform:translateY(-190px);
     background-color: white;
     width: 60vw;
     max-width: 800px;
@@ -87,7 +86,7 @@ form{
 
 
 label{
-    // margin-bottom:15px;
+
     transform: translateY(6px);
     margin-left: 30px;
     position:relative;
