@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('more_stylesheets')
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0">
@@ -74,5 +75,7 @@
             </main>
         </div>
     </div>
+
+    @yield('more_js')
 </body>
 </html>
