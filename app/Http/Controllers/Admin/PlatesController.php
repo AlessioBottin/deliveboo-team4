@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Plate;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
+use App\Plate;
 
 
 class PlatesController extends Controller
@@ -19,8 +19,10 @@ class PlatesController extends Controller
      */
     public function index()
     {
-
-        $plates = Plate::all();
+        $currentuserid = Auth::user()->id;
+        $plates = Plate::all()->where('user_id', '=', $currentuserid);
+        // $plates = Plate::all();
+        // dd($currentuserid);
         // dd($plates);
 
         $data = [
