@@ -20,6 +20,10 @@
   background-color: white;
 }
 
+.category_box {
+  font-size: 20px;
+}
+
 img {
   width: 100%;
 }
