@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Plate;
 
 class PlatesController extends Controller
 {
@@ -14,7 +15,14 @@ class PlatesController extends Controller
      */
     public function index()
     {
-        //
+        $plates = Plate::all();
+        // dd($plates);
+
+        $data = [
+            'plates' => $plates
+        ];
+
+        return view('admin.plates.index', $data);
     }
 
     /**
@@ -46,7 +54,13 @@ class PlatesController extends Controller
      */
     public function show($id)
     {
-        //
+        $plate = Plate::findOrfail($id);
+
+        $data = [
+            'plate' => $plate
+        ];
+
+        return view('admin.plates.show', $data);
     }
 
     /**

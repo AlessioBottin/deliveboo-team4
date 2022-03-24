@@ -10062,3 +10062,10 @@ h3 {
     border-color: #dee2e6;
   }
 }
+img {
+  max-width: 100%;
+}
+
+.current-image img {
+  max-width: 250px;
+}
