@@ -10,6 +10,13 @@ use App\Plate;
 
 class RestaurantController extends Controller
 {
+
+    public function getRestaurant($id){
+        $restaurant = User::findOrFail($id);
+
+        return response()->json($restaurant);
+    } 
+
     // ! Function that returns an API with x categories to show in the homepage slider
     public function loadCategories(){
         $categories = Category::all()->take(10);
