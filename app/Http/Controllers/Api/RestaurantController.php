@@ -19,7 +19,7 @@ class RestaurantController extends Controller
 
 
     // ! Function that returns an API with all the restaurants having the specified category
-    public function getRestaurants($category_id){
+    public function getRestaurants($category_slug){
         // Taking all the users
         $users = User::all();
 
@@ -31,7 +31,7 @@ class RestaurantController extends Controller
         foreach ($users as $user) {
             $categories = $user->categories;
             foreach ($categories as $category) {
-                if($category->id == $category_id){
+                if($category->slug == $category_slug){
                     $correct_users[] = $user;
                 }
             }
