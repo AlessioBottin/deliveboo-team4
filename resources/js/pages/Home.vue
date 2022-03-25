@@ -11,9 +11,9 @@
         </div>
 
 
-        <Slider />
+        <!-- <Slider /> -->
 
-        <Category />
+        <Category :categories="categoriesArray"/>
         
     </div>
 </template>
@@ -37,17 +37,21 @@ export default {
         Category,
         Slider,
     },
+    data: function(){
+        return {
+            categoriesArray: []
+        }
+    },
     methods:{
-        getCategories : function(){
+        getCategories: function(){
             axios.get('http://127.0.0.1:8000/api/categories')
             .then((response)=>{
-                console.log(response);
+                this.categoriesArray = response.data;
             })
         }
     },
     created: function(){
-        this.getCategories;
-        // console.log('ciao');
+        this.getCategories();
     }
 }
 </script>
