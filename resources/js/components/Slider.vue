@@ -36,6 +36,9 @@ export default {
         VueperSlides, 
         VueperSlide 
     },
+    props:{
+        categoriesArray: Array
+    },
     data: function() {
         return {
             viewportWidth: 0,

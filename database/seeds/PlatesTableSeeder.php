@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use App\Plate;
 
 class PlatesTableSeeder extends Seeder
@@ -17,6 +18,7 @@ class PlatesTableSeeder extends Seeder
         foreach($plates as $plate) {
             $new_plate = new Plate();
             $new_plate->name = $plate['name'];
+            $new_plate->slug = Str::slug($new_plate->name);
             $new_plate->ingredients = $plate['ingredients'];
             $new_plate->description = $plate['description'];
             $new_plate->price = $plate['price'];
