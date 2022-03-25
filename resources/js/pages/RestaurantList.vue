@@ -110,7 +110,6 @@ export default {
     },
     data: function() {
         return {
-            ratingForTesting: 4,
             researchInput: '',
             restaurantsList : [],
             categories: []

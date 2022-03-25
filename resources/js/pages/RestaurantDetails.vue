@@ -36,7 +36,7 @@
         
                     <!-- start principal card -->
                     <div class="card my_card_wrapper">
-                        <div class="card my_card">
+                        <div class="card my_card box_shadow">
                             <!-- start img container -->
                             <div class="img_container">
 
@@ -60,14 +60,14 @@
                                 <!-- start grey card container -->
                                 <div class="card-body text-center grey_card">
 
-                                    <div class="d-flex justify-content-between flex-wrap">
+                                    <div class="d-flex justify-content-between flex-wrap grey_card_text">
 
                                         <p class="card-text justify-content-center ">Consegna:</p>
                                         <p class="card-text justify-content-center ">Voglio ritirare</p>
 
                                     </div>
 
-                                    <div class="d-flex justify-content-between mt-3">
+                                    <div class="d-flex justify-content-between mt-3 flex-wrap grey_card_text">
 
                                         <p class="card-text justify-content-center">Consegna gratuita:</p>
                                         <p class="card-text justify-content-center d-flex flex-wrap">
@@ -83,7 +83,7 @@
                             <!-- end card content restaurant container -->
                         </div>
                         <!-- start card menu e info -->
-                        <div class="card my_card my-3">
+                        <div class="card my_card my-3 box_shadow">
 
                             <div class="menu_info">
 
@@ -100,6 +100,14 @@
 
                             <h3>Menu</h3>
 
+<<<<<<< HEAD
+=======
+                                    <div
+                                    v-for="(plate, index) in restaurant.plates"
+                                    :key="index"
+                                    class="card my_card my-3 p-3 box_shadow"
+                                    >
+>>>>>>> cecf30ed999850a3308140ea5969d9d2e93fbdea
 
                                 <div
                                 v-for="(plate, index) in restaurantMenu"
@@ -136,7 +144,7 @@
                 <div class="order_card_container">
 
                     <!-- start order card -->
-                    <div class="order_card mx-3 card">
+                    <div class="order_card mx-3 card box_shadow">
 
 
                         <!-- start card content restaurant container -->
@@ -145,6 +153,7 @@
                             <h3 class="card-text justify-content-center ">Il tuo ordine</h3>
                             
                             <p>
+                            
                                 <i class="fa-solid fa-circle-exclamation"></i>
                                 Se hai un'allergia o un'intolleranza alimentare (o
                                 se una persona per la quale stai effettuando un
@@ -155,6 +164,7 @@
                             </button>
                             <div class="button_container">
                                 <button class="btn btn_delivery_special_btn">
+                                    <i class="fas fa-motorcycle"></i>
                                     consegna
                                 </button>
                                 <button class="btn btn_take_away_special_btn">
@@ -196,7 +206,6 @@ export default {
             currentPage: 0,
             restaurantMenu: [],
             restaurant: false,
-
         };
     },
     methods:{
@@ -347,11 +356,11 @@ export default {
    
     @media screen and (max-width: 650px) {
         .cards_wrapper_container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: inherit;
-    }
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: inherit;
+        }
     }
 
 
@@ -360,7 +369,11 @@ export default {
         color: #8a8786;
         background-color: #efedea;
         width: 100%;
+    }
 
+    .payment_btn:hover {
+        background-color: #ffce08;
+        color: white;
     }
 
     .left_menu_list_container {
@@ -375,26 +388,34 @@ export default {
 
     .button_container {
         display: inline-block;
-        background-color: #8a8786;
+        background-color: #efedea;
         padding: 3px;
         display: flex;
         justify-content: space-between;
         border-radius: 30px;
-        width: 200px;
+        width: 100%;
         margin: 15px auto;
     }
 
     *[class$="_special_btn"]:hover {
-        color: #8a8786;
-        background-color: #efedea;
+        color: white;
+        background-color: #ffce08;
 
     }
     *[class$="_special_btn"] {
-        border-radius: 30px;
-        background-color: #8a8786;
-        color: black;
-        
+        border-radius: 30px;        
     }
 
+    *[class$="box_shadow"] {
+        box-shadow: 0px -1px 15px -3px #000000;
+    }
+
+    @media screen and (max-width: 1230px) {
+        *[class$="grey_card_text"] {
+            justify-content: center !important;
+        }
+    }
+
+    
    
 </style>
