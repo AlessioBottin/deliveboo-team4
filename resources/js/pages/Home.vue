@@ -39,7 +39,7 @@ export default {
     },
     methods:{
         getCategories : function(){
-            axios.get('http://127.0.0.1:8000/api/restaurants/1')
+            axios.get('http://127.0.0.1:8000/api/categories')
             .then((response)=>{
                 console.log(response);
             })

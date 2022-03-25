@@ -2339,7 +2339,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCategories: function getCategories() {
-      axios.get('http://127.0.0.1:8000/api/restaurants/1').then(function (response) {
+      axios.get('http://127.0.0.1:8000/api/categories').then(function (response) {
         console.log(response);
       });
     }
