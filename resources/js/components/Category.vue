@@ -54,7 +54,8 @@
                         <p class="card-title text-center">Categoria</p>
                     </div>
                 </div>
-            </div>    
+            </div>   
+
         </div>
     </div>
     
@@ -64,6 +65,9 @@
 
 export default {
     name: 'Category',
+    props:{
+        Categories: Array
+    }
     
 }
 </script>

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+// import axios from 'Axios';
 import Header from '../components/Header.vue';
 import Jumbotron from '../components/Jumbotron.vue';
 import SearchBanner from '../components/SearchBanner.vue';
