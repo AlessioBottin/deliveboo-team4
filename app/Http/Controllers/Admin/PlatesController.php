@@ -64,9 +64,9 @@ class PlatesController extends Controller
         $new_plate = new Plate();
         $new_plate->fill($form_data);
         
-        if(isset($form_data['img'])) {
-            $img_path = Storage::put('plate_image', $form_data['image']);
-            dd($img_path);
+        if(isset($form_data['image'])) {
+            $img_path = Storage::put('plate_images', $form_data['image']);
+            // dd($img_path);
 
             $new_plate->img = $img_path;
         }
@@ -117,12 +117,19 @@ class PlatesController extends Controller
      */
     public function edit($id)
     {
-        // $user_id = Auth::user()->id;
-        $plate = Plate::findOrfail($id);
-        
-        $data = [
-            'plate' => $plate,
-        ];
+        $user_id = Auth::user()->id;
+        $plate = Plate::find($id);
+
+        if( !$plate || $plate->user_id != $user_id ) {
+            $data = [
+                'error' => 'errore'
+            ];
+            
+        }else{
+            $data = [
+                'plate' => $plate,
+            ];
+        }    
 
         return view('admin.plates.edit', $data);
     }
@@ -145,7 +152,7 @@ class PlatesController extends Controller
         // $plate = Plate::findOrfail($user_id);
         
         // dd($plate);
-        // dd($form_data, $plate);
+        // dd($form_data);
 
         if($form_data['image']) {
             //Cancello il file vecchio

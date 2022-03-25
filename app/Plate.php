@@ -20,6 +20,6 @@ class Plate extends Model
         'ingredients',
         'price',
         'visibility',
-        'img',
+        'image',
     ];
 }
