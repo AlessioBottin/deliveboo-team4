@@ -1,75 +1,242 @@
 <template>
+
     <!-- start section -->
     <section>
-        <!-- restaurant banner -->
+        <!-- banner -->
         <div class="banner_container">
+
             <img :src="restaurants[currentPage].image_banner" :alt="restaurants[currentPage].name">
+
         </div>
+       
         <!-- start container -->
-        <div class="container" >
-            <!-- start card -->
-            <div class="card">
-                <!-- card image restaurant container -->
-                <div class="img_container">
+        <div class="container my_container" >
 
-                    <div class="img_box">
+            <!-- cards wrapper container -->
+            <div class="cards_wrapper_container">
+                
+                <div class="left_menu_list_container">
+            
+                    <h6 class="text-uppercase">Novità e promozioni</h6>
+                    <div v-for="(restaurant, index) in restaurants" :key="index">
 
-                        <img :src="restaurants[currentPage].image_logo" :alt="restaurants[currentPage].name">
+                        <div v-if="currentPage == restaurant.id - 1">
+
+                            <div
+                            v-for="(plate, index) in restaurant.plates"
+                            :key="index"
+                            >
+
+                                <ul class="plate_wrapper">
+                                    
+                                    <li>
+                                        <a :href="'#' + plate.name">
+                                            {{plate.name}}
+                                        </a>
+                                        
+                                    </li>
+
+                                </ul>
+
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
-                <!-- start card content restaurant container --> 
-                <div class="card-body text-center">
 
-                    <h2 class="card-name">{{restaurants[currentPage].name}}</h2>
-                    <p class="card-text justify-content-center ">Categoria 1 - Categoria 2</p>
-                    <p class="card-text justify-content-center ">Rating stars</p>
-                    <p class="card-text justify-content-center "></p>
+                <!-- principal_and_underlay_cards_container -->
+                <div class="principal_and_underlay_cards_container">
 
-                    <!-- start grey card container -->
-                    <div class="card-body text-center grey_card">
+                    <!-- start underlay -->
+                    <div class="underlay_container">
 
-                        <div class="d-flex justify-content-between">
+                        <!-- start underlay card -->
+                        <div class="card underlay_card">
 
-                            <p class="card-text justify-content-center ">Consegna</p>
-                            <p class="card-text justify-content-center ">Voglio ritirare</p>
+                            <div class="card-body text-center">
+
+                                <h6 class="card-text justify-content-center ">Questo ristorante è tra i più amati in questo momento</h6>
+                                <p>Stiamo ricevendo molti ordini - i tempi per la consegna potrebbero essere più lunghi del solito</p>
+                           
+                            </div>
 
                         </div>
-
-                        <div class="d-flex justify-content-between mt-3">
-
-                            <p class="card-text justify-content-center ">Consegna gratuita</p>
-                            <p class="card-text justify-content-center "> <strong>20€</strong> ordine minimo</p>
+                        <!-- end card underlay card -->
                         
+                    </div>
+                    <!-- end card underlay card -->
+        
+                    <!-- start principal card -->
+                    <div class="card my_card_wrapper">
+                        <div class="card my_card">
+                            <!-- start img container -->
+                            <div class="img_container">
+
+                                <div class="img_box">
+
+                                    <img :src="restaurants[currentPage].image_logo" :alt="restaurants[currentPage].title">
+
+                                </div>
+
+                            </div>
+                            <!-- end img container -->
+                            
+                            <!-- start card content restaurant container -->
+                            <div class="card-body text-center">
+
+                                <h2 class="card-name">{{restaurants[currentPage].name}}</h2>
+                                <p class="card-text justify-content-center ">Categoria 1 - Categoria 2</p>
+                                <p class="card-text justify-content-center ">Rating stars</p>
+                                <p class="card-text justify-content-center "></p>
+
+                                <!-- start grey card container -->
+                                <div class="card-body text-center grey_card">
+
+                                    <div class="d-flex justify-content-between flex-wrap">
+
+                                        <p class="card-text justify-content-center ">Consegna:</p>
+                                        <p class="card-text justify-content-center ">Voglio ritirare</p>
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-3">
+
+                                        <p class="card-text justify-content-center">Consegna gratuita:</p>
+                                        <p class="card-text justify-content-center d-flex flex-wrap">
+                                            <strong>20€</strong> ordine minimo
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                                <!-- end grey card container -->
+
+                            </div>
+                            <!-- end card content restaurant container -->
                         </div>
+                        <!-- start card menu e info -->
+                        <div class="card my_card my-3">
+
+                            <div class="menu_info">
+
+                                <h6 class="menu_style">Menu</h6>
+                                <h6 class="info_style">Info</h6>
+
+                            </div>
+
+                        </div>
+                        <!-- start card menu e info -->
+
+                        <!-- start slider -->
+                       
+                        <!-- end slider -->
+
+                        <!-- start menu list container -->
+                        <div class="menu_list_container">
+
+                            <h3>Novità e promozioni</h3>
+
+                            <div v-for="(restaurant, index) in restaurants" :key="index">
+
+                                <div v-if="currentPage == restaurant.id - 1">
+
+                                    <div
+                                    v-for="(plate, index) in restaurant.plates"
+                                    :key="index"
+                                    class="card my_card my-3 p-3"
+                                    >
+
+                                        <div class="plate_wrapper">
+
+                                            <div class="plate_content">
+                                                <h3 :id="plate.name">{{plate.name}}</h3>
+                                                <p>da: {{plate.price}}</p>
+                                            </div>
+
+                                            <div class="plate_image">
+                                                <img :src="plate.image" :alt="plate.name">
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- end menu list container -->
 
                     </div>
-                    <!-- end grey card container -->
+                    <!-- end card principal card -->
 
                 </div>
-                <!-- end card content restaurant container --> 
-            
+                <!-- end principal and order cards container -->
+
+                <!-- start order card container -->
+                <div class="order_card_container">
+
+                    <!-- start order card -->
+                    <div class="order_card mx-3 card">
+
+
+                        <!-- start card content restaurant container -->
+                        <div class="card-body text-center">
+
+                            <h3 class="card-text justify-content-center ">Il tuo ordine</h3>
+                            
+                            <p>
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                Se hai un'allergia o un'intolleranza alimentare (o
+                                se una persona per la quale stai effettuando un
+                                ordine ne ha), clicca qui.
+                            </p>
+                            <button class="btn payment_btn">
+                                Vai al pagamento
+                            </button>
+                            <div class="button_container">
+                                <button class="btn btn_delivery_special_btn">
+                                    consegna
+                                </button>
+                                <button class="btn btn_take_away_special_btn">
+                                    ritira
+                                </button>
+                            </div>
+
+                        </div>
+                        <!-- end card content restaurant container -->
+                    
+                    </div>
+                    <!-- start order card -->
+                
+                </div>
+                <!-- end order card container -->
+
             </div>
-            <!-- end card single product-->
-            <!-- start slider -->
+            <!-- cards wrapper container -->
+
             
-            <!-- end slider -->
+
         </div>
         <!-- end container -->
 
     </section>
     <!-- end section -->
+
 </template>
 
 <script>
-
 export default {
-    name: 'RestaurantDetails', 
+    name: 'RestaurantDetails',
     data: function() {
         return {
             currentPage: 0,
-            restaurants: [ 
+            restaurants: [
                 {
                     id: 1,
                     email: 'spizzico@gmail.com',
@@ -93,11 +260,39 @@ export default {
                             description: 'pizza',
                             price: '10 euro',
                             visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vanityfair.it%2Fgallery%2F10-trend-della-pizza-spiegati-in-10-pizze&psig=AOvVaw34S-jjr8s2Y7dwzN789Bxn&ust=1647686198568000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCb_8e7z_YCFQAAAAAdAAAAABAD',
+                            image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg',
                         },
-                        
+                        {
+                            name: 'salsiccia',
+                            description: 'pizza',
+                            price: '10 euro',
+                            visibility: true ,
+                            image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg',
+                        },
+                        {
+                            name: 'stagioni',
+                            description: 'pizza',
+                            price: '10 euro',
+                            visibility: true ,
+                            image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg',
+                        },
+                        {
+                            name: 'capricciosa',
+                            description: 'pizza',
+                            price: '10 euro',
+                            visibility: true ,
+                            image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg',
+                        },
+                        {
+                            name: 'gamberetti',
+                            description: 'pizza',
+                            price: '10 euro',
+                            visibility: true ,
+                            image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg',
+                        },
+
                     ]
-                },            
+                },
                 {
                     id: 2,
                     email: 'zushi@gmail.com',
@@ -123,7 +318,7 @@ export default {
                             visibility: true ,
                             image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Framonaincucina.com%2F2020%2F10%2F02%2Fpan-poke-street-food-tra-panini-e-poke%2F&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAJ',
                         },
-                    
+
                     ]
                 },
                 {
@@ -145,7 +340,7 @@ export default {
                             visibility: true ,
                             image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Framonaincucina.com%2F2020%2F10%2F02%2Fpan-poke-street-food-tra-panini-e-poke%2F&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAJ',
                         },
-                    
+
                     ]
                 },
                 {
@@ -167,7 +362,7 @@ export default {
                         visibility: true ,
                         image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Froma.fanpage.it%2Ffive-guys-a-roma-rimandata-lapertura-del-primo-fast-food-in-citta-prevista-per-oggi%2F&psig=AOvVaw0SB2Jcmj_EcHc1C8XdhMBS&ust=1647686534196000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNiXl-i8z_YCFQAAAAAdAAAAABAP',
                     },
-                    
+
                     ]
                 },
                 {
@@ -203,7 +398,7 @@ export default {
                             visibility: true ,
                             image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD',
                         },
-                    
+
                     ]
                 },
                 {
@@ -225,32 +420,30 @@ export default {
                         visibility: true ,
                         image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fit.m.wikipedia.org%2Fwiki%2FFile%3AD%25C3%25B6ner_Kebab%2C_Berlin%2C_2010_(01).jpg&psig=AOvVaw0y83sKkdr6EwbGlZP5gAkW&ust=1647686788395000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi1meG9z_YCFQAAAAAdAAAAABAJ',
                     },
-                    
+
                     ]
                 }
             ]
 
         };
+    },
+    created: function() {
+
     }
 };
 </script>
 
 <style scoped lang="scss">
- 
- li {
-        display: flex;
-        justify-content: center;
-    }
+
 
     .img_container {
         display: flex;
         justify-content: center;
     }
 
-    .container {
-        margin: -150px auto 40px auto;
-        width: 700px;
-
+    .my_container {
+        margin: -300px auto 40px auto;
+        width: 100%; 
     }
 
     .img_box {
@@ -267,7 +460,12 @@ export default {
         }
     }
 
-    .card {
+    .my_card {
+        border-radius: 15px;
+    }
+
+    .my_card_wrapper {
+        border: none;
         border-radius: 15px;
     }
 
@@ -281,13 +479,133 @@ export default {
 
    .banner_container {
     line-height: 150px;
-    height: 450px;
+    height: 400px;
     object-position: center;
-    img {
-        height: inherit;
-        width: 100%;
-        object-fit: cover;
-        object-position: center;
+        img {
+            height: inherit;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
     }
-}
+
+    .menu_info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    *[class$="_style"]:hover {
+
+        text-decoration: underline;
+        text-underline-offset: 17px;
+        text-decoration-thickness: 4px;
+        text-decoration-color: #ffce08;
+
+    }
+
+    .plate_wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .plate_image {
+            width: 25%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    }
+
+    .order_card {
+        position: sticky;
+        top: -100px;
+        border-radius: 15px;
+        margin: 140px 0 -50px 50px;
+        width: 100%;
+        
+        p {
+            font-size: 13px;
+        }
+
+    }
+    
+
+    .underlay_container {
+        position: sticky;
+        top: 0;
+        margin-bottom: 1px;
+    }
+
+    .underlay_card {
+        border-radius: 15px;
+        height: 190px;
+        margin-bottom: -50px;
+        background-color: rgba($color: #f75e28, $alpha: .9);
+        color: white;
+        
+        p {
+            font-size: 13px;
+        }
+    }
+
+
+    .cards_wrapper_container {
+        display: flex;
+        justify-content: center;
+        width: inherit;
+    }
+   
+    @media screen and (max-width: 650px) {
+        .cards_wrapper_container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: inherit;
+    }
+    }
+
+
+    .payment_btn {
+        border-radius: 30px;
+        color: #8a8786;
+        background-color: #efedea;
+        width: 100%;
+
+    }
+
+    .left_menu_list_container {
+        margin: 350px 40px 0 10px;
+        
+    }
+
+    .plate_wrapper > li:hover {
+        border-left: solid 3px gray;
+        cursor: pointer;
+    }
+
+    .button_container {
+        display: inline-block;
+        background-color: #8a8786;
+        padding: 3px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 30px;
+        width: 200px;
+        margin: 15px auto;
+    }
+
+    *[class$="_special_btn"]:hover {
+        color: #8a8786;
+        background-color: #efedea;
+
+    }
+    *[class$="_special_btn"] {
+        border-radius: 30px;
+        background-color: #8a8786;
+        color: black;
+        
+    }
+
+   
 </style>
