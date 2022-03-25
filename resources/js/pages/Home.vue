@@ -35,7 +35,17 @@ export default {
         SearchBanner,
         Category,
         Slider,
-
+    },
+    methods:{
+        getCategories: function(){
+            axios.get('http://127.0.0.1:8000/api/categories')
+            .then((response)=>{
+                console.log(response);
+            })
+        }
+    },
+    created: function(){
+        this.getCategories;
     }
 }
 </script>
