@@ -19,10 +19,11 @@ class PlatesController extends Controller
      */
     public function index()
     {
-        $currentuserid = Auth::user()->id;
-        $plates = Plate::all()->where('user_id', '=', $currentuserid);
-        // $plates = Plate::all();
-        // dd($currentuserid);
+        $user_id = Auth::user()->id;
+   
+        $plates = Plate::all()->where('user_id', '=', $user_id);
+        
+        // dd($user_id);
         // dd($plates);
 
         $data = [
@@ -51,20 +52,27 @@ class PlatesController extends Controller
      */
     public function store(Request $request)
     {   
-        $form_data = $request->all();
-        $user = Auth::user();
+        $user_id = Auth::user()->id;
+
+        $form_data = $request->all();        
+        
         // dd($form_data);
+        // dd($user_id);
+
         $request->validate($this->getValidationRules());
 
         $new_plate = new Plate();
         $new_plate->fill($form_data);
+        
+        if(isset($form_data['img'])) {
+            $img_path = Storage::put('plate_image', $form_data['image']);
+            dd($img_path);
 
-        // Prendo il path dell'immagine e lo salvo in una variabile che verra' assegnata alla image del plate
-        // in questo caso l' immagine viene assegnata due volte prima con il fill e poi adesso, 
-        // si potrebbe cambiare al form il nome con cui viene passata l'immagine 
-        $img_path = Storage::put('plate_images', $form_data['image']);
-        $new_plate->image = $img_path;
-        $new_plate->user_id = $user->id;
+            $new_plate->img = $img_path;
+        }
+
+        $new_plate->user_id = $user_id;
+
         $new_plate->save();
 
         return redirect()->route('admin.plates.show', ['plate' => $new_plate->id]);
@@ -76,13 +84,27 @@ class PlatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        $plate = Plate::findOrfail($id);
+        $user_id = Auth::user()->id;
+        
+        $plate = Plate::find($id);
+        // dd($plate->user_id);
+        // dd($user_id);
+        
 
-        $data = [
-            'plate' => $plate
-        ];
+        if( !$plate || $plate->user_id != $user_id ) {
+            $data = [
+                'error' => 'errore'
+            ];
+            
+        }else{
+            $data = [
+                'plate' => $plate,
+                // 'user_id' => $user_id
+            ];
+        }
 
         return view('admin.plates.show', $data);
     }
@@ -95,7 +117,14 @@ class PlatesController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $user_id = Auth::user()->id;
+        $plate = Plate::findOrfail($id);
+        
+        $data = [
+            'plate' => $plate,
+        ];
+
+        return view('admin.plates.edit', $data);
     }
 
     /**
@@ -107,7 +136,33 @@ class PlatesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $form_data = $request->all();
+        $request->validate($this->getValidationRules());
+
+        $user_id = Auth::user()->id;
+        $plate = Plate::findOrfail($id);
+
+        // $plate = Plate::findOrfail($user_id);
+        
+        // dd($plate);
+        // dd($form_data, $plate);
+
+        if($form_data['image']) {
+            //Cancello il file vecchio
+            if($plate->image) {
+                Storage::delete($plate->image);
+            }
+    
+        //Faccio l'upload del nuovo file
+            $img_path = Storage::put('img', $form_data['image']);
+    
+        //Salvo nella colonna cover il path del nuovo file
+            $form_data['img'] = $img_path;
+        }
+
+        $plate->update($form_data);
+
+        return redirect()->route('admin.plates.show', ['plate' => $id]);
     }
 
     /**
@@ -118,7 +173,17 @@ class PlatesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plate = Plate::findOrFail($id);
+        // $plate ->visibility()->sync([]);
+
+        if($plate->img) {
+            Storage::delete($plate->img);
+        }
+
+        // dd($plate);
+        $plate->delete();
+
+        return redirect()->route('admin.plates.index');
     }
 
     // Validation Rules 
@@ -127,9 +192,9 @@ class PlatesController extends Controller
             'name' => 'required|max:70',
             'description' => 'required|max:60000',
             'ingredients' => 'required|max:60000',
-            'price' => 'required|numeric|between:0.1,999.99',
-            'visibility' => 'required|boolean',
-            'image' => 'required|image|max:512'
+            'price' => 'required|numeric|between:0,1999.99',
+            // 'visibility' => 'required|boolean',
+            'image' => 'image|max:512'
         ];
     }
 }

@@ -11,7 +11,8 @@
                         <div class="card mt-4">
                             @if($plate->image)
                                 <div>
-                                    <img src="{{$plate->image}}" alt="{{ $plate->name}}" class="card-img-top">
+                                    {{-- <img src="{{$plate->image}}" alt="{{ $plate->name}}" class="card-img-top"> --}}
+                                    <img src="{{ asset('storage/' . $plate->img)}}" alt="{{ $plate->name}}" class="card-img-top">
                                 </div>
                             @endif 
                             <div class="card-body">
