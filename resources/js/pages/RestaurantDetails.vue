@@ -100,14 +100,6 @@
 
                             <h3>Menu</h3>
 
-<<<<<<< HEAD
-=======
-                                    <div
-                                    v-for="(plate, index) in restaurant.plates"
-                                    :key="index"
-                                    class="card my_card my-3 p-3 box_shadow"
-                                    >
->>>>>>> cecf30ed999850a3308140ea5969d9d2e93fbdea
 
                                 <div
                                 v-for="(plate, index) in restaurantMenu"

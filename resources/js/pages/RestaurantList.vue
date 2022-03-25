@@ -54,7 +54,7 @@
 
                         <!-- Results Info  -->
                         <div class="results-info d-flex justify-content-between">
-                            <span class="n-results">{{restaurantsList.length}} ristoranti aperti</span>
+                            <!-- <span class="n-results">{{restaurantsList.length}} ristoranti aperti</span> -->
                             <div class="order">
                                 <span class="order-by">Ordina per: Rating</span>
                                 <span class="order-by-icon"><i class="fas fa-sort-amount-down"></i></span>
@@ -110,8 +110,9 @@ export default {
     },
     data: function() {
         return {
+            ratingForTesting: 4,
             researchInput: '',
-            restaurantsList : [],
+            restaurantsList: [],
             categories: []
         }
     },
