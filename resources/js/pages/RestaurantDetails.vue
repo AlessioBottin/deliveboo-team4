@@ -79,7 +79,7 @@
                                             <h3 :id="plate.name">{{plate.name}}</h3>
                                             <p>Prezzo: <b>{{plate.price}}€</b></p>
 
-                                            <div class="btn btn-outline-warning">
+                                            <div @click="addProductToCart(plate)" class="btn btn-outline-warning">
                                                 Aggiungi al Carrello
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                 <div class="order_card_container">
 
                     <!-- start order card -->
-                    <div class="order_card mx-3 card box_shadow">
+                    <div class="order_card card box_shadow">
 
 
                         <!-- start card content restaurant container -->
@@ -121,6 +121,27 @@
                                 se una persona per la quale stai effettuando un
                                 ordine ne ha), clicca qui.
                             </p>
+                            <!-- CART WITH ALL THE PLATES -->
+                            <div v-for="(product,index) in cart" :key="index">
+                                <div class="cart-product text-center">
+                                    <img :src="product.image" style="width:60px; height:60px" class="mx-4" :alt="product.name">
+                                    <div>
+                                        <h4>{{product.name}}</h4>
+                                        <div class="mt-2 position-relative">
+                                            <i class="fa-solid fa-circle-minus quantity-changer" :class="{disabled: (product.isBtnDisabled)}" @click="decreaseQuantity(product)"></i>
+                                            <span class="quantity">{{product.quantity}}</span>
+                                            <i class="fa-solid fa-circle-plus quantity-changer" @click="increaseQuantity(product)"></i>
+                                            <i class="fa-solid fa-trash delete-product" @click="deleteProductFromCart(product)"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="cart.length > 0">
+                                <h5>Totale: {{totalPrice.toFixed(2)}}€</h5>
+                            </div>
+                            <!-- END CART WITH ALL THE PLATES -->
+
                             <button class="btn payment_btn">
                                 Vai al pagamento
                             </button>
@@ -159,20 +180,85 @@ export default {
             currentPage: 0,
             restaurantMenu: [],
             restaurant: false,
+            cart:[],
+            totalPrice: 0,
         };
     },
     methods:{
+        resetTotalPrice: function(){
+            this.totalPrice = 0;
+            return this.totalPrice
+        },
+        // Function that returns an API with the specific restaurant
         getRestaurant: function(){
             axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.id)
             .then((response)=>{
                 this.restaurant = response.data;
             })
         },
+        // Function that returns an API with the menu of the restaurant
         getRestaurantMenu: function(){
             axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.id)
             .then((response)=>{
                 this.restaurantMenu = response.data;
             })
+        },
+        // IF at the click on a specific product, this is already in the cart,
+        // increase its quantity.
+        // Otherwise add the new clicked product at the cart
+        addProductToCart: function(product){
+            let check = this.cart.some(element => element.name == product.name);
+            if(check){
+                this.cart.forEach(e => {
+                    if (e.name == product.name){
+                        e.quantity ++;
+                        e.isBtnDisabled = false;
+                    }
+                });
+            }else{
+                let newProduct = {
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1,
+                    isBtnDisabled: true
+                };
+                this.cart.push(newProduct);
+            };
+            this.resetTotalPrice();
+        },
+        // Delete the product from the cart
+        // Reassigning cart's values, with the exception of the product with the name of the clicked one
+        deleteProductFromCart: function(product){
+            this.cart = this.cart.filter(element => element.name !== product.name);
+            this.resetTotalPrice();
+        },
+        // Increase quantity for the specified product, and activate the "-" button
+        increaseQuantity: function(product){
+            product.quantity++;
+            this.resetTotalPrice();
+            product.isBtnDisabled = false
+        },
+        // If the quantity is greater than 1, decrease the value
+        // Otherwise don't, and also disable the "-" button
+        decreaseQuantity: function(product){
+            if (product.quantity > 1){
+                product.quantity--;
+                this.resetTotalPrice();
+            }
+            if(product.quantity == 1){
+                product.isBtnDisabled = true
+            }
+        }
+    },
+    // When the cart array changes it updates the total price
+    computed: {
+        changeTotalPrice: function(){
+            let singleTotalPrice = 0;
+            this.cart.forEach(product => {
+                singleTotalPrice = product.price * product.quantity
+                this.totalPrice += singleTotalPrice;
+            });
         }
     },
     created: function() {
@@ -183,6 +269,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .cart-product{
+        padding: 20px 0;
+    }
+    .quantity{
+        font-size: 22px;
+    }
+    .quantity-changer{
+        font-size: 20px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+    .disabled{
+        color: gray;
+    }
+    .delete-product{
+        cursor: pointer;
+        position: absolute;
+        right: 70px;
+        top: 8px;
+        font-size: 20px;
+        &:hover{
+            color: red;
+        }
+    }
+
     .principal_and_underlay_cards_container{
         width: 100%;
     }
@@ -275,11 +386,16 @@ export default {
         border-radius: 15px;
         margin: 140px 0 -50px 50px;
         width: 100%;
-        
+
         p {
             font-size: 13px;
         }
 
+    }
+    @media screen and (max-width: 650px) {
+        .order_card{
+            margin: 50px auto;
+        }
     }
     
 

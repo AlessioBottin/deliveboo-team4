@@ -2508,6 +2508,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RestaurantDetails',
@@ -2518,10 +2539,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentPage: 0,
       restaurantMenu: [],
-      restaurant: false
+      restaurant: false,
+      cart: [],
+      totalPrice: 0
     };
   },
   methods: {
+    resetTotalPrice: function resetTotalPrice() {
+      this.totalPrice = 0;
+      return this.totalPrice;
+    },
+    // Function that returns an API with the specific restaurant
     getRestaurant: function getRestaurant() {
       var _this = this;
 
@@ -2529,11 +2557,79 @@ __webpack_require__.r(__webpack_exports__);
         _this.restaurant = response.data;
       });
     },
+    // Function that returns an API with the menu of the restaurant
     getRestaurantMenu: function getRestaurantMenu() {
       var _this2 = this;
 
       axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.id).then(function (response) {
         _this2.restaurantMenu = response.data;
+      });
+    },
+    // IF at the click on a specific product, this is already in the cart,
+    // increase its quantity.
+    // Otherwise add the new clicked product at the cart
+    addProductToCart: function addProductToCart(product) {
+      var check = this.cart.some(function (element) {
+        return element.name == product.name;
+      });
+
+      if (check) {
+        this.cart.forEach(function (e) {
+          if (e.name == product.name) {
+            e.quantity++;
+            e.isBtnDisabled = false;
+          }
+        });
+      } else {
+        var newProduct = {
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+          isBtnDisabled: true
+        };
+        this.cart.push(newProduct);
+      }
+
+      ;
+      this.resetTotalPrice();
+    },
+    // Delete the product from the cart
+    // Reassigning cart's values, with the exception of the product with the name of the clicked one
+    deleteProductFromCart: function deleteProductFromCart(product) {
+      this.cart = this.cart.filter(function (element) {
+        return element.name !== product.name;
+      });
+      this.resetTotalPrice();
+    },
+    // Increase quantity for the specified product, and activate the "-" button
+    increaseQuantity: function increaseQuantity(product) {
+      product.quantity++;
+      this.resetTotalPrice();
+      product.isBtnDisabled = false;
+    },
+    // If the quantity is greater than 1, decrease the value
+    // Otherwise don't, and also disable the "-" button
+    decreaseQuantity: function decreaseQuantity(product) {
+      if (product.quantity > 1) {
+        product.quantity--;
+        this.resetTotalPrice();
+      }
+
+      if (product.quantity == 1) {
+        product.isBtnDisabled = true;
+      }
+    }
+  },
+  // When the cart array changes it updates the total price
+  computed: {
+    changeTotalPrice: function changeTotalPrice() {
+      var _this3 = this;
+
+      var singleTotalPrice = 0;
+      this.cart.forEach(function (product) {
+        singleTotalPrice = product.price * product.quantity;
+        _this3.totalPrice += singleTotalPrice;
       });
     }
   },
@@ -2873,7 +2969,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".principal_and_underlay_cards_container[data-v-7720c0e8] {\n  width: 100%;\n}\n.img_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n}\n.my_container[data-v-7720c0e8] {\n  margin: -300px auto 40px auto;\n  width: 100%;\n}\n.img_box[data-v-7720c0e8] {\n  margin: -50px 0 0 0;\n  height: 100px;\n  width: 100px;\n  border: solid whitesmoke 4px;\n  border-radius: 20px;\n  overflow: hidden;\n  background-color: white;\n  display: flex;\n}\n.img_box img[data-v-7720c0e8] {\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.my_card[data-v-7720c0e8] {\n  border-radius: 15px;\n}\n.my_card_wrapper[data-v-7720c0e8] {\n  border: none;\n  border-radius: 15px;\n}\n.grey_card[data-v-7720c0e8] {\n  width: 65%;\n  margin: auto;\n  background-color: #f5f3f1;\n  border-radius: 10px;\n}\n.banner_container[data-v-7720c0e8] {\n  line-height: 150px;\n  height: 400px;\n  -o-object-position: center;\n     object-position: center;\n}\n.banner_container img[data-v-7720c0e8] {\n  height: inherit;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.menu_info[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px 0;\n}\n*[class$=_style][data-v-7720c0e8]:hover {\n  text-decoration: underline;\n  text-underline-offset: 17px;\n  text-decoration-thickness: 4px;\n  -webkit-text-decoration-color: #ffce08;\n          text-decoration-color: #ffce08;\n}\n.plate_wrapper[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.plate_wrapper .plate_image[data-v-7720c0e8] {\n  width: 25%;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.order_card[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: -100px;\n  border-radius: 15px;\n  margin: 140px 0 -50px 50px;\n  width: 100%;\n}\n.order_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n.underlay_container[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  margin-bottom: 1px;\n}\n.underlay_card[data-v-7720c0e8] {\n  border-radius: 15px;\n  height: 190px;\n  margin-bottom: -50px;\n  background-color: rgba(247, 94, 40, 0.9);\n  color: white;\n}\n.underlay_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n.cards_wrapper_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n  width: inherit;\n}\n@media screen and (max-width: 650px) {\n.cards_wrapper_container[data-v-7720c0e8] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: inherit;\n}\n}\n.payment_btn[data-v-7720c0e8] {\n  border-radius: 30px;\n  color: #8a8786;\n  background-color: #efedea;\n  width: 100%;\n}\n.payment_btn[data-v-7720c0e8]:hover {\n  background-color: #ffce08;\n  color: white;\n}\n.left_menu_list_container[data-v-7720c0e8] {\n  margin: 350px 40px 0 10px;\n}\n.plate_wrapper > li[data-v-7720c0e8]:hover {\n  border-left: solid 3px gray;\n  cursor: pointer;\n}\n.button_container[data-v-7720c0e8] {\n  display: inline-block;\n  background-color: #efedea;\n  padding: 3px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 30px;\n  width: 100%;\n  margin: 15px auto;\n}\n*[class$=_special_btn][data-v-7720c0e8]:hover {\n  color: white;\n  background-color: #ffce08;\n}\n*[class$=_special_btn][data-v-7720c0e8] {\n  border-radius: 30px;\n}\n*[class$=box_shadow][data-v-7720c0e8] {\n  box-shadow: 0px -1px 15px -3px #000000;\n}\n@media screen and (max-width: 1230px) {\n*[class$=grey_card_text][data-v-7720c0e8] {\n    justify-content: center !important;\n}\n}", ""]);
+exports.push([module.i, ".cart-product[data-v-7720c0e8] {\n  padding: 20px 0;\n}\n.quantity[data-v-7720c0e8] {\n  font-size: 22px;\n}\n.quantity-changer[data-v-7720c0e8] {\n  font-size: 20px;\n  margin: 0 10px;\n  cursor: pointer;\n}\n.disabled[data-v-7720c0e8] {\n  color: gray;\n}\n.delete-product[data-v-7720c0e8] {\n  cursor: pointer;\n  position: absolute;\n  right: 70px;\n  top: 8px;\n  font-size: 20px;\n}\n.delete-product[data-v-7720c0e8]:hover {\n  color: red;\n}\n.principal_and_underlay_cards_container[data-v-7720c0e8] {\n  width: 100%;\n}\n.img_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n}\n.my_container[data-v-7720c0e8] {\n  margin: -300px auto 40px auto;\n  width: 100%;\n}\n.img_box[data-v-7720c0e8] {\n  margin: -50px 0 0 0;\n  height: 100px;\n  width: 100px;\n  border: solid whitesmoke 4px;\n  border-radius: 20px;\n  overflow: hidden;\n  background-color: white;\n  display: flex;\n}\n.img_box img[data-v-7720c0e8] {\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.my_card[data-v-7720c0e8] {\n  border-radius: 15px;\n}\n.my_card_wrapper[data-v-7720c0e8] {\n  border: none;\n  border-radius: 15px;\n}\n.grey_card[data-v-7720c0e8] {\n  width: 65%;\n  margin: auto;\n  background-color: #f5f3f1;\n  border-radius: 10px;\n}\n.banner_container[data-v-7720c0e8] {\n  line-height: 150px;\n  height: 400px;\n  -o-object-position: center;\n     object-position: center;\n}\n.banner_container img[data-v-7720c0e8] {\n  height: inherit;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.menu_info[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px 0;\n}\n*[class$=_style][data-v-7720c0e8]:hover {\n  text-decoration: underline;\n  text-underline-offset: 17px;\n  text-decoration-thickness: 4px;\n  -webkit-text-decoration-color: #ffce08;\n          text-decoration-color: #ffce08;\n}\n.plate_wrapper[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.plate_wrapper .plate_image[data-v-7720c0e8] {\n  width: 25%;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.order_card[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: -100px;\n  border-radius: 15px;\n  margin: 140px 0 -50px 50px;\n  width: 100%;\n}\n.order_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n@media screen and (max-width: 650px) {\n.order_card[data-v-7720c0e8] {\n    margin: 50px auto;\n}\n}\n.underlay_container[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  margin-bottom: 1px;\n}\n.underlay_card[data-v-7720c0e8] {\n  border-radius: 15px;\n  height: 190px;\n  margin-bottom: -50px;\n  background-color: rgba(247, 94, 40, 0.9);\n  color: white;\n}\n.underlay_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n.cards_wrapper_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n  width: inherit;\n}\n@media screen and (max-width: 650px) {\n.cards_wrapper_container[data-v-7720c0e8] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: inherit;\n}\n}\n.payment_btn[data-v-7720c0e8] {\n  border-radius: 30px;\n  color: #8a8786;\n  background-color: #efedea;\n  width: 100%;\n}\n.payment_btn[data-v-7720c0e8]:hover {\n  background-color: #ffce08;\n  color: white;\n}\n.left_menu_list_container[data-v-7720c0e8] {\n  margin: 350px 40px 0 10px;\n}\n.plate_wrapper > li[data-v-7720c0e8]:hover {\n  border-left: solid 3px gray;\n  cursor: pointer;\n}\n.button_container[data-v-7720c0e8] {\n  display: inline-block;\n  background-color: #efedea;\n  padding: 3px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 30px;\n  width: 100%;\n  margin: 15px auto;\n}\n*[class$=_special_btn][data-v-7720c0e8]:hover {\n  color: white;\n  background-color: #ffce08;\n}\n*[class$=_special_btn][data-v-7720c0e8] {\n  border-radius: 30px;\n}\n*[class$=box_shadow][data-v-7720c0e8] {\n  box-shadow: 0px -1px 15px -3px #000000;\n}\n@media screen and (max-width: 1230px) {\n*[class$=grey_card_text][data-v-7720c0e8] {\n    justify-content: center !important;\n}\n}", ""]);
 
 // exports
 
@@ -4940,7 +5036,14 @@ var render = function () {
                             _vm._v(" "),
                             _c(
                               "div",
-                              { staticClass: "btn btn-outline-warning" },
+                              {
+                                staticClass: "btn btn-outline-warning",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.addProductToCart(plate)
+                                  },
+                                },
+                              },
                               [
                                 _vm._v(
                                   "\n                                            Aggiungi al Carrello\n                                        "
@@ -4965,7 +5068,92 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "order_card_container" }, [
+            _c("div", { staticClass: "order_card card box_shadow" }, [
+              _c(
+                "div",
+                { staticClass: "card-body text-center" },
+                [
+                  _c(
+                    "h3",
+                    { staticClass: "card-text justify-content-center " },
+                    [_vm._v("Il tuo ordine")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._l(_vm.cart, function (product, index) {
+                    return _c("div", { key: index }, [
+                      _c("div", { staticClass: "cart-product text-center" }, [
+                        _c("img", {
+                          staticClass: "mx-4",
+                          staticStyle: { width: "60px", height: "60px" },
+                          attrs: { src: product.image, alt: product.name },
+                        }),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c("h4", [_vm._v(_vm._s(product.name))]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2 position-relative" }, [
+                            _c("i", {
+                              staticClass:
+                                "fa-solid fa-circle-minus quantity-changer",
+                              class: { disabled: product.isBtnDisabled },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.decreaseQuantity(product)
+                                },
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "quantity" }, [
+                              _vm._v(_vm._s(product.quantity)),
+                            ]),
+                            _vm._v(" "),
+                            _c("i", {
+                              staticClass:
+                                "fa-solid fa-circle-plus quantity-changer",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.increaseQuantity(product)
+                                },
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("i", {
+                              staticClass: "fa-solid fa-trash delete-product",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.deleteProductFromCart(product)
+                                },
+                              },
+                            }),
+                          ]),
+                        ]),
+                      ]),
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _vm.cart.length > 0
+                    ? _c("div", [
+                        _c("h5", [
+                          _vm._v(
+                            "Totale: " + _vm._s(_vm.totalPrice.toFixed(2)) + "€"
+                          ),
+                        ]),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("button", { staticClass: "btn payment_btn" }, [
+                    _vm._v(
+                      "\n                            Vai al pagamento\n                        "
+                    ),
+                  ]),
+                ],
+                2
+              ),
+            ]),
+          ]),
         ]),
       ]),
     ],
@@ -4997,27 +5185,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "order_card_container" }, [
-      _c("div", { staticClass: "order_card mx-3 card box_shadow" }, [
-        _c("div", { staticClass: "card-body text-center" }, [
-          _c("h3", { staticClass: "card-text justify-content-center " }, [
-            _vm._v("Il tuo ordine"),
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c("i", { staticClass: "fa-solid fa-circle-exclamation" }),
-            _vm._v(
-              "\n                            Se hai un'allergia o un'intolleranza alimentare (o\n                            se una persona per la quale stai effettuando un\n                            ordine ne ha), clicca qui.\n                        "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("button", { staticClass: "btn payment_btn" }, [
-            _vm._v(
-              "\n                            Vai al pagamento\n                        "
-            ),
-          ]),
-        ]),
-      ]),
+    return _c("p", [
+      _c("i", { staticClass: "fa-solid fa-circle-exclamation" }),
+      _vm._v(
+        "\n                            Se hai un'allergia o un'intolleranza alimentare (o\n                            se una persona per la quale stai effettuando un\n                            ordine ne ha), clicca qui.\n                        "
+      ),
     ])
   },
 ]
