@@ -3,12 +3,11 @@
 @import './partials/utilities';
 @import './partials/categories';
 
-// General
-@import './partials/general';
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// General
+@import './partials/general';

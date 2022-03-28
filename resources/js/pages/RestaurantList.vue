@@ -4,7 +4,7 @@
         <div class="container">
             <!-- Categories  -->
             <div class="categories">
-                Categorie
+                <Slider/>
             </div>
 
             <!-- List  -->
@@ -16,7 +16,7 @@
                     <!-- User Location  -->
                     <div class="user-location d-sm-flex d-md-block justify-content-sm-between">
                         <i class="fas fa-map-marker-alt"></i> <span>Via Corso, Roma 00187</span>
-                        <router-link class="change-zone" :to="{ name: 'home' }">Cambia Zona</router-link>
+                        <router-link class="change-zone" :to="{ name: 'home' }">Aree Coperte</router-link>
                     </div>
 
                     <!-- Input  -->
@@ -30,11 +30,23 @@
                 </div>
 
                 <!-- Content  -->
-                <div class="content d-flex justify-content-between">
+                <div class="content d-md-flex justify-content-md-between">
 
                     <!-- Filters  -->
-                    <div class="filters">
-                        Filtri
+                    <div class="filters d-none d-md-block">
+                        <h4 class="mb-4">Filtri</h4>
+
+                        <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
+                        fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
+                        <ul class="categories-aside">
+                            <li class="category mb-4 d-flex justify-content-between" v-for="n in 10" :key="n">
+                                <!-- Al click sulla categoria deve essere settato il filtro  -->
+                                <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
+                                <span>Categoria</span>
+                                <span class="check"><i class="fa-solid fa-check"></i></span>
+                            </li>
+                        </ul>
+
                     </div>
 
                     <!-- results -->
@@ -42,28 +54,41 @@
 
                         <!-- Results Info  -->
                         <div class="results-info d-flex justify-content-between">
-                            <span class="n-results">5 ristoranti aperti</span>
+                            <!-- <span class="n-results">{{restaurantsList.length}} ristoranti aperti</span> -->
                             <div class="order">
                                 <span class="order-by">Ordina per: Rating</span>
                                 <span class="order-by-icon"><i class="fas fa-sort-amount-down"></i></span>
                             </div>
                         </div>
 
+
+
                         <!-- list  -->
                         <ul class="list">
-                            <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurants" :key="index">
-                                <div class="row row-cols-sm-1 row-cols-md-3">
-                                    <!-- Img  -->
-                                    <div class="col"><img src="https://www.villacrespi.it/wp-content/uploads/2018/10/Villa-Crespi-San-Valentino-1-uai-1000x666.jpg" :alt="restaurant.name"></div>
-                                    <!-- Restaurant Info  -->
-                                    <div class="col">
-                                        <h4>{{restaurant.name}}</h4>
+                            <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurantsList" :key="index">
+                                <router-link :to="{ name: 'restaurant-details', params: { id: restaurant.id } }">
+                                    <div class="row">
+
+                                        <!-- Img  -->
+                                        <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img :src="restaurant.image" :alt="restaurant.name"></div>
+                                        
+                                        <!-- Restaurant Info  -->
+                                        <div class="col-sm-12 col-md-6 restaurant-info">
+                                            <h4 class="mb-0">{{restaurant.name}}</h4>
+                                            <span class="restaurant-categories">Categorie: Dolci, Gelato</span>
+                                            <div class="rating d-flex">
+                                                <span class="stars d-inline-block" v-for="star in ratingForTesting" :key="star"><i class="fa-solid fa-star"></i></span>
+                                                <span class="gray-stars d-inline-block" v-for="star in (5 - ratingForTesting)" :key="star+restaurant.name"><i class="fa-solid fa-star"></i></span>
+                                                <span class="voters ml-2">2345</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Delivery Info  -->
+                                        <div class="col-sm-12 col-md-4 delivery-info">
+                                            <p>Consegna: <span class="delivery">GRATIS</span></p>
+                                        </div>
                                     </div>
-                                    <!-- Delivery Info  -->
-                                    <div class="col">
-                                        <p>Consegna GRATIS</p>
-                                    </div>
-                                </div>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
@@ -76,162 +101,38 @@
 </template>
 
 <script>
+import Slider from '../components/Slider.vue';
+
 export default {
     name: 'RestaurantList',
+    components: {
+        Slider
+    },
     data: function() {
         return {
+            ratingForTesting: 4,
             researchInput: '',
-            restaurants: [ 
-                {
-                    id: 1,
-                    email: 'spizzico@gmail.com',
-                    password: '12345678',
-                    name: 'Spizzico',
-                    address: 'via Roma 1',
-                    VAT: '1234567890',
-                    image: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia-cdn.tripadvisor.com%2Fmedia%2Fphoto-s%2F1a%2F16%2F32%2Fe3%2Fwine-room-dari-ristorante.jpg&imgrefurl=https%3A%2F%2Fwww.tripadvisor.it%2FRestaurant_Review-g187871-d1639024-Reviews-Dari_Ristorante_Enoteca-Verona_Province_of_Verona_Veneto.html&tbnid=C39mc5lxO1HOLM&vet=12ahUKEwje3bGyu8_2AhUL1eAKHQXhAioQMygAegUIARDUAQ..i&docid=t7q50BKp_f7gPM&w=550&h=366&q=ristorante&ved=2ahUKEwje3bGyu8_2AhUL1eAKHQXhAioQMygAegUIARDUAQ',
-                    categories: [1],
-                    plates: [
-                        {
-                            name: 'margherita',
-                            description: 'pizza',
-                            price: '10 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vanityfair.it%2Fgallery%2F10-trend-della-pizza-spiegati-in-10-pizze&psig=AOvVaw34S-jjr8s2Y7dwzN789Bxn&ust=1647686198568000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCb_8e7z_YCFQAAAAAdAAAAABAD',
-                        },
-                        {
-                            name: 'diavola',
-                            description: 'pizza',
-                            price: '10 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vanityfair.it%2Fgallery%2F10-trend-della-pizza-spiegati-in-10-pizze&psig=AOvVaw34S-jjr8s2Y7dwzN789Bxn&ust=1647686198568000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCb_8e7z_YCFQAAAAAdAAAAABAD',
-                        },
-                        
-                    ]
-                },            
-                {
-                    id: 2,
-                    email: 'zushi@gmail.com',
-                    password: '12345678',
-                    name: 'Zushi',
-                    address: 'via Milano 1',
-                    VAT: '1234567890',
-                    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tripadvisor.it%2FRestaurant_Review-g187872-d1097319-Reviews-Zushi_Japanese_Restaurant-Vicenza_Province_of_Vicenza_Veneto.html&psig=AOvVaw2t9SDjNP5zkliY6fIJBeHj&ust=1647686321413000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMjhxoK8z_YCFQAAAAAdAAAAABAD',
-                    categories: [2, 3],
-                    plates: [
-                        {
-                        name: 'uramaki',
-                        description: 'sushi',
-                        price: '20 euro',
-                        visibility: true ,
-                        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.giallozafferano.it%2Fdulcisinforno%2Furamaki-california-maki-roll-sushi%2F&psig=AOvVaw2Fm9P54Zyp7CID36mQwbuK&ust=1647686298875000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOin2_e7z_YCFQAAAAAdAAAAABAJ',
-                        },
-                        {
-                            name: 'poke',
-                            description: 'poke',
-                            price: '5 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Framonaincucina.com%2F2020%2F10%2F02%2Fpan-poke-street-food-tra-panini-e-poke%2F&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAJ',
-                        },
-                    
-                    ]
-                },
-                {
-                    id: 3,
-                    email: 'panpoke@gmail.com',
-                    password: '12345678',
-                    name: 'Panpoke',
-                    address: 'via Genova 1',
-                    VAT: '1234567890',
-                    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fms-my.facebook.com%2FPaniniePoke%2Fposts%2F311712480647862&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAD',
-                    categories: [3],
-                    plates: [
-                        {
-                            name: 'poke',
-                            description: 'poke',
-                            price: '5 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Framonaincucina.com%2F2020%2F10%2F02%2Fpan-poke-street-food-tra-panini-e-poke%2F&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAJ',
-                        },
-                    
-                    ]
-                },
-                {
-                    id: 4,
-                    email: 'fiveguys@gmail.com',
-                    password: '12345678',
-                    name: 'Five guys',
-                    address: 'via Torino 1',
-                    VAT: '1234567890',
-                    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Frestaurants.fiveguys.it%2Froma-termini&psig=AOvVaw0SB2Jcmj_EcHc1C8XdhMBS&ust=1647686534196000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNiXl-i8z_YCFQAAAAAdAAAAABAD',
-                    categories: [4],
-                    plates: [
-                    {
-                        name: 'menu hamburger',
-                        description: 'hamburger e patatine',
-                        price: '15 euro',
-                        visibility: true ,
-                        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Froma.fanpage.it%2Ffive-guys-a-roma-rimandata-lapertura-del-primo-fast-food-in-citta-prevista-per-oggi%2F&psig=AOvVaw0SB2Jcmj_EcHc1C8XdhMBS&ust=1647686534196000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNiXl-i8z_YCFQAAAAAdAAAAABAP',
-                    },
-                    
-                    ]
-                },
-                {
-                    id: 5,
-                    email: 'venchi@gmail.com',
-                    password: '12345678',
-                    name: 'Venchi',
-                    address: 'via Alessandria 1',
-                    VAT: '1234567890',
-                    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.comunicaffe.it%2Fvenchi-cioccolato-storia-azienda%2F&psig=AOvVaw107WrcyMXqs1tFoZRPZa_P&ust=1647686630525000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPD16JW9z_YCFQAAAAAdAAAAABAD',
-                    categories: [5],
-                    plates: [
-                        {
-                            name: 'pistacchio',
-                            description: 'gelato',
-                            price: '5 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD',
-                        },
-                        {
-                            name: 'cioccolato',
-                            description: 'gelato',
-                            price: '5 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD',
-                        },
-                        {
-                            name: 'limone',
-                            description: 'gelato',
-                            price: '5 euro',
-                            visibility: true ,
-                            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD',
-                        },
-                    
-                    ]
-                },
-                {
-                    id: 6,
-                    email: 'donerkebab@gmail.com',
-                    password: '12345678',
-                    name: 'Doner kebab',
-                    address: 'via venezia 1',
-                    VAT: '1234567890',
-                    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDoner_kebab&psig=AOvVaw0y83sKkdr6EwbGlZP5gAkW&ust=1647686788395000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi1meG9z_YCFQAAAAAdAAAAABAD',
-                    categories: [6],
-                    plates: [
-                    {
-                        name: 'kebab',
-                        description: 'kebab',
-                        price: '5 euro',
-                        visibility: true ,
-                        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fit.m.wikipedia.org%2Fwiki%2FFile%3AD%25C3%25B6ner_Kebab%2C_Berlin%2C_2010_(01).jpg&psig=AOvVaw0y83sKkdr6EwbGlZP5gAkW&ust=1647686788395000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi1meG9z_YCFQAAAAAdAAAAABAJ',
-                    },
-                    
-                    ]
-                }
-            ]
+            restaurantsList: [],
+            categories: []
         }
+    },
+    methods:{
+        getRestaurantsList: function(){
+            axios.get('http://127.0.0.1:8000/api/restaurants/' + this.$route.params.slug)
+            .then((response)=>{
+                this.restaurantsList = response.data;
+            })
+        },
+        getCategoriesForSlider: function(){
+            axios.get('http://127.0.0.1:8000/api/categories')
+            .then((response)=>{
+                this.categories = response.data;
+            })
+        }
+    },
+    created: function(){
+        this.getRestaurantsList();
+        this.getCategoriesForSlider();
     }
 }
 </script>
@@ -241,12 +142,15 @@ export default {
 
 section {
     margin-top: 98px;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 125px;
+    }
     .container {
 
-        // Categories 
+        // Cateogries Slider
         .categories {
-            height: 200px;
-            background-color: lightblue; //!TEST 
+            padding: 30px 0;
         }
 
         // Restaurant List 
@@ -311,7 +215,7 @@ section {
                         top: 100px;
                         left: 50%;
                         transform: translate(-50%);
-                        width: 100%;
+                        width: 80%;
 
                         .research-input {
                             
@@ -330,8 +234,33 @@ section {
 
                 // Filters 
                 .filters {
-                    background-color: lightcoral;
                     width: 22%;
+
+                    // Categories list aside 
+                    .categories-aside {
+                        .category {
+                            padding: 5px 10px;
+                            border-radius: 15px;
+                            border: 1px solid $main_color; 
+                            display: inline-block;
+
+                            &:hover {
+                                background-color: $main_color;
+                                color: white;
+                    
+                            }
+
+                            .check {
+                                color: $main_color;
+                                display: none;
+
+                                &.active {
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
 
                 // Results 
@@ -362,7 +291,42 @@ section {
                             -o-box-shadow: 0px -1px 15px -5px #000000;
                             box-shadow: 0px -1px 15px -5px #000000;
                             margin-bottom: 20px;
+                            
+                            // Image 
+                            .restaurant-img {        
+                                img {
+                                    width: 100%;
+                                    display: inline-block;
+                                    border-radius: 10px;                            
+                                }
+                            }
+
+                            // Restaurant info 
+                            .restaurant-info {
+                                
+                                .rating {
+                                    .stars { 
+                                        color: $main_color;                                
+                                    }
+
+                                    .gray-stars { 
+                                        color: gray;
+                                        
+                                    }
+                                }
+                            }
+
+                            // Delivery nfo 
+                            .delivery-info {
+                                .delivery {
+                                    font-weight: bold;
+                                }
+                            }
                         }
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        width: 100%;
                     }
                 }
             }

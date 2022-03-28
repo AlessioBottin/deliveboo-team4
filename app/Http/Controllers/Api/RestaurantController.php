@@ -10,6 +10,13 @@ use App\Plate;
 
 class RestaurantController extends Controller
 {
+
+    public function getRestaurant($id){
+        $restaurant = User::findOrFail($id);
+
+        return response()->json($restaurant);
+    } 
+
     // ! Function that returns an API with x categories to show in the homepage slider
     public function loadCategories(){
         $categories = Category::all()->take(10);
@@ -19,7 +26,7 @@ class RestaurantController extends Controller
 
 
     // ! Function that returns an API with all the restaurants having the specified category
-    public function getRestaurants($category_id){
+    public function getRestaurants($category_slug){
         // Taking all the users
         $users = User::all();
 
@@ -31,7 +38,7 @@ class RestaurantController extends Controller
         foreach ($users as $user) {
             $categories = $user->categories;
             foreach ($categories as $category) {
-                if($category->id == $category_id){
+                if($category->slug == $category_slug){
                     $correct_users[] = $user;
                 }
             }
