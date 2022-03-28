@@ -225,18 +225,22 @@ export default {
                 };
                 this.cart.push(newProduct);
             };
-            this.resetTotalPrice();
+            this.totalPrice = this.totalPrice + parseFloat(product.price);
+            // this.resetTotalPrice();
         },
         // Delete the product from the cart
         // Reassigning cart's values, with the exception of the product with the name of the clicked one
         deleteProductFromCart: function(product){
+            let quantityOfProduct = this.cart.filter(element => element.name === product.name)[0].quantity;
             this.cart = this.cart.filter(element => element.name !== product.name);
-            this.resetTotalPrice();
+            this.totalPrice = this.totalPrice - (parseFloat(product.price) * quantityOfProduct);
+            // this.resetTotalPrice();
         },
         // Increase quantity for the specified product, and activate the "-" button
         increaseQuantity: function(product){
             product.quantity++;
-            this.resetTotalPrice();
+            // this.resetTotalPrice();
+             this.totalPrice = this.totalPrice + parseFloat(product.price);
             product.isBtnDisabled = false
         },
         // If the quantity is greater than 1, decrease the value
@@ -244,23 +248,25 @@ export default {
         decreaseQuantity: function(product){
             if (product.quantity > 1){
                 product.quantity--;
-                this.resetTotalPrice();
+                this.totalPrice = this.totalPrice - parseFloat(product.price);
+                // this.resetTotalPrice();
             }
             if(product.quantity == 1){
                 product.isBtnDisabled = true
             }
+            
         }
     },
     // When the cart array changes it updates the total price
-    computed: {
-        changeTotalPrice: function(){
-            let singleTotalPrice = 0;
-            this.cart.forEach(product => {
-                singleTotalPrice = product.price * product.quantity
-                this.totalPrice += singleTotalPrice;
-            });
-        }
-    },
+    // computed: {
+    //     changeTotalPrice: function(){
+    //         let singleTotalPrice = 0;
+    //         this.cart.forEach(product => {
+    //             singleTotalPrice = product.price * product.quantity
+    //             this.totalPrice += singleTotalPrice;
+    //         });
+    //     }
+    // },
     created: function() {
         this.getRestaurant();
         this.getRestaurantMenu();

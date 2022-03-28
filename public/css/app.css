@@ -10045,7 +10045,6 @@ h3 {
   }
 }
 img {
-<<<<<<< HEAD
   width: 100%;
 }
 
@@ -10066,11 +10065,12 @@ a:hover {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-=======
+}
+
+img {
   max-width: 100%;
 }
 
 .current-image img {
   max-width: 250px;
->>>>>>> backoffice-crud
 }
