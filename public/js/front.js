@@ -2508,45 +2508,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RestaurantDetails',
@@ -4952,18 +4913,14 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text justify-content-center " }),
-                  _vm._v(" "),
-                  _vm._m(1),
                 ]),
               ]),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "menu_list_container" },
+                { staticClass: "menu_list_container mt-4" },
                 [
-                  _c("h3", [_vm._v("Menu")]),
+                  _c("h2", { staticClass: "text-center" }, [_vm._v("Menu")]),
                   _vm._v(" "),
                   _vm._l(_vm.restaurantMenu, function (plate, index) {
                     return _c(
@@ -4976,7 +4933,20 @@ var render = function () {
                               _vm._v(_vm._s(plate.name)),
                             ]),
                             _vm._v(" "),
-                            _c("p", [_vm._v("da: " + _vm._s(plate.price))]),
+                            _c("p", [
+                              _vm._v("Prezzo: "),
+                              _c("b", [_vm._v(_vm._s(plate.price) + "€")]),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "btn btn-outline-warning" },
+                              [
+                                _vm._v(
+                                  "\n                                            Aggiungi al Carrello\n                                        "
+                                ),
+                              ]
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "plate_image" }, [
@@ -4995,7 +4965,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(1),
         ]),
       ]),
     ],
@@ -5027,65 +4997,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body text-center grey_card" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "d-flex justify-content-between flex-wrap grey_card_text",
-        },
-        [
-          _c("p", { staticClass: "card-text justify-content-center " }, [
-            _vm._v("Consegna:"),
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text justify-content-center " }, [
-            _vm._v("Voglio ritirare"),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "d-flex justify-content-between mt-3 flex-wrap grey_card_text",
-        },
-        [
-          _c("p", { staticClass: "card-text justify-content-center" }, [
-            _vm._v("Consegna gratuita:"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "p",
-            {
-              staticClass: "card-text justify-content-center d-flex flex-wrap",
-            },
-            [
-              _c("strong", [_vm._v("20€")]),
-              _vm._v(" ordine minimo\n                                    "),
-            ]
-          ),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card my_card my-3 box_shadow" }, [
-      _c("div", { staticClass: "menu_info" }, [
-        _c("h6", { staticClass: "menu_style" }, [_vm._v("Menu")]),
-        _vm._v(" "),
-        _c("h6", { staticClass: "info_style" }, [_vm._v("Info")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "order_card_container" }, [
       _c("div", { staticClass: "order_card mx-3 card box_shadow" }, [
         _c("div", { staticClass: "card-body text-center" }, [
@@ -5104,21 +5015,6 @@ var staticRenderFns = [
             _vm._v(
               "\n                            Vai al pagamento\n                        "
             ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "button_container" }, [
-            _c("button", { staticClass: "btn btn_delivery_special_btn" }, [
-              _c("i", { staticClass: "fas fa-motorcycle" }),
-              _vm._v(
-                "\n                                consegna\n                            "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn btn_take_away_special_btn" }, [
-              _vm._v(
-                "\n                                ritira\n                            "
-              ),
-            ]),
           ]),
         ]),
       ]),

@@ -57,48 +57,14 @@
                                 <p class="card-text justify-content-center ">Rating stars</p>
                                 <p class="card-text justify-content-center "></p>
 
-                                <!-- start grey card container -->
-                                <div class="card-body text-center grey_card">
-
-                                    <div class="d-flex justify-content-between flex-wrap grey_card_text">
-
-                                        <p class="card-text justify-content-center ">Consegna:</p>
-                                        <p class="card-text justify-content-center ">Voglio ritirare</p>
-
-                                    </div>
-
-                                    <div class="d-flex justify-content-between mt-3 flex-wrap grey_card_text">
-
-                                        <p class="card-text justify-content-center">Consegna gratuita:</p>
-                                        <p class="card-text justify-content-center d-flex flex-wrap">
-                                            <strong>20€</strong> ordine minimo
-                                        </p>
-
-                                    </div>
-
-                                </div>
-                                <!-- end grey card container -->
-
                             </div>
                             <!-- end card content restaurant container -->
                         </div>
-                        <!-- start card menu e info -->
-                        <div class="card my_card my-3 box_shadow">
-
-                            <div class="menu_info">
-
-                                <h6 class="menu_style">Menu</h6>
-                                <h6 class="info_style">Info</h6>
-
-                            </div>
-
-                        </div>
-                        <!-- start card menu e info -->
 
                         <!-- start menu list container -->
-                        <div class="menu_list_container">
+                        <div class="menu_list_container mt-4">
 
-                            <h3>Menu</h3>
+                            <h2 class="text-center">Menu</h2>
 
 
                                 <div
@@ -111,7 +77,11 @@
 
                                         <div class="plate_content">
                                             <h3 :id="plate.name">{{plate.name}}</h3>
-                                            <p>da: {{plate.price}}</p>
+                                            <p>Prezzo: <b>{{plate.price}}€</b></p>
+
+                                            <div class="btn btn-outline-warning">
+                                                Aggiungi al Carrello
+                                            </div>
                                         </div>
 
                                         <div class="plate_image">
@@ -154,15 +124,6 @@
                             <button class="btn payment_btn">
                                 Vai al pagamento
                             </button>
-                            <div class="button_container">
-                                <button class="btn btn_delivery_special_btn">
-                                    <i class="fas fa-motorcycle"></i>
-                                    consegna
-                                </button>
-                                <button class="btn btn_take_away_special_btn">
-                                    ritira
-                                </button>
-                            </div>
 
                         </div>
                         <!-- end card content restaurant container -->
@@ -278,6 +239,7 @@ export default {
             object-position: center;
         }
     }
+
 
     .menu_info {
         display: flex;
