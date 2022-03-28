@@ -2106,7 +2106,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SearchBanner'
+  name: 'SearchBanner',
+  data: function data() {
+    return {
+      searchInput: ''
+    };
+  },
+  methods: {
+    // Redirect to the restaurant lista page at the click on the input
+    // As route's param it passes the slug returned by the "string_to_slug" function
+    redirectToPage: function redirectToPage() {
+      this.$router.push({
+        name: 'restaurant-list',
+        params: {
+          slug: this.string_to_slug(this.searchInput)
+        }
+      });
+    },
+    // ! Creating the slug by a given string
+    string_to_slug: function string_to_slug(str) {
+      str = str.replace(/^\s+|\s+$/g, ""); // trim
+
+      str = str.toLowerCase(); // remove accents, swap ñ for n, etc
+
+      var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+      var to = "aaaaaaeeeeiiiioooouuuunc------";
+
+      for (var i = 0, l = from.length; i < l; i++) {
+        str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+      }
+
+      str = str.replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+      .replace(/\s+/g, "-") // collapse whitespace and replace by -
+      .replace(/-+/g, "-") // collapse dashes
+      .replace(/^-+/, "") // trim - from start of text
+      .replace(/-+$/, ""); // trim - from end of text
+
+      return str;
+    }
+  }
 });
 
 /***/ }),
@@ -2120,10 +2158,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vueperslides__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vueperslides */ "./node_modules/vueperslides/dist/vueperslides.common.js");
-/* harmony import */ var vueperslides__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vueperslides__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vueperslides_dist_vueperslides_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vueperslides/dist/vueperslides.css */ "./node_modules/vueperslides/dist/vueperslides.css");
-/* harmony import */ var vueperslides_dist_vueperslides_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vueperslides_dist_vueperslides_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vueperslides__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vueperslides */ "./node_modules/vueperslides/dist/vueperslides.common.js");
+/* harmony import */ var vueperslides__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vueperslides__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vueperslides_dist_vueperslides_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vueperslides/dist/vueperslides.css */ "./node_modules/vueperslides/dist/vueperslides.css");
+/* harmony import */ var vueperslides_dist_vueperslides_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vueperslides_dist_vueperslides_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2157,8 +2195,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Slider',
   components: {
-    VueperSlides: vueperslides__WEBPACK_IMPORTED_MODULE_1__["VueperSlides"],
-    VueperSlide: vueperslides__WEBPACK_IMPORTED_MODULE_1__["VueperSlide"]
+    VueperSlides: vueperslides__WEBPACK_IMPORTED_MODULE_0__["VueperSlides"],
+    VueperSlide: vueperslides__WEBPACK_IMPORTED_MODULE_0__["VueperSlide"]
   },
   props: {
     categoriesArray: Array
@@ -4748,54 +4786,71 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "d-flex justify-content-center" }, [
+    _c("div", { staticClass: "searchbox" }, [
+      _c("h2", { staticClass: "title" }, [
+        _vm._v("Il bello è prenderci gusto"),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text" }, [
+        _vm._v("Ordina online dai tuoi ristoranti preferiti"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "search-container" }, [
+        _c("div", { staticClass: "find-restaurant" }, [
+          _c("form", [
+            _c("label", { attrs: { for: "name" } }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchInput,
+                    expression: "searchInput",
+                  },
+                ],
+                attrs: { type: "text", id: "address", placeholder: "address" },
+                domProps: { value: _vm.searchInput },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchInput = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Scegli una categoria")]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "text-button",
+                attrs: { type: "button" },
+                on: { click: _vm.redirectToPage },
+              },
+              [_vm._v("Trova i ristoranti!")]
+            ),
+            _vm._v(" "),
+            _vm._m(0),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex justify-content-center" }, [
-      _c("div", { staticClass: "searchbox" }, [
-        _c("h2", { staticClass: "title" }, [
-          _vm._v("Il bello è prenderci gusto"),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text" }, [
-          _vm._v("Ordina online dai tuoi ristoranti preferiti"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "search-container" }, [
-          _c("div", { staticClass: "find-restaurant" }, [
-            _c("form", [
-              _c("label", { attrs: { for: "name" } }, [
-                _c("input", {
-                  attrs: {
-                    type: "text",
-                    id: "address",
-                    placeholder: "address",
-                  },
-                }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Scegli una categoria")]),
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "text-button", attrs: { type: "button" } },
-                [_vm._v("Trova i ristoranti!")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "icon-button", attrs: { type: "button" } },
-                [_c("i", { staticClass: "fa-solid fa-magnifying-glass" })]
-              ),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
+    return _c(
+      "button",
+      { staticClass: "icon-button", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa-solid fa-magnifying-glass" })]
+    )
   },
 ]
 render._withStripped = true
@@ -28406,7 +28461,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

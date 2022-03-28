@@ -10,10 +10,10 @@
                 <div class="find-restaurant">
                     <form>
                         <label for="name">
-                            <input type="text" id="address" placeholder="address">
+                            <input type="text" id="address" placeholder="address" v-model="searchInput">
                             <span>Scegli una categoria</span>
                         </label>
-                        <button class="text-button" type="button">Trova i ristoranti!</button>
+                        <button class="text-button" @click="redirectToPage" type="button">Trova i ristoranti!</button>
                         
                         <!-- <i class="fa-solid fa-location-arrow"></i> -->
                         <button class="icon-button" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -29,7 +29,41 @@
 
 <script>
 export default {
-    name: 'SearchBanner'
+    name: 'SearchBanner',
+    data: function(){
+        return{
+            searchInput: '',
+        }
+    },
+    methods:{
+        // Redirect to the restaurant lista page at the click on the input
+        // As route's param it passes the slug returned by the "string_to_slug" function
+        redirectToPage: function(){
+            this.$router.push({name:'restaurant-list', params: {slug: this.string_to_slug(this.searchInput)}}); 
+        },
+        // ! Creating the slug by a given string
+        string_to_slug: function(str) {
+            str = str.replace(/^\s+|\s+$/g, ""); // trim
+            str = str.toLowerCase();
+
+            // remove accents, swap ñ for n, etc
+            var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+            var to = "aaaaaaeeeeiiiioooouuuunc------";
+
+            for (var i = 0, l = from.length; i < l; i++) {
+                str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+            }
+
+            str = str
+                .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+                .replace(/\s+/g, "-") // collapse whitespace and replace by -
+                .replace(/-+/g, "-") // collapse dashes
+                .replace(/^-+/, "") // trim - from start of text
+                .replace(/-+$/, ""); // trim - from end of text
+
+            return str;
+        }
+    }
 }
 </script>
 
