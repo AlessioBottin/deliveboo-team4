@@ -27,6 +27,9 @@ Route::middleware('auth')
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/save', 'HomeController@saveCategories')->name('save-categories');
 
+    // Crud Plates 
+    Route::resource('plates', 'PlatesController');
+
 });
 
 

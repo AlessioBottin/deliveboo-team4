@@ -11,3 +11,13 @@
 
 // General
 @import './partials/general';
+
+
+
+img {
+	max-width: 100%;
+}
+
+.current-image img {
+	max-width: 250px;
+}
