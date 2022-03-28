@@ -152,9 +152,8 @@ class PlatesController extends Controller
         if(isset($form_data['image'])) {
             //Cancello il file vecchio
             if($plate->image) {
-                Storage::delete('plate_images/' + $plate->image);
-            }
-    
+                Storage::delete($plate->image);
+            }    
             //Faccio l'upload del nuovo file
             $img_path = Storage::put('plate_images', $form_data['image']);
     

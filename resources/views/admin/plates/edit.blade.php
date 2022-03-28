@@ -80,7 +80,7 @@
             @if ($plate->image)
                 <div class="current-image">
                     Immagine attuale: 
-                    <img src="{{$plate->image}}" alt="{{ $plate->name}}">
+                    <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}">
                 </div>
             @endif
 
