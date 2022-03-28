@@ -52,24 +52,20 @@ class PlatesController extends Controller
      */
     public function store(Request $request)
     {   
+        // E' sempre richiesta una nuova immagine alla creazione del piatto
+        $isImgRequired = true;
         $user_id = Auth::user()->id;
 
         $form_data = $request->all();        
-        
-        // dd($form_data);
-        // dd($user_id);
 
-        $request->validate($this->getValidationRules());
+        $request->validate($this->getValidationRules($isImgRequired));
 
         $new_plate = new Plate();
         $new_plate->fill($form_data);
         
-        if(isset($form_data['image'])) {
-            $img_path = Storage::put('plate_images', $form_data['image']);
-            // dd($img_path);
+        $img_path = Storage::put('plate_images', $form_data['image']);
 
-            $new_plate->img = $img_path;
-        }
+        $new_plate->image = $img_path;
 
         $new_plate->user_id = $user_id;
 
@@ -142,29 +138,28 @@ class PlatesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        // Non e' sempre richiesta una nuova immagine
+        // nel form ad esempio nel caso si voglia tenere quella vecchia
+        $isImgRequired = false;
         $form_data = $request->all();
-        $request->validate($this->getValidationRules());
-
-        $user_id = Auth::user()->id;
-        $plate = Plate::findOrfail($id);
-
-        // $plate = Plate::findOrfail($user_id);
         
-        // dd($plate);
-        // dd($form_data);
+        // $user_id = Auth::user()->id; 
+        $plate = Plate::findOrfail($id);
+        
+        $request->validate($this->getValidationRules($isImgRequired));
 
-        if($form_data['image']) {
+        if(isset($form_data['image'])) {
             //Cancello il file vecchio
             if($plate->image) {
-                Storage::delete($plate->image);
+                Storage::delete('plate_images/' + $plate->image);
             }
     
-        //Faccio l'upload del nuovo file
-            $img_path = Storage::put('img', $form_data['image']);
+            //Faccio l'upload del nuovo file
+            $img_path = Storage::put('plate_images', $form_data['image']);
     
-        //Salvo nella colonna cover il path del nuovo file
-            $form_data['img'] = $img_path;
+            //Salvo nel form data il path del nuovo file
+            $form_data['image'] = $img_path;
         }
 
         $plate->update($form_data);
@@ -181,7 +176,6 @@ class PlatesController extends Controller
     public function destroy($id)
     {
         $plate = Plate::findOrFail($id);
-        // $plate ->visibility()->sync([]);
 
         if($plate->img) {
             Storage::delete($plate->img);
@@ -194,14 +188,17 @@ class PlatesController extends Controller
     }
 
     // Validation Rules 
-    public function getValidationRules() {
+    public function getValidationRules($_isImgRequired) {
+
+        $_isImgRequired ? $imageRules = 'required|image|max:512' : $imageRules = 'image|max:512';
+
         return [
             'name' => 'required|max:70',
             'description' => 'required|max:60000',
             'ingredients' => 'required|max:60000',
-            'price' => 'required|numeric|between:0,1999.99',
-            // 'visibility' => 'required|boolean',
-            'image' => 'image|max:512'
+            'price' => 'required|numeric|between:0.1,999.99',
+            'visibility' => 'required|boolean',
+            'image' => $imageRules
         ];
     }
 }

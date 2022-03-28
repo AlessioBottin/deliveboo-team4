@@ -9,12 +9,11 @@
                 @foreach ($plates as $plate)
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card mt-4">
-                            @if($plate->image)
-                                <div>
-                                    {{-- <img src="{{$plate->image}}" alt="{{ $plate->name}}" class="card-img-top"> --}}
-                                    <img src="{{ asset('storage/' . $plate->img)}}" alt="{{ $plate->name}}" class="card-img-top">
-                                </div>
-                            @endif 
+                            
+                            <div>
+                                <img src="{{ asset('storage/' . $plate->image)}}" alt="{{ $plate->name}}" class="card-img-top">
+                            </div>
+                             
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{ $plate->name }}</h5>
                                 <p class="card-text">{{ Str::substr($plate->description, 0, 100)}}...</p>

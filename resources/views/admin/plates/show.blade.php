@@ -11,14 +11,12 @@
       <div class="mb-3"><strong>Categoria:</strong> {{ $plate->category ? $plate->category->name : 'nessuna'}}</div>
       
       <div class="mb-3"><strong>Ingredienti:</strong> {{ $plate->ingredients }}</div>
-      
 
-      @if($plate->image)
-         <div>
-         {{-- <img src="{{$plate->image}}" alt="{{ $plate->name}}"> --}}
-         <img src="{{ asset('storage/' .  $plate->img)}}" alt="{{ $plate->name}}">
-         </div>
-      @endif
+      <div class="mb-3"><strong>Visibility:</strong> {{ $plate->visibility ? 'visibile' : 'non visibile' }}</div>
+
+      <div>
+         <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}">
+      </div>
 
       <p>{{ $plate->description }}</p>
 

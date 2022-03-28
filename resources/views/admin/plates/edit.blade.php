@@ -8,13 +8,14 @@
 
         <form action="{{ route('admin.plates.update', ['plate' => $plate->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
+            @method('PUT')
             
             {{-- Plate Name  --}}
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $plate->name) }}">
             </div>
+
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -61,13 +62,13 @@
                 <div class="form-check  form-check-inline mb-3">
                     <input class="form-check-input" type="radio" name="visibility" id="visibility" value="0" @if(!old('visibility')) checked @endif>
                     <label class="form-check-label" for="visibility">
-                    Non Visibile
-                </label>
-            </div>
+                        Non Visibile
+                    </label>
+                </div>
 
-            @error('visibility')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+                @error('visibility')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
 
@@ -79,16 +80,19 @@
             @if ($plate->image)
                 <div class="current-image">
                     Immagine attuale: 
-                    {{-- <img src="{{ asset('storage/' . $post->cover) }}" alt=""> --}}
                     <img src="{{$plate->image}}" alt="{{ $plate->name}}">
                 </div>
             @endif
+
+            @error('image')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         
             <button type="submit" class="btn btn-primary">Modifica</button>
         </form>
 
     @else 
-    <h1>Errore la pagina non è stata trovata</h1>
+        <h1>Errore la pagina non è stata trovata</h1>
     @endif
 
 @endsection
