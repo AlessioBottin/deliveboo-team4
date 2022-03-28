@@ -15,9 +15,7 @@ class HomeController extends Controller
 {
     public function index(){
         $user = Auth::user();
-
         $categories = Category::all();
-        
         
         // If he has already any related category, redirect him to the homepage
         if(count($user->categories)>0){
