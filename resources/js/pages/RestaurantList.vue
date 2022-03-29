@@ -39,10 +39,10 @@
                         <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
                         fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
                         <ul class="categories-aside">
-                            <li class="category mb-4 d-flex justify-content-between" v-for="n in 10" :key="n">
+                            <li class="category mb-4 d-flex justify-content-between" v-for="(category, n) in categories" :key="n">
                                 <!-- Al click sulla categoria deve essere settato il filtro  -->
                                 <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
-                                <span>Categoria</span>
+                                <span>{{ category.name }}</span>
                                 <span class="check"><i class="fa-solid fa-check"></i></span>
                             </li>
                         </ul>

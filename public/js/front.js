@@ -5392,7 +5392,7 @@ var render = function () {
               _c(
                 "ul",
                 { staticClass: "categories-aside" },
-                _vm._l(10, function (n) {
+                _vm._l(_vm.categories, function (category, n) {
                   return _c(
                     "li",
                     {
@@ -5401,7 +5401,7 @@ var render = function () {
                         "category mb-4 d-flex justify-content-between",
                     },
                     [
-                      _c("span", [_vm._v("Categoria")]),
+                      _c("span", [_vm._v(_vm._s(category.name))]),
                       _vm._v(" "),
                       _vm._m(0, true),
                     ]
@@ -28523,7 +28523,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
