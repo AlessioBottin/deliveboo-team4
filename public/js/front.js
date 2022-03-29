@@ -5450,7 +5450,7 @@ var render = function () {
               _c(
                 "ul",
                 { staticClass: "categories-aside" },
-                _vm._l(10, function (n) {
+                _vm._l(_vm.categories, function (category, n) {
                   return _c(
                     "li",
                     {
@@ -5459,7 +5459,7 @@ var render = function () {
                         "category mb-4 d-flex justify-content-between",
                     },
                     [
-                      _c("span", [_vm._v("Categoria")]),
+                      _c("span", [_vm._v(_vm._s(category.name))]),
                       _vm._v(" "),
                       _vm._m(0, true),
                     ]
