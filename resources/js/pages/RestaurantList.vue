@@ -66,7 +66,7 @@
                         <!-- list  -->
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurantsList" :key="index">
-                                <router-link :to="{ name: 'restaurant-details', params: { id: restaurant.id } }">
+                                <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.slug } }">
                                     <div class="row">
 
                                         <!-- Img  -->

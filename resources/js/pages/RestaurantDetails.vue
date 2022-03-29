@@ -6,7 +6,7 @@
         <Jumbotron />
        
         <!-- start container -->
-        <div class="container my_container" >
+        <div v-if="restaurant && restaurantMenu.length > 0" class="container my_container" >
 
             <!-- cards wrapper container -->
             <div class="cards_wrapper_container">
@@ -163,6 +163,13 @@
         </div>
         <!-- end container -->
 
+        <div v-else class="container">
+            <h1 class="text-center mt-5">Non abbiamo trovato ciò che cercavi</h1>
+            <h5 class="text-center">
+                <router-link :to="{name:'home'}">Torna alla homepage</router-link>
+            </h5>
+        </div>
+
     </section>
     <!-- end section -->
 
@@ -190,14 +197,14 @@ export default {
         },
         // Function that returns an API with the specific restaurant
         getRestaurant: function(){
-            axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.id)
+            axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurant = response.data;
             })
         },
         // Function that returns an API with the menu of the restaurant
         getRestaurantMenu: function(){
-            axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.id)
+            axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurantMenu = response.data;
             })
