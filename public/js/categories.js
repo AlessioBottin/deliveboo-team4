@@ -119,7 +119,7 @@ categoryBox.forEach(function (element) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\categories.js */"./resources/js/categories.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\categories.js */"./resources/js/categories.js");
 
 
 /***/ })
