@@ -26,3 +26,10 @@ Route::get('/restaurants/{category_slug}', 'Api\RestaurantController@getRestaura
 
 Route::get('/restaurant-list/{restaurant_id}', 'Api\RestaurantController@getPlatesForRestaurant');
 
+
+
+// Payment API
+Route::get('orders/generate', 'Api\Orders\OrderController@generate');
+Route::post('orders/make/payment', 'Api\Orders\OrderController@makePayment');
+
+
