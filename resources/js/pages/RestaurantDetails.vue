@@ -185,9 +185,8 @@ export default {
         };
     },
     methods:{
-        resetTotalPrice: function(){
-            this.totalPrice = 0;
-            return this.totalPrice
+        changeLocalstorageCart: function(){
+            localStorage.cart = JSON.stringify(this.cart);
         },
         // Function that returns an API with the specific restaurant
         getRestaurant: function(){
@@ -226,7 +225,9 @@ export default {
                 this.cart.push(newProduct);
             };
             this.totalPrice = this.totalPrice + parseFloat(product.price);
-            // this.resetTotalPrice();
+
+            // ! Adding cart to local storage
+            // TODO this.changeLocalstorageCart();
         },
         // Delete the product from the cart
         // Reassigning cart's values, with the exception of the product with the name of the clicked one
@@ -234,14 +235,16 @@ export default {
             let quantityOfProduct = this.cart.filter(element => element.name === product.name)[0].quantity;
             this.cart = this.cart.filter(element => element.name !== product.name);
             this.totalPrice = this.totalPrice - (parseFloat(product.price) * quantityOfProduct);
-            // this.resetTotalPrice();
+            // ! Adding cart to local storage
+            // TODO this.changeLocalstorageCart();
         },
         // Increase quantity for the specified product, and activate the "-" button
         increaseQuantity: function(product){
             product.quantity++;
-            // this.resetTotalPrice();
              this.totalPrice = this.totalPrice + parseFloat(product.price);
-            product.isBtnDisabled = false
+            product.isBtnDisabled = false;
+            // ! Adding cart to local storage
+            // TODO this.changeLocalstorageCart();
         },
         // If the quantity is greater than 1, decrease the value
         // Otherwise don't, and also disable the "-" button
@@ -249,7 +252,8 @@ export default {
             if (product.quantity > 1){
                 product.quantity--;
                 this.totalPrice = this.totalPrice - parseFloat(product.price);
-                // this.resetTotalPrice();
+                // ! Adding cart to local storage
+                // TODO this.changeLocalstorageCart();
             }
             if(product.quantity == 1){
                 product.isBtnDisabled = true
@@ -257,19 +261,11 @@ export default {
             
         }
     },
-    // When the cart array changes it updates the total price
-    // computed: {
-    //     changeTotalPrice: function(){
-    //         let singleTotalPrice = 0;
-    //         this.cart.forEach(product => {
-    //             singleTotalPrice = product.price * product.quantity
-    //             this.totalPrice += singleTotalPrice;
-    //         });
-    //     }
-    // },
     created: function() {
         this.getRestaurant();
         this.getRestaurantMenu();
+        // this.cart = JSON.parse(localStorage.getItem("cart"));
+        // console.log(localStorage.getItem("cart"));
     }
 };
 </script>

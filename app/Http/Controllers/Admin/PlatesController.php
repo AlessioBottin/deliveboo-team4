@@ -63,6 +63,7 @@ class PlatesController extends Controller
         $new_plate = new Plate();
         $new_plate->fill($form_data);
         
+        $new_plate->slug = Plate::generateSlug($new_plate->name);
         $img_path = Storage::put('plate_images', $form_data['image']);
 
         $new_plate->image = $img_path;
@@ -148,6 +149,10 @@ class PlatesController extends Controller
         $plate = Plate::findOrfail($id);
         
         $request->validate($this->getValidationRules($isImgRequired));
+
+        if($form_data['name'] != $plate->name) {
+            $plate->slug = Plate::generateSlug($form_data['name']);
+        }
 
         if(isset($form_data['image'])) {
             //Cancello il file vecchio

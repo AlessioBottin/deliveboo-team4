@@ -2575,9 +2575,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    resetTotalPrice: function resetTotalPrice() {
-      this.totalPrice = 0;
-      return this.totalPrice;
+    changeLocalstorageCart: function changeLocalstorageCart() {
+      localStorage.cart = JSON.stringify(this.cart);
     },
     // Function that returns an API with the specific restaurant
     getRestaurant: function getRestaurant() {
@@ -2622,7 +2621,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       ;
-      this.totalPrice = this.totalPrice + parseFloat(product.price); // this.resetTotalPrice();
+      this.totalPrice = this.totalPrice + parseFloat(product.price); // ! Adding cart to local storage
+      // TODO this.changeLocalstorageCart();
     },
     // Delete the product from the cart
     // Reassigning cart's values, with the exception of the product with the name of the clicked one
@@ -2633,21 +2633,23 @@ __webpack_require__.r(__webpack_exports__);
       this.cart = this.cart.filter(function (element) {
         return element.name !== product.name;
       });
-      this.totalPrice = this.totalPrice - parseFloat(product.price) * quantityOfProduct; // this.resetTotalPrice();
+      this.totalPrice = this.totalPrice - parseFloat(product.price) * quantityOfProduct; // ! Adding cart to local storage
+      // TODO this.changeLocalstorageCart();
     },
     // Increase quantity for the specified product, and activate the "-" button
     increaseQuantity: function increaseQuantity(product) {
-      product.quantity++; // this.resetTotalPrice();
-
+      product.quantity++;
       this.totalPrice = this.totalPrice + parseFloat(product.price);
-      product.isBtnDisabled = false;
+      product.isBtnDisabled = false; // ! Adding cart to local storage
+      // TODO this.changeLocalstorageCart();
     },
     // If the quantity is greater than 1, decrease the value
     // Otherwise don't, and also disable the "-" button
     decreaseQuantity: function decreaseQuantity(product) {
       if (product.quantity > 1) {
         product.quantity--;
-        this.totalPrice = this.totalPrice - parseFloat(product.price); // this.resetTotalPrice();
+        this.totalPrice = this.totalPrice - parseFloat(product.price); // ! Adding cart to local storage
+        // TODO this.changeLocalstorageCart();
       }
 
       if (product.quantity == 1) {
@@ -2655,19 +2657,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  // When the cart array changes it updates the total price
-  // computed: {
-  //     changeTotalPrice: function(){
-  //         let singleTotalPrice = 0;
-  //         this.cart.forEach(product => {
-  //             singleTotalPrice = product.price * product.quantity
-  //             this.totalPrice += singleTotalPrice;
-  //         });
-  //     }
-  // },
   created: function created() {
     this.getRestaurant();
-    this.getRestaurantMenu();
+    this.getRestaurantMenu(); // this.cart = JSON.parse(localStorage.getItem("cart"));
+    // console.log(localStorage.getItem("cart"));
   }
 });
 
