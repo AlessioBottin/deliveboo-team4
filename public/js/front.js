@@ -2785,6 +2785,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RestaurantList',
@@ -2806,6 +2807,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('http://127.0.0.1:8000/api/restaurants/' + this.$route.params.slug).then(function (response) {
         _this.restaurantsList = response.data;
       });
+    },
+    test: function test(category) {
+      this.$router.push({
+        name: 'restaurant-list',
+        params: {
+          slug: category.slug
+        }
+      });
+      this.getRestaurantsList();
     },
     getCategoriesForSlider: function getCategoriesForSlider() {
       var _this2 = this;
@@ -4863,6 +4873,7 @@ var render = function () {
               attrs: { type: "text", id: "address", placeholder: "address" },
               domProps: { value: _vm.searchInput },
               on: {
+                keydown: _vm.redirectToPage,
                 input: function ($event) {
                   if ($event.target.composing) {
                     return
@@ -5375,7 +5386,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("section", [
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "categories" }, [_c("Slider")], 1),
+      _c("div", { staticClass: "categories" }),
       _vm._v(" "),
       _c("div", { staticClass: "restaurant-list" }, [
         _c(
@@ -5457,6 +5468,11 @@ var render = function () {
                       key: n,
                       staticClass:
                         "category mb-4 d-flex justify-content-between",
+                      on: {
+                        click: function ($event) {
+                          return _vm.test(category)
+                        },
+                      },
                     },
                     [
                       _c("span", [_vm._v(_vm._s(category.name))]),
