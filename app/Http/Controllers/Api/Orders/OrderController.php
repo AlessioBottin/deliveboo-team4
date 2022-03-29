@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Orders;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
+use App\Plate;
 
 class OrderController extends Controller
 {
@@ -24,8 +25,18 @@ class OrderController extends Controller
 
     public function makePayment (Request $request, Gateway $gateway){
         
+        // Dobbiamo salvarci per ogni piatto la quantity 
+        // e calcolare il prezzo poi sommarlo in una variabile e passarlo ad amount
+        $plates_array = $request->plate;
+        $total_amount = 0;
+        foreach ($plates_array as $plate) {
+            $plate_database = Plate::find($plate["id"]);
+            $plate_multiplied_price = $plate_database->price * $plate["quantity"];
+            $total_amount = $total_amount + $plate_multiplied_price;
+        }
+
         $result = $gateway->transaction()->sale([
-            'amount' => $request->amount,
+            'amount' => $total_amount,
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true
@@ -45,11 +56,6 @@ class OrderController extends Controller
             ];
             return response()->json($data,401);
         }
-        
-        
-        
-        return 'make Payment';
-
 
     }
 
