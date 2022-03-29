@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="position-relative">
         <Header />
         <Jumbotron />
 
@@ -55,3 +55,11 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '../../sass/app';
+
+.container {
+    margin-top: 80px;
+}
+</style>
