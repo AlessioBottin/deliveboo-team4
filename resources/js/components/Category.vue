@@ -40,7 +40,6 @@ export default {
     background: white;
     border-radius: 15px;
 }
-
 ::-webkit-scrollbar-thumb{
     background: lighten(#ffce08, 10%);
     border-radius: 15px;
