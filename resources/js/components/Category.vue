@@ -41,6 +41,7 @@ export default {
     border-radius: 15px;
 }
 
+<<<<<<< HEAD
 ::-webkit-scrollbar-thumb{
     background: lighten(#ffce08, 10%);
     border-radius: 15px;
@@ -52,6 +53,8 @@ export default {
 }
 // ! End scrollbar customization
 
+=======
+>>>>>>> Payment
 .container {
     overflow-x: hidden;
     overflow-x: scroll;  
