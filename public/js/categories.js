@@ -119,7 +119,19 @@ categoryBox.forEach(function (element) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\categories.js */"./resources/js/categories.js");
+=======
+<<<<<<< HEAD
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\categories.js */"./resources/js/categories.js");
+=======
+module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\categories.js */"./resources/js/categories.js");
+<<<<<<< HEAD
+>>>>>>> 95e9cfc85f8fdda5c82ea971455d75abab49716e
+=======
+>>>>>>> Payment
+>>>>>>> 9d93bcbf628e94e26e1de1c88bdf592949750644
+>>>>>>> fed7e7f1e85e74b6da5d525f4c86a44545ef7a50
 
 
 /***/ })
