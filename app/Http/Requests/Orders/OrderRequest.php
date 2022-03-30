@@ -26,10 +26,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'token' => 'required',
-            'plate' => [
-                'required',
-                new ValidPlate()
-            ]
+            'plate.*.id' => 'exists:plates,id'
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
 use App\Plate;
+use App\Http\Requests\Orders\OrderRequest;
 
 class OrderController extends Controller
 {
@@ -23,8 +24,7 @@ class OrderController extends Controller
         return response()->json($data,200);
     }
 
-    public function makePayment (Request $request, Gateway $gateway){
-        
+    public function makePayment (OrderRequest $request, Gateway $gateway){
         // Dobbiamo salvarci per ogni piatto la quantity 
         // e calcolare il prezzo poi sommarlo in una variabile e passarlo ad amount
         $plates_array = $request->plate;
