@@ -37341,6 +37341,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
@@ -37361,6 +37362,10 @@ module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliv
 >>>>>>> Payment
 >>>>>>> 9d93bcbf628e94e26e1de1c88bdf592949750644
 >>>>>>> fed7e7f1e85e74b6da5d525f4c86a44545ef7a50
+=======
+__webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 5b6293d46641b145342aacb1ddcb8ec4c6f8af21
 
 
 /***/ })
