@@ -3,8 +3,6 @@
 namespace App\Http\Requests\Orders;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\ValidPlate;
-
 class OrderRequest extends FormRequest
 {
     /**
@@ -26,7 +24,9 @@ class OrderRequest extends FormRequest
     {
         return [
             'token' => 'required',
+            // For each element inside plate, verify if the id exists in plates table
             'plate.*.id' => 'exists:plates,id'
+            // If we want to check if the plates belong to the same restaurant we need to check if the user_id is the same in each plate
         ];
     }
 }
