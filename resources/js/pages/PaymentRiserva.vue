@@ -14,10 +14,10 @@
             <!-- start cards wrapper container -->
             <div class="cards_wrapper">
             
-                <!-- start contact informations contact and payment methods cards box -->
+                <!-- Contact informations contact and payment methods cards box -->
                 <div class="info_and_payment_cards_box">
         
-                    <!-- start contact informations card -->
+                    <!-- Contact informations card -->
                     <div class="card my_card_wrapper mb-3 box_shadow">
                     
                         <!-- start card body -->
@@ -74,7 +74,7 @@
                     </div>
                     <!-- end contact informations card -->
 
-                    <!-- start payment methods card -->
+                    <!-- PAYMENT METHODS card -->
                     <div class="card my_card_wrapper my-4 box_shadow">
 
                         <!-- start card body -->
@@ -203,12 +203,12 @@
                         <!-- end card body -->
 
                     </div>
-                    <!-- end card payment methods card -->
+                    <!-- END PAYMENT METHODS card -->
 
                 </div>
                 <!-- end contact informations contact and payment methods cards box -->
 
-                <!-- start order card container -->
+                <!-- Order card container -->
                 <div class="order_card_container">
 
                     <!-- start order card -->

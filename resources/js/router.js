@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 import Home from './pages/Home.vue';
 import RestaurantList from './pages/RestaurantList.vue';
 import RestaurantDetails from './pages/RestaurantDetails.vue';
-import Payment from './pages/Payment.vue';
+import PaymentPage from './pages/PaymentPage.vue';
 import NotFound from './pages/NotFound.vue';
 import Thankyou from './pages/Thankyou.vue';
 
@@ -31,7 +31,7 @@ const router = new VueRouter({
         {
             path: "/payment",
             name: "payment",
-            component: Payment
+            component: PaymentPage
         },
         {
             path: "/thankyou",
