@@ -6,7 +6,7 @@
         <Jumbotron />
        
         <!-- start container -->
-        <div class="container my_container" >
+        <div v-if="restaurant && restaurantMenu.length > 0" class="container my_container" >
 
             <!-- cards wrapper container -->
             <div class="cards_wrapper_container">
@@ -163,6 +163,13 @@
         </div>
         <!-- end container -->
 
+        <div v-else class="container">
+            <h1 class="text-center mt-5">Non abbiamo trovato ciò che cercavi</h1>
+            <h5 class="text-center">
+                <router-link :to="{name:'home'}">Torna alla homepage</router-link>
+            </h5>
+        </div>
+
     </section>
     <!-- end section -->
 
@@ -184,20 +191,34 @@ export default {
             totalPrice: 0,
         };
     },
+    // If the user has something in the cart and he wants to leave the page,
+    // he will be alerted that he will lose all the things he added to the cart
+    // Otherwise, if the cart is empty, he can leave without any alert displaying
+    beforeRouteLeave (to, from, next) {
+        if(this.cart.length > 0){
+            if(confirm('Vuoi davvero uscire? Perderai tutti i prodotti nel carrello')){
+                next()
+            }else{
+                next(false)
+            }
+        }else{
+            next()
+        }
+    },
     methods:{
         changeLocalstorageCart: function(){
             localStorage.cart = JSON.stringify(this.cart);
         },
         // Function that returns an API with the specific restaurant
         getRestaurant: function(){
-            axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.id)
+            axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurant = response.data;
             })
         },
         // Function that returns an API with the menu of the restaurant
         getRestaurantMenu: function(){
-            axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.id)
+            axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurantMenu = response.data;
             })
@@ -216,6 +237,7 @@ export default {
                 });
             }else{
                 let newProduct = {
+                    id: product.id,
                     name: product.name,
                     price: product.price,
                     image: product.image,

@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Category;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -56,7 +58,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:70'],
             'vat' => ['required', 'string', 'max:11', 'unique:users'],
-            'image' => ['required', 'string', 'max:255'],
+            'image' => ['required', 'image', 'max:1000'],
 
         ]);
     }
@@ -69,12 +71,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $img_path = Storage::put('register', $data['image']);
+        
+        // dd($img_path, Str::slug($data['name']));
         return User::create([
             'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
             'email' => $data['email'],
             'address' => $data['address'],
             'vat' => $data['vat'],
-            'image' => $data['image'],
+            'image' => $img_path,
             'password' => Hash::make($data['password']),
         ]);
     }

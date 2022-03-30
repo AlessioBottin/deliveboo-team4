@@ -11,8 +11,8 @@ use App\Plate;
 class RestaurantController extends Controller
 {
 
-    public function getRestaurant($id){
-        $restaurant = User::findOrFail($id);
+    public function getRestaurant($slug){
+        $restaurant = User::where('slug', '=', $slug)->first();
 
         return response()->json($restaurant);
     } 
@@ -49,10 +49,10 @@ class RestaurantController extends Controller
 
 
     // ! Function that returns API with all the plates of a given restaurant
-    public function getPlatesForRestaurant($restaurant_id){
-        $restaurant = User::findOrfail($restaurant_id);
+    public function getPlatesForRestaurant($restaurant_slug){
+        $restaurant = User::where('slug', '=', $restaurant_slug)->first();
 
-        $plates = Plate::where('user_id', '=', $restaurant_id)->get();
+        $plates = Plate::where('user_id', '=', $restaurant->id)->get();
 
         return response()->json($plates);
     }

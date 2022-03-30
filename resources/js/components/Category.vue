@@ -32,7 +32,29 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../sass/app';
+// ! Scrollbar customization
+::-webkit-scrollbar{
+    height: 10px;
+}
+::-webkit-scrollbar-track{
+    background: white;
+    border-radius: 15px;
+}
 
+<<<<<<< HEAD
+::-webkit-scrollbar-thumb{
+    background: lighten(#ffce08, 10%);
+    border-radius: 15px;
+    border: 1px solid white;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: darken(#ffce08, 5%);
+}
+// ! End scrollbar customization
+
+=======
+>>>>>>> Payment
 .container {
     overflow-x: hidden;
     overflow-x: scroll;  

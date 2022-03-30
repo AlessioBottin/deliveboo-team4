@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class UsersTableSeeder extends Seeder
         foreach($users as $user) {
             $new_user = new User();
             $new_user->name = $user['name'];
+            $new_user->slug = Str::slug($user['name'], '-');
             $new_user->email = $user['email'];
             $new_user->password = Hash::make($user['password']);
             $new_user->address = $user['address'];

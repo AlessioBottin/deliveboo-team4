@@ -4,7 +4,7 @@
         <div class="container">
             <!-- Categories  -->
             <div class="categories">
-                <Slider/>
+                <!-- <Slider/> -->
             </div>
 
             <!-- List  -->
@@ -39,10 +39,11 @@
                         <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
                         fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
                         <ul class="categories-aside">
-                            <li class="category mb-4 d-flex justify-content-between" v-for="n in 10" :key="n">
+                            <li v-for="(category,n) in categories" :key="n" @click="test(category)" class="category mb-4 d-flex justify-content-between">
                                 <!-- Al click sulla categoria deve essere settato il filtro  -->
                                 <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
-                                <span>Categoria</span>
+                                
+                                <span>{{ category.name }}</span>
                                 <span class="check"><i class="fa-solid fa-check"></i></span>
                             </li>
                         </ul>
@@ -66,7 +67,7 @@
                         <!-- list  -->
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurantsList" :key="index">
-                                <router-link :to="{ name: 'restaurant-details', params: { id: restaurant.id } }">
+                                <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.slug } }">
                                     <div class="row">
 
                                         <!-- Img  -->
@@ -122,6 +123,10 @@ export default {
             .then((response)=>{
                 this.restaurantsList = response.data;
             })
+        },
+        test: function(category){
+            this.$router.push({name:'restaurant-list', params: {slug: category.slug}}); 
+            this.getRestaurantsList();
         },
         getCategoriesForSlider: function(){
             axios.get('http://127.0.0.1:8000/api/categories')
