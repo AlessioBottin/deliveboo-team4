@@ -1,28 +1,21 @@
 <template>
-    <div class="d-flex justify-content-center">
-       
+    <div class="container-fluid d-flex justify-content-center position-absolute">
+        
+        
+
         <div class="searchbox">
-            <h2 class="title">Il bello è prenderci gusto</h2>
-            <p class="text">Ordina online dai tuoi ristoranti preferiti</p>
-           
-           <div class="search-container">
+            <h2 class="title text-center">Il bello è prenderci gusto</h2>
+            <p class="text text-center">Ordina online dai tuoi ristoranti preferiti</p>
+                           
+            <form>
+                <label for="name">
+                    <input type="text" id="address" placeholder="address" v-model="searchInput">
+                    <span>Scegli una categoria</span>
+                </label>
+                <button class="text-button" @click="redirectToPage" type="button">Trova i ristoranti!</button>
                 
-                <div class="find-restaurant">
-                    <form>
-                        <label for="name">
-                            <input type="text" id="address" placeholder="address" v-model="searchInput">
-                            <span>Scegli una categoria</span>
-                        </label>
-                        <button class="text-button" @click="redirectToPage" type="button">Trova i ristoranti!</button>
-                        
-                        <!-- <i class="fa-solid fa-location-arrow"></i> -->
-                        <button class="icon-button" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        
-                        
-                    </form>
-                </div>
-                
-            </div>
+                <button class="icon-button" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
         </div>
     </div>
 </template>
@@ -70,33 +63,35 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/app';
 
+.test {
+    
+    background-color: blue;
+    height: 100px;
+    width: 100%;
+}
+
+
 .title {
     font-size: 48px;
     color: $main_color;
-    @media screen and (max-width: 768px) {
-        font-size: 34px;
-    }
+}
+
+.position-absolute {
+    top: 42%;
 }
 
 .searchbox {
     display: flex;
     flex-direction: column;
-    transform:translateY(-190px);
     background-color: white;
-    width: 60vw;
-    max-width: 800px;
+    width: 55%;
     height: 234px;
-    // border: 1px solid black;
     border-radius: 15px;
     align-items: center;
     justify-content: center;
     -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
     -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
     box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.17);
-
-    @media screen and (max-width: 1200px) {
-        width:95vw;
-    }
 }
 
 form{
@@ -107,40 +102,26 @@ form{
     max-width: 610px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;    
-    // max-width:768px;  
-    // padding:3vw;
-    // display:flex;
-    // flex-direction:column;
-        @media screen and (max-width: 1200px) {
-            width:70vw;
-        }
-    
+    justify-content: space-between;        
 }
-
 
 label{
-
     transform: translateY(6px);
-    margin-left: 30px;
-    position:relative;
-   
+    margin-left: 28px;
+    position:relative; 
 }
+
 input{
-    width:150%;
+    width:100%;
     margin-top:20px;
     border:none;
     outline:none;
     font-weight: 600;
-    @media screen and (min-width: 768px) {
-       input {
-         width:50%;  
-       }
-    }
 }
 input::placeholder{
     opacity:0;
 }
+
 span{
     position:absolute;
     top:0;
@@ -149,9 +130,10 @@ span{
     font-size:1em;
     transition-duration:300ms;
 }
+
 label:focus-within > span,
 input:not(:placeholder-shown) + span{   
-    transform:scale(0.8) translateX(-15px);    
+    transform:scale(0.8) translateX(-18px);    
 }
 
 .text-button{
@@ -164,9 +146,7 @@ input:not(:placeholder-shown) + span{
     font-size: 20px;
     font-weight: 600;
     border-radius:50px;
-        @media screen and (max-width: 767.98px) {
-            display: none;
-        }
+    display: block;
 }
 
 .text-button:hover {
@@ -183,9 +163,7 @@ input:not(:placeholder-shown) + span{
     font-size: 20px;
     font-weight: 600;
     border-radius:50px;
-        @media screen and (min-width: 768px) {
-            display: none;
-        }
+    display: none;
 }
 
 // .fa-location-arrow {
@@ -196,5 +174,41 @@ input:not(:placeholder-shown) + span{
 //         display: none;
 //     }
 // }
+
+@media screen and (max-width: 768px) {
+    .position-absolute {
+        top: 24%;
+    }
+    .title {
+        font-size: 28px;
+    }
+    .text {
+        font-size: 14px;
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+    .searchbox {
+        width: 95%;
+    }
+
+    form {
+        width: 85%;
+    }
+    label {
+        width: 90%;
+    }
+    .text-button {
+        display: none;
+    }
+    .icon-button {
+        display: block;
+    }
+
+    
+}
+
+
 
 </style>
