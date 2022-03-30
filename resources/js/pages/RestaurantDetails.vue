@@ -191,6 +191,20 @@ export default {
             totalPrice: 0,
         };
     },
+    // If the user has something in the cart and he wants to leave the page,
+    // he will be alerted that he will lose all the things he added to the cart
+    // Otherwise, if the cart is empty, he can leave without any alert displaying
+    beforeRouteLeave (to, from, next) {
+        if(this.cart.length > 0){
+            if(confirm('Vuoi davvero uscire? Perderai tutti i prodotti nel carrello')){
+                next()
+            }else{
+                next(false)
+            }
+        }else{
+            next()
+        }
+    },
     methods:{
         changeLocalstorageCart: function(){
             localStorage.cart = JSON.stringify(this.cart);
