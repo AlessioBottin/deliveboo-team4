@@ -8,6 +8,7 @@ import RestaurantList from './pages/RestaurantList.vue';
 import RestaurantDetails from './pages/RestaurantDetails.vue';
 import Payment from './pages/Payment.vue';
 import NotFound from './pages/NotFound.vue';
+import Thankyou from './pages/Thankyou.vue';
 
 const router = new VueRouter({
     mode: "history",
@@ -31,6 +32,11 @@ const router = new VueRouter({
             path: "/payment",
             name: "payment",
             component: Payment
+        },
+        {
+            path: "/thankyou",
+            name: "thankyou",
+            component: Thankyou
         },
         {
             path: "/*",

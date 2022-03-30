@@ -9,7 +9,7 @@
                            
             <form>
                 <label for="name">
-                    <input type="text" id="address" placeholder="address" v-model="searchInput" @keydown="redirectToPage">
+                    <input type="text" id="address" placeholder="address" v-model="searchInput" @keydown.enter="redirectToPage">
                     <span>Cerca un ristorante</span>
                 </label>
                 <button class="text-button" @click="redirectToPage" type="button">Trova i ristoranti!</button>
