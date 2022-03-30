@@ -37340,8 +37340,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+<<<<<<< HEAD
+__webpack_require__(/*! C:\mamp\htdocs\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\mamp\htdocs\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 1ed504b2ec34d81445c47fa896781aee51b2693d
+>>>>>>> 95e9cfc85f8fdda5c82ea971455d75abab49716e
 
 
 /***/ })
