@@ -17,25 +17,25 @@ export default {
         authToken: {
             type: String,
             required: true
+        },
+        userCart: {
+            type: Array,
+            required: true
         }
     },  
+    data: function() {
+        return {
+            cart: this.userCart
+        }
+    },
     methods: {
         onSuccess (payload) {
             let nonce = payload.nonce;
             // Do something great with the nonce...
             axios.post('/api/orders/make/payment', 
             {
-                "token" : "fake-valid-nonce",
-                "plate" : [
-                    {
-                        "id" : 3,
-                        "quantity" : 10
-                    },
-                    {
-                        "id" : 2,
-                        "quantity" : 1
-                    }
-                ]
+                "token" : nonce,
+                "cart" : this.cart
             }).then((response) => {
                 console.log(response);
             })
@@ -43,7 +43,17 @@ export default {
         onError (error) {
         let message = error.message;
         // Whoops, an error has occured while trying to get the nonce
+        console.log(message);
         }
     },
 }
 </script>
+
+
+<style lang="scss" >
+// test
+.btn-primary {
+    background-color: red;
+    border: 1px solid red;
+}
+</style>

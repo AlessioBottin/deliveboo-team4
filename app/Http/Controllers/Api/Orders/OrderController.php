@@ -28,7 +28,7 @@ class OrderController extends Controller
     public function makePayment (OrderRequest $request, Gateway $gateway) {
         // Dobbiamo salvarci per ogni piatto la quantity 
         // e calcolare il prezzo poi sommarlo in una variabile e passarlo ad amount
-        $plates_array = $request->plate;
+        $plates_array = $request->cart;
         $total_amount = 0;
         foreach ($plates_array as $plate) {
             $plate_database = Plate::find($plate["id"]);
