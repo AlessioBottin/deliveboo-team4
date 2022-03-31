@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Braintree\Gateway;
 use App\Plate;
 use App\Http\Requests\Orders\OrderRequest;
+use App\Order;
 
 class OrderController extends Controller
 {
@@ -29,6 +30,8 @@ class OrderController extends Controller
         // Dobbiamo salvarci per ogni piatto la quantity 
         // e calcolare il prezzo poi sommarlo in una variabile e passarlo ad amount
         $plates_array = $request->cart;
+        $userForm = $request->form;
+
         $total_amount = 0;
         foreach ($plates_array as $plate) {
             $plate_database = Plate::find($plate["id"]);
@@ -49,9 +52,17 @@ class OrderController extends Controller
         if($result->success)  {
             $data = [
                 'success' => true,
-                'message' => 'Transazione eseguita con successo!'
+                'message' => 'Transazione eseguita con successo!',
             ];
+
+            $new_order = new Order();
+            $new_order->fill($userForm);
+            $new_order->status = 1;
+            $new_order->total_price = $total_amount;
+            $new_order->save();
+
             return response()->json($data,200);
+
         }else {
             $data = [
                 'success' => false,

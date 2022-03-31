@@ -2097,6 +2097,10 @@ __webpack_require__.r(__webpack_exports__);
     userCart: {
       type: Array,
       required: true
+    },
+    userForm: {
+      type: Object,
+      required: true
     }
   },
   data: function data() {
@@ -2110,7 +2114,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/orders/make/payment', {
         "token": nonce,
-        "cart": this.cart
+        "cart": this.cart,
+        "form": this.userForm
       }).then(function (response) {
         console.log(response);
       });
@@ -2666,6 +2671,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PaymentPage',
@@ -2677,7 +2693,17 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 0,
       token: '',
       cart: this.$route.params.cart,
-      paymentIsReady: false
+      paymentIsReady: false,
+      userName: '',
+      userAddress: '',
+      userEmail: '',
+      userPhone: '' // form: {
+      //     userName: this.userName,
+      //     userAddress: this.userAddress,
+      //     userEmail: this.userEmail,
+      //     userPhone: this.userPhone
+      // }
+
     };
   },
   methods: {
@@ -29389,7 +29415,212 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "cards_wrapper" }, [
         _c("div", { staticClass: "info_and_payment_cards_box" }, [
-          _vm._m(1),
+          _c("div", { staticClass: "card my_card_wrapper mb-3 box_shadow" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "left_column" }, [
+                _c("h4", { staticClass: "card-name" }, [
+                  _vm._v(
+                    "\n                                Informazioni di contatto\n                            "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("form", [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label-sm",
+                      attrs: { for: "name" },
+                    },
+                    [_vm._v("Nome Cognome")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "mb-3 d-flex justify-content-center align-items-center",
+                    },
+                    [
+                      _c("i", { staticClass: "fa-solid fa-user" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userName,
+                            expression: "userName",
+                          },
+                        ],
+                        staticClass: "form-control ml-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Nome Cognome",
+                          "aria-label": "name",
+                          id: "name",
+                          name: "name",
+                        },
+                        domProps: { value: _vm.userName },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.userName = $event.target.value
+                          },
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label-sm",
+                      attrs: { for: "email" },
+                    },
+                    [_vm._v("Email")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "mb-3 d-flex justify-content-center align-items-center",
+                    },
+                    [
+                      _c("i", { staticClass: "fa-solid fa-envelope" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userEmail,
+                            expression: "userEmail",
+                          },
+                        ],
+                        staticClass: "form-control ml-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "example@mail.com",
+                          "aria-label": "email",
+                          id: "email",
+                          name: "email",
+                        },
+                        domProps: { value: _vm.userEmail },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.userEmail = $event.target.value
+                          },
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label-sm",
+                      attrs: { for: "address" },
+                    },
+                    [_vm._v("Indirizzo di consegna")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row g-3" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-sm-7 d-flex justify-content-center align-items-center",
+                      },
+                      [
+                        _c("i", { staticClass: "fa-solid fa-location-dot" }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.userAddress,
+                              expression: "userAddress",
+                            },
+                          ],
+                          staticClass: "form-control ml-2",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Indirizzo",
+                            "aria-label": "Indirizzo",
+                            id: "address",
+                            name: "address",
+                          },
+                          domProps: { value: _vm.userAddress },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.userAddress = $event.target.value
+                            },
+                          },
+                        }),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label-sm",
+                      attrs: { for: "phone" },
+                    },
+                    [_vm._v("Numero di telefono")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "mb-3 d-flex justify-content-center align-items-center",
+                    },
+                    [
+                      _c("i", { staticClass: "fa-solid fa-envelope" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userPhone,
+                            expression: "userPhone",
+                          },
+                        ],
+                        staticClass: "form-control ml-2",
+                        attrs: {
+                          type: "text",
+                          "aria-label": "phone",
+                          id: "phone",
+                          name: "phone",
+                        },
+                        domProps: { value: _vm.userPhone },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.userPhone = $event.target.value
+                          },
+                        },
+                      }),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card my_card_wrapper my-4 box_shadow" }, [
             _c("div", { staticClass: "card-body" }, [
@@ -29414,6 +29645,12 @@ var render = function () {
                               attrs: {
                                 authToken: _vm.token,
                                 userCart: _vm.cart,
+                                userForm: {
+                                  customer_name: this.userName,
+                                  customer_address: this.userAddress,
+                                  customer_email: this.userEmail,
+                                  customer_phone: this.userPhone,
+                                },
                               },
                             })
                           : _vm._e(),
@@ -29424,12 +29661,12 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _vm._m(1),
             ]),
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(3),
+        _vm._m(2),
       ]),
     ]),
   ])
@@ -29441,126 +29678,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "payment_title my-5" }, [
       _c("h1", [_vm._v("Controlla il tuo ordine da nome ristorante")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card my_card_wrapper mb-3 box_shadow" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "left_column" }, [
-          _c("h4", { staticClass: "card-name" }, [
-            _vm._v(
-              "\n                                Informazioni di contatto\n                            "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("form", [
-            _c(
-              "label",
-              { staticClass: "col-form-label-sm", attrs: { for: "" } },
-              [_vm._v("Nome Cognome")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "mb-3 d-flex justify-content-center align-items-center",
-              },
-              [
-                _c("i", { staticClass: "fa-solid fa-user" }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control ml-2",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Nome Cognome",
-                    "aria-label": "name",
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "col-form-label-sm", attrs: { for: "" } },
-              [_vm._v("Email")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "mb-3 d-flex justify-content-center align-items-center",
-              },
-              [
-                _c("i", { staticClass: "fa-solid fa-envelope" }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control ml-2",
-                  attrs: {
-                    type: "text",
-                    placeholder: "example@mail.com",
-                    "aria-label": "email",
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "col-form-label-sm", attrs: { for: "" } },
-              [_vm._v("Indirizzo di consegna")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "row g-3" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col-sm-7 d-flex justify-content-center align-items-center",
-                },
-                [
-                  _c("i", { staticClass: "fa-solid fa-location-dot" }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control ml-2",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Città",
-                      "aria-label": "Città",
-                    },
-                  }),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "regione",
-                    "aria-label": "regione",
-                  },
-                }),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "CAP",
-                    "aria-label": "Cap",
-                  },
-                }),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
     ])
   },
   function () {

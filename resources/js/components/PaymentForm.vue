@@ -21,6 +21,10 @@ export default {
         userCart: {
             type: Array,
             required: true
+        },
+        userForm: {
+            type: Object,
+            required: true
         }
     },  
     data: function() {
@@ -35,7 +39,8 @@ export default {
             axios.post('/api/orders/make/payment', 
             {
                 "token" : nonce,
-                "cart" : this.cart
+                "cart" : this.cart,
+                "form" : this.userForm
             }).then((response) => {
                 console.log(response);
             })
