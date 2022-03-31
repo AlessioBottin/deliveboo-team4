@@ -183,6 +183,7 @@ export default {
     components:{
         Jumbotron
     },
+    // ! Data
     data: function() {
         return {
             currentPage: 0,
@@ -192,6 +193,7 @@ export default {
             totalPrice: 0,
         };
     },
+    // ! BeforeRouteLeave
     // If the user has something in the cart and he wants to leave the page,
     // he will be alerted that he will lose all the things he added to the cart
     // Otherwise, if the cart is empty, he can leave without any alert displaying
@@ -207,6 +209,7 @@ export default {
             next();
         }
     },
+    // ! Methods
     methods:{
         // Update the cart in the localStorage
         changeLocalstorageCart: function(){
@@ -234,8 +237,6 @@ export default {
 
                 // If there is a plate with an id different from the restaurant.id, empty the whole localStorage('cart')
                 this.cart.forEach(element => {
-                    console.log(element.user_id);
-                    console.log(this.restaurant);
                     if(element.user_id != this.restaurant.id){
                         this.$router.go();
                         localStorage.removeItem("cart");
@@ -315,6 +316,7 @@ export default {
             
         }
     },
+    // ! Created
     created: function() {
         this.getRestaurant();
         this.getRestaurantMenu();

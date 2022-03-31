@@ -61,6 +61,21 @@ class OrderController extends Controller
             $new_order->total_price = $total_amount;
             $new_order->save();
 
+            // ! SAVING DATA IN ORDER_PLATE TABLE
+            $new_array = [];
+            
+            foreach ($plates_array as $new_plate) {
+                $new_row = [
+                    'order_id' => $new_order->id,
+                    'plate_id' => $new_plate['id'],
+                    'quantity' => $new_plate['quantity']
+                ];
+                $new_array[] = $new_row;
+            };
+
+            $new_order->plates()->sync($new_array);
+            // ! END SAVING DATA IN ORDER_PLATE TABLE
+
             return response()->json($data,200);
 
         }else {
