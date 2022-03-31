@@ -34,34 +34,35 @@
 
                                 <!-- form -->
                                 <form >
-
-                                    <label for="" class="col-form-label-sm">Nome Cognome</label>
+                                    
+                                    <!-- Name  -->
+                                    <label for="name" class="col-form-label-sm">Nome Cognome</label>
                                     <div class="mb-3 d-flex justify-content-center align-items-center">
                                         <i class="fa-solid fa-user"></i>
-                                        <input type="text" class="form-control ml-2" placeholder="Nome Cognome" aria-label="name">
+                                        <input type="text" class="form-control ml-2" placeholder="Nome Cognome" aria-label="name" id="name" name="name" v-model="userName">
                                     </div>
 
-                                    <label for="" class="col-form-label-sm">Email</label>
+                                    <!-- Email  -->
+                                    <label for="email" class="col-form-label-sm">Email</label>
                                     <div class="mb-3 d-flex justify-content-center align-items-center">
                                         <i class="fa-solid fa-envelope"></i>
-                                        <input type="text" class="form-control ml-2" placeholder="example@mail.com" aria-label="email">
+                                        <input type="text" class="form-control ml-2" placeholder="example@mail.com" aria-label="email" id="email" name="email" v-model="userEmail">
                                     </div>
 
-                                    <label for="" class="col-form-label-sm">Indirizzo di consegna</label>
+                                    <!-- Address  -->
+                                    <label for="address" class="col-form-label-sm">Indirizzo di consegna</label>
                                     <div class="row g-3">
                                         <div class="col-sm-7 d-flex justify-content-center align-items-center">
                                             <i class="fa-solid fa-location-dot"></i>
-                                            <input type="text" class="form-control ml-2" placeholder="Città" aria-label="Città">
-                                        </div>
+                                            <input type="text" class="form-control ml-2" placeholder="Indirizzo" aria-label="Indirizzo" id="address" name="address" v-model="userAddress">
+                                        </div>                                        
+                                    </div>
 
-                                        <div class="col-sm">
-                                            <input type="text" class="form-control" placeholder="regione" aria-label="regione">
-                                        </div>
-
-                                        <div class="col-sm">
-                                            <input type="text" class="form-control" placeholder="CAP" aria-label="Cap">
-                                        </div>
-                                        
+                                    <!-- Phone number -->
+                                    <label for="phone" class="col-form-label-sm">Numero di telefono</label>
+                                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <input type="text" class="form-control ml-2" aria-label="phone" id="phone" name="phone" v-model="userPhone">
                                     </div>
                                     
                                 </form>
@@ -90,7 +91,17 @@
                                 <form class="needs-validation" novalidate="">
 
                                     <div class="text-center">
-                                        <PaymentForm :authToken='token' :userCart="cart" v-if="paymentIsReady"/>                                
+                                        <PaymentForm 
+                                        :authToken='token' 
+                                        :userCart="cart" 
+                                        :userForm="{
+                                            customer_name: this.userName,
+                                            customer_address: this.userAddress,
+                                            customer_email: this.userEmail,
+                                            customer_phone: this.userPhone
+                                        }"
+                                        v-if="paymentIsReady"
+                                        />                                
                                     </div>
 
                                 </form>
@@ -221,6 +232,16 @@ export default {
             token: '',
             cart: this.$route.params.cart,
             paymentIsReady: false,
+            userName: '',
+            userAddress: '',
+            userEmail: '',
+            userPhone: '',
+            // form: {
+            //     userName: this.userName,
+            //     userAddress: this.userAddress,
+            //     userEmail: this.userEmail,
+            //     userPhone: this.userPhone
+            // }
         };
     },
     methods: {
