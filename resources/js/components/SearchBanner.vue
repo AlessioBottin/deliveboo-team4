@@ -9,10 +9,10 @@
                            
             <form>
                 <label for="name">
-                    <input type="text" id="address" placeholder="address" v-model="searchInput" @keydown.enter="redirectToPage">
+                    <input type="text" id="address" placeholder="address" v-model="searchInput" @keydown.enter="redirectToRestaurantMenu">
                     <span>Cerca un ristorante</span>
                 </label>
-                <button class="text-button" @click="redirectToPage" type="button">Trova i ristoranti!</button>
+                <button class="text-button" @click="redirectToRestaurantMenu" type="button">Trova i ristoranti!</button>
                 
                 <button class="icon-button" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
@@ -31,8 +31,12 @@ export default {
     methods:{
         // Redirect to the restaurant lista page at the click on the input
         // As route's param it passes the slug returned by the "string_to_slug" function
-        redirectToPage: function(){
-            this.$router.push({name:'restaurant-details', params: {slug: this.string_to_slug(this.searchInput)}}); 
+        redirectToRestaurantMenu: function(){
+            if(this.searchInput.trim() == 0){
+                this.$router.push({name:'restaurant-details', params: {slug: 'not-found'}});
+            } else{
+                this.$router.push({name:'restaurant-details', params: {slug: this.string_to_slug(this.searchInput)}});
+            }
         },
         // ! Creating the slug by a given string
         string_to_slug: function(str) {
