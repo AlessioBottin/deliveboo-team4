@@ -29924,30 +29924,19 @@ var render = function () {
                         : _vm._e(),
                       _vm._v(" "),
                       _c(
-                        "button",
+                        "router-link",
                         {
                           staticClass: "btn payment_btn",
                           class: _vm.cart.length == 0 ? "disabled-btn" : "",
+                          attrs: {
+                            to: { name: "payment", params: { cart: _vm.cart } },
+                          },
                         },
                         [
-                          _c(
-                            "router-link",
-                            {
-                              attrs: {
-                                to: {
-                                  name: "payment",
-                                  params: { cart: _vm.cart },
-                                },
-                              },
-                            },
-                            [
-                              _vm._v(
-                                "\n                                Vai al pagamento\n                            "
-                              ),
-                            ]
+                          _vm._v(
+                            "\n                            Vai al pagamento\n                        "
                           ),
-                        ],
-                        1
+                        ]
                       ),
                     ],
                     2
