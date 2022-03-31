@@ -142,8 +142,10 @@
                             </div>
                             <!-- END CART WITH ALL THE PLATES -->
 
-                            <button class="btn payment_btn">
-                                Vai al pagamento
+                            <button :class="cart.length==0 ? 'disabled-btn' : ''" class="btn payment_btn">
+                                <router-link :to="{name: 'payment'}">
+                                    Vai al pagamento
+                                </router-link>
                             </button>
 
                         </div>
@@ -195,19 +197,30 @@ export default {
     // he will be alerted that he will lose all the things he added to the cart
     // Otherwise, if the cart is empty, he can leave without any alert displaying
     beforeRouteLeave (to, from, next) {
-        if(this.cart.length > 0){
-            if(confirm('Vuoi davvero uscire? Perderai tutti i prodotti nel carrello')){
+        if(to.name !== 'payment' && this.cart.length > 0){
+            if(confirm('Vuoi davvero uscire? Il tuo carrello verrà svuotato!')){
+                localStorage.removeItem('cart');
                 next()
             }else{
-                next(false)
+                next(false);
             }
         }else{
-            next()
+            next();
         }
     },
     methods:{
+        // Update the cart in the localStorage
         changeLocalstorageCart: function(){
             localStorage.cart = JSON.stringify(this.cart);
+        },
+        // When the pages load, calculate the totalPrice 
+        // (this because the user may refresh the page while having something in the cart)
+        calculateTotalPriceAtLoading: function(){
+            if(this.cart.length > 0){
+                this.cart.forEach(element => {
+                    this.totalPrice += element.price * element.quantity;
+                });
+            }
         },
         // Function that returns an API with the specific restaurant
         getRestaurant: function(){
@@ -242,14 +255,15 @@ export default {
                     price: product.price,
                     image: product.image,
                     quantity: 1,
-                    isBtnDisabled: true
+                    isBtnDisabled: true,
+                    user_id: product.user_id
                 };
                 this.cart.push(newProduct);
             };
             this.totalPrice = this.totalPrice + parseFloat(product.price);
 
             // ! Adding cart to local storage
-            // TODO this.changeLocalstorageCart();
+            this.changeLocalstorageCart();
         },
         // Delete the product from the cart
         // Reassigning cart's values, with the exception of the product with the name of the clicked one
@@ -258,7 +272,7 @@ export default {
             this.cart = this.cart.filter(element => element.name !== product.name);
             this.totalPrice = this.totalPrice - (parseFloat(product.price) * quantityOfProduct);
             // ! Adding cart to local storage
-            // TODO this.changeLocalstorageCart();
+            this.changeLocalstorageCart();
         },
         // Increase quantity for the specified product, and activate the "-" button
         increaseQuantity: function(product){
@@ -266,7 +280,7 @@ export default {
              this.totalPrice = this.totalPrice + parseFloat(product.price);
             product.isBtnDisabled = false;
             // ! Adding cart to local storage
-            // TODO this.changeLocalstorageCart();
+            this.changeLocalstorageCart();
         },
         // If the quantity is greater than 1, decrease the value
         // Otherwise don't, and also disable the "-" button
@@ -275,7 +289,7 @@ export default {
                 product.quantity--;
                 this.totalPrice = this.totalPrice - parseFloat(product.price);
                 // ! Adding cart to local storage
-                // TODO this.changeLocalstorageCart();
+                this.changeLocalstorageCart();
             }
             if(product.quantity == 1){
                 product.isBtnDisabled = true
@@ -286,13 +300,32 @@ export default {
     created: function() {
         this.getRestaurant();
         this.getRestaurantMenu();
-        // this.cart = JSON.parse(localStorage.getItem("cart"));
-        // console.log(localStorage.getItem("cart"));
+        // Link the cart and the localStorage('cart') only if there is already something in the localStorage('cart')
+        if(JSON.parse(localStorage.getItem("cart"))){
+            this.cart = JSON.parse(localStorage.getItem("cart"));
+        };
+
+        this.calculateTotalPriceAtLoading();
+
+        // If the user types a new url and has already something in the cart,
+        // it refreshes the page when he arrives at new route,
+        // and then it empties the localStorage('cart')
+        if(JSON.parse(localStorage.getItem("cart"))){
+            this.cart.forEach(element => {
+                if(element.user_id != this.restaurant.id){
+                    this.$router.go();
+                    localStorage.removeItem("cart");
+                }
+            });
+        };
     }
 };
 </script>
 
 <style scoped lang="scss">
+    .disabled-btn{
+        pointer-events: none;
+    }
     .cart-product{
         padding: 20px 0;
     }

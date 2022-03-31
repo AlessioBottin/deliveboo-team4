@@ -2161,13 +2161,22 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Redirect to the restaurant lista page at the click on the input
     // As route's param it passes the slug returned by the "string_to_slug" function
-    redirectToPage: function redirectToPage() {
-      this.$router.push({
-        name: 'restaurant-details',
-        params: {
-          slug: this.string_to_slug(this.searchInput)
-        }
-      });
+    redirectToRestaurantMenu: function redirectToRestaurantMenu() {
+      if (this.searchInput.trim() == 0) {
+        this.$router.push({
+          name: 'restaurant-details',
+          params: {
+            slug: 'not-found'
+          }
+        });
+      } else {
+        this.$router.push({
+          name: 'restaurant-details',
+          params: {
+            slug: this.string_to_slug(this.searchInput)
+          }
+        });
+      }
     },
     // ! Creating the slug by a given string
     string_to_slug: function string_to_slug(str) {
@@ -2796,6 +2805,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RestaurantDetails',
@@ -2815,8 +2826,9 @@ __webpack_require__.r(__webpack_exports__);
   // he will be alerted that he will lose all the things he added to the cart
   // Otherwise, if the cart is empty, he can leave without any alert displaying
   beforeRouteLeave: function beforeRouteLeave(to, from, next) {
-    if (this.cart.length > 0) {
-      if (confirm('Vuoi davvero uscire? Perderai tutti i prodotti nel carrello')) {
+    if (to.name !== 'payment' && this.cart.length > 0) {
+      if (confirm('Vuoi davvero uscire? Il tuo carrello verrà svuotato!')) {
+        localStorage.removeItem('cart');
         next();
       } else {
         next(false);
@@ -2826,23 +2838,35 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    // Update the cart in the localStorage
     changeLocalstorageCart: function changeLocalstorageCart() {
       localStorage.cart = JSON.stringify(this.cart);
     },
-    // Function that returns an API with the specific restaurant
-    getRestaurant: function getRestaurant() {
+    // When the pages load, calculate the totalPrice 
+    // (this because the user may refresh the page while having something in the cart)
+    calculateTotalPriceAtLoading: function calculateTotalPriceAtLoading() {
       var _this = this;
 
+      if (this.cart.length > 0) {
+        this.cart.forEach(function (element) {
+          _this.totalPrice += element.price * element.quantity;
+        });
+      }
+    },
+    // Function that returns an API with the specific restaurant
+    getRestaurant: function getRestaurant() {
+      var _this2 = this;
+
       axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.slug).then(function (response) {
-        _this.restaurant = response.data;
+        _this2.restaurant = response.data;
       });
     },
     // Function that returns an API with the menu of the restaurant
     getRestaurantMenu: function getRestaurantMenu() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.slug).then(function (response) {
-        _this2.restaurantMenu = response.data;
+        _this3.restaurantMenu = response.data;
       });
     },
     // IF at the click on a specific product, this is already in the cart,
@@ -2867,14 +2891,16 @@ __webpack_require__.r(__webpack_exports__);
           price: product.price,
           image: product.image,
           quantity: 1,
-          isBtnDisabled: true
+          isBtnDisabled: true,
+          user_id: product.user_id
         };
         this.cart.push(newProduct);
       }
 
       ;
       this.totalPrice = this.totalPrice + parseFloat(product.price); // ! Adding cart to local storage
-      // TODO this.changeLocalstorageCart();
+
+      this.changeLocalstorageCart();
     },
     // Delete the product from the cart
     // Reassigning cart's values, with the exception of the product with the name of the clicked one
@@ -2886,14 +2912,16 @@ __webpack_require__.r(__webpack_exports__);
         return element.name !== product.name;
       });
       this.totalPrice = this.totalPrice - parseFloat(product.price) * quantityOfProduct; // ! Adding cart to local storage
-      // TODO this.changeLocalstorageCart();
+
+      this.changeLocalstorageCart();
     },
     // Increase quantity for the specified product, and activate the "-" button
     increaseQuantity: function increaseQuantity(product) {
       product.quantity++;
       this.totalPrice = this.totalPrice + parseFloat(product.price);
       product.isBtnDisabled = false; // ! Adding cart to local storage
-      // TODO this.changeLocalstorageCart();
+
+      this.changeLocalstorageCart();
     },
     // If the quantity is greater than 1, decrease the value
     // Otherwise don't, and also disable the "-" button
@@ -2901,7 +2929,8 @@ __webpack_require__.r(__webpack_exports__);
       if (product.quantity > 1) {
         product.quantity--;
         this.totalPrice = this.totalPrice - parseFloat(product.price); // ! Adding cart to local storage
-        // TODO this.changeLocalstorageCart();
+
+        this.changeLocalstorageCart();
       }
 
       if (product.quantity == 1) {
@@ -2910,9 +2939,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this4 = this;
+
     this.getRestaurant();
-    this.getRestaurantMenu(); // this.cart = JSON.parse(localStorage.getItem("cart"));
-    // console.log(localStorage.getItem("cart"));
+    this.getRestaurantMenu(); // Link the cart and the localStorage('cart') only if there is already something in the localStorage('cart')
+
+    if (JSON.parse(localStorage.getItem("cart"))) {
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+    }
+
+    ;
+    this.calculateTotalPriceAtLoading(); // If the user types a new url and has already something in the cart,
+    // it refreshes the page when he arrives at new route,
+    // and then it empties the localStorage('cart')
+
+    if (JSON.parse(localStorage.getItem("cart"))) {
+      this.cart.forEach(function (element) {
+        if (element.user_id != _this4.restaurant.id) {
+          _this4.$router.go();
+
+          localStorage.removeItem("cart");
+        }
+      });
+    }
+
+    ;
   }
 });
 
@@ -26472,7 +26523,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".cart-product[data-v-7720c0e8] {\n  padding: 20px 0;\n}\n.quantity[data-v-7720c0e8] {\n  font-size: 22px;\n}\n.quantity-changer[data-v-7720c0e8] {\n  font-size: 20px;\n  margin: 0 10px;\n  cursor: pointer;\n}\n.disabled[data-v-7720c0e8] {\n  color: gray;\n}\n.delete-product[data-v-7720c0e8] {\n  cursor: pointer;\n  position: absolute;\n  right: 70px;\n  top: 8px;\n  font-size: 20px;\n}\n.delete-product[data-v-7720c0e8]:hover {\n  color: red;\n}\n.principal_and_underlay_cards_container[data-v-7720c0e8] {\n  width: 100%;\n}\n.img_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n}\n.my_container[data-v-7720c0e8] {\n  margin: -300px auto 40px auto;\n  width: 100%;\n}\n.img_box[data-v-7720c0e8] {\n  margin: -50px 0 0 0;\n  height: 100px;\n  width: 100px;\n  border: solid whitesmoke 4px;\n  border-radius: 20px;\n  overflow: hidden;\n  background-color: white;\n  display: flex;\n}\n.img_box img[data-v-7720c0e8] {\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.my_card[data-v-7720c0e8] {\n  border-radius: 15px;\n}\n.my_card_wrapper[data-v-7720c0e8] {\n  border: none;\n  border-radius: 15px;\n}\n.grey_card[data-v-7720c0e8] {\n  width: 65%;\n  margin: auto;\n  background-color: #f5f3f1;\n  border-radius: 10px;\n}\n.banner_container[data-v-7720c0e8] {\n  line-height: 150px;\n  height: 400px;\n  -o-object-position: center;\n     object-position: center;\n}\n.banner_container img[data-v-7720c0e8] {\n  height: inherit;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.menu_info[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px 0;\n}\n*[class$=_style][data-v-7720c0e8]:hover {\n  text-decoration: underline;\n  text-underline-offset: 17px;\n  text-decoration-thickness: 4px;\n  -webkit-text-decoration-color: #ffce08;\n          text-decoration-color: #ffce08;\n}\n.plate_wrapper[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.plate_wrapper .plate_image[data-v-7720c0e8] {\n  width: 25%;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.order_card[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: -100px;\n  border-radius: 15px;\n  margin: 140px 0 -50px 50px;\n  width: 100%;\n}\n.order_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n@media screen and (max-width: 650px) {\n.order_card[data-v-7720c0e8] {\n    margin: 50px auto;\n}\n}\n.underlay_container[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  margin-bottom: 1px;\n}\n.underlay_card[data-v-7720c0e8] {\n  border-radius: 15px;\n  height: 190px;\n  margin-bottom: -50px;\n  background-color: rgba(247, 94, 40, 0.9);\n  color: white;\n}\n.underlay_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n.cards_wrapper_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n  width: inherit;\n}\n@media screen and (max-width: 650px) {\n.cards_wrapper_container[data-v-7720c0e8] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: inherit;\n}\n}\n.payment_btn[data-v-7720c0e8] {\n  border-radius: 30px;\n  color: #8a8786;\n  background-color: #efedea;\n  width: 100%;\n}\n.payment_btn[data-v-7720c0e8]:hover {\n  background-color: #ffce08;\n  color: white;\n}\n.left_menu_list_container[data-v-7720c0e8] {\n  margin: 350px 40px 0 10px;\n}\n.plate_wrapper > li[data-v-7720c0e8]:hover {\n  border-left: solid 3px gray;\n  cursor: pointer;\n}\n.button_container[data-v-7720c0e8] {\n  display: inline-block;\n  background-color: #efedea;\n  padding: 3px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 30px;\n  width: 100%;\n  margin: 15px auto;\n}\n*[class$=_special_btn][data-v-7720c0e8]:hover {\n  color: white;\n  background-color: #ffce08;\n}\n*[class$=_special_btn][data-v-7720c0e8] {\n  border-radius: 30px;\n}\n*[class$=box_shadow][data-v-7720c0e8] {\n  box-shadow: 0px -1px 15px -3px #000000;\n}\n@media screen and (max-width: 1230px) {\n*[class$=grey_card_text][data-v-7720c0e8] {\n    justify-content: center !important;\n}\n}", ""]);
+exports.push([module.i, ".disabled-btn[data-v-7720c0e8] {\n  pointer-events: none;\n}\n.cart-product[data-v-7720c0e8] {\n  padding: 20px 0;\n}\n.quantity[data-v-7720c0e8] {\n  font-size: 22px;\n}\n.quantity-changer[data-v-7720c0e8] {\n  font-size: 20px;\n  margin: 0 10px;\n  cursor: pointer;\n}\n.disabled[data-v-7720c0e8] {\n  color: gray;\n}\n.delete-product[data-v-7720c0e8] {\n  cursor: pointer;\n  position: absolute;\n  right: 70px;\n  top: 8px;\n  font-size: 20px;\n}\n.delete-product[data-v-7720c0e8]:hover {\n  color: red;\n}\n.principal_and_underlay_cards_container[data-v-7720c0e8] {\n  width: 100%;\n}\n.img_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n}\n.my_container[data-v-7720c0e8] {\n  margin: -300px auto 40px auto;\n  width: 100%;\n}\n.img_box[data-v-7720c0e8] {\n  margin: -50px 0 0 0;\n  height: 100px;\n  width: 100px;\n  border: solid whitesmoke 4px;\n  border-radius: 20px;\n  overflow: hidden;\n  background-color: white;\n  display: flex;\n}\n.img_box img[data-v-7720c0e8] {\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.my_card[data-v-7720c0e8] {\n  border-radius: 15px;\n}\n.my_card_wrapper[data-v-7720c0e8] {\n  border: none;\n  border-radius: 15px;\n}\n.grey_card[data-v-7720c0e8] {\n  width: 65%;\n  margin: auto;\n  background-color: #f5f3f1;\n  border-radius: 10px;\n}\n.banner_container[data-v-7720c0e8] {\n  line-height: 150px;\n  height: 400px;\n  -o-object-position: center;\n     object-position: center;\n}\n.banner_container img[data-v-7720c0e8] {\n  height: inherit;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.menu_info[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px 0;\n}\n*[class$=_style][data-v-7720c0e8]:hover {\n  text-decoration: underline;\n  text-underline-offset: 17px;\n  text-decoration-thickness: 4px;\n  -webkit-text-decoration-color: #ffce08;\n          text-decoration-color: #ffce08;\n}\n.plate_wrapper[data-v-7720c0e8] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.plate_wrapper .plate_image[data-v-7720c0e8] {\n  width: 25%;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.order_card[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: -100px;\n  border-radius: 15px;\n  margin: 140px 0 -50px 50px;\n  width: 100%;\n}\n.order_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n@media screen and (max-width: 650px) {\n.order_card[data-v-7720c0e8] {\n    margin: 50px auto;\n}\n}\n.underlay_container[data-v-7720c0e8] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  margin-bottom: 1px;\n}\n.underlay_card[data-v-7720c0e8] {\n  border-radius: 15px;\n  height: 190px;\n  margin-bottom: -50px;\n  background-color: rgba(247, 94, 40, 0.9);\n  color: white;\n}\n.underlay_card p[data-v-7720c0e8] {\n  font-size: 13px;\n}\n.cards_wrapper_container[data-v-7720c0e8] {\n  display: flex;\n  justify-content: center;\n  width: inherit;\n}\n@media screen and (max-width: 650px) {\n.cards_wrapper_container[data-v-7720c0e8] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: inherit;\n}\n}\n.payment_btn[data-v-7720c0e8] {\n  border-radius: 30px;\n  color: #8a8786;\n  background-color: #efedea;\n  width: 100%;\n}\n.payment_btn[data-v-7720c0e8]:hover {\n  background-color: #ffce08;\n  color: white;\n}\n.left_menu_list_container[data-v-7720c0e8] {\n  margin: 350px 40px 0 10px;\n}\n.plate_wrapper > li[data-v-7720c0e8]:hover {\n  border-left: solid 3px gray;\n  cursor: pointer;\n}\n.button_container[data-v-7720c0e8] {\n  display: inline-block;\n  background-color: #efedea;\n  padding: 3px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 30px;\n  width: 100%;\n  margin: 15px auto;\n}\n*[class$=_special_btn][data-v-7720c0e8]:hover {\n  color: white;\n  background-color: #ffce08;\n}\n*[class$=_special_btn][data-v-7720c0e8] {\n  border-radius: 30px;\n}\n*[class$=box_shadow][data-v-7720c0e8] {\n  box-shadow: 0px -1px 15px -3px #000000;\n}\n@media screen and (max-width: 1230px) {\n*[class$=grey_card_text][data-v-7720c0e8] {\n    justify-content: center !important;\n}\n}", ""]);
 
 // exports
 
@@ -28987,7 +29038,7 @@ var render = function () {
                   ) {
                     return null
                   }
-                  return _vm.redirectToPage.apply(null, arguments)
+                  return _vm.redirectToRestaurantMenu.apply(null, arguments)
                 },
                 input: function ($event) {
                   if ($event.target.composing) {
@@ -29006,7 +29057,7 @@ var render = function () {
             {
               staticClass: "text-button",
               attrs: { type: "button" },
-              on: { click: _vm.redirectToPage },
+              on: { click: _vm.redirectToRestaurantMenu },
             },
             [_vm._v("Trova i ristoranti!")]
           ),
@@ -29442,11 +29493,25 @@ var render = function () {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn payment_btn" }, [
-                        _vm._v(
-                          "\n                            Vai al pagamento\n                        "
-                        ),
-                      ]),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn payment_btn",
+                          class: _vm.cart.length == 0 ? "disabled-btn" : "",
+                        },
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: { name: "payment" } } },
+                            [
+                              _vm._v(
+                                "\n                                Vai al pagamento\n                            "
+                              ),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
                     ],
                     2
                   ),
@@ -52633,14 +52698,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/pages/RestaurantDetails.vue ***!
   \**************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RestaurantDetails_vue_vue_type_template_id_7720c0e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=template&id=7720c0e8&scoped=true& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=template&id=7720c0e8&scoped=true&");
 /* harmony import */ var _RestaurantDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=script&lang=js& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _RestaurantDetails_vue_vue_type_style_index_0_id_7720c0e8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _RestaurantDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _RestaurantDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _RestaurantDetails_vue_vue_type_style_index_0_id_7720c0e8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -52672,7 +52738,7 @@ component.options.__file = "resources/js/pages/RestaurantDetails.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/pages/RestaurantDetails.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53025,7 +53091,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
