@@ -2110,6 +2110,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onSuccess: function onSuccess(payload) {
+      var _this = this;
+
       var nonce = payload.nonce; // Do something great with the nonce...
 
       axios.post('/api/orders/make/payment', {
@@ -2118,6 +2120,8 @@ __webpack_require__.r(__webpack_exports__);
         "form": this.userForm
       }).then(function (response) {
         console.log(response);
+
+        _this.$router.push("thankyou");
       });
     },
     onError: function onError(error) {
@@ -2973,9 +2977,6 @@ __webpack_require__.r(__webpack_exports__);
           _this2.cart = JSON.parse(localStorage.getItem("cart")); // If there is a plate with an id different from the restaurant.id, empty the whole localStorage('cart')
 
           _this2.cart.forEach(function (element) {
-            console.log(element.user_id);
-            console.log(_this2.restaurant);
-
             if (element.user_id != _this2.restaurant.id) {
               _this2.$router.go();
 

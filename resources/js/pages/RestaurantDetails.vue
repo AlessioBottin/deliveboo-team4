@@ -238,8 +238,6 @@ export default {
 
                 // If there is a plate with an id different from the restaurant.id, empty the whole localStorage('cart')
                 this.cart.forEach(element => {
-                    console.log(element.user_id);
-                    console.log(this.restaurant);
                     if(element.user_id != this.restaurant.id){
                         this.$router.go();
                         localStorage.removeItem("cart");
