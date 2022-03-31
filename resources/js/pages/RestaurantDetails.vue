@@ -227,6 +227,25 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurant = response.data;
+                
+                // Only if there is something stored in the localStorage('cart')
+                if(JSON.parse(localStorage.getItem("cart"))){
+                // Link the cart to the localStorage('cart')
+                this.cart = JSON.parse(localStorage.getItem("cart"));
+
+                // If there is a plate with an id different from the restaurant.id, empty the whole localStorage('cart')
+                this.cart.forEach(element => {
+                    console.log(element.user_id);
+                    console.log(this.restaurant);
+                    if(element.user_id != this.restaurant.id){
+                        this.$router.go();
+                        localStorage.removeItem("cart");
+                    }
+                });
+
+                // Everytime the pages load calculate the totalPrice
+                this.calculateTotalPriceAtLoading();
+            };
             })
         },
         // Function that returns an API with the menu of the restaurant
@@ -234,7 +253,7 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurant-list/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurantMenu = response.data;
-            })
+            });
         },
         // IF at the click on a specific product, this is already in the cart,
         // increase its quantity.
@@ -300,24 +319,6 @@ export default {
     created: function() {
         this.getRestaurant();
         this.getRestaurantMenu();
-        // Link the cart and the localStorage('cart') only if there is already something in the localStorage('cart')
-        if(JSON.parse(localStorage.getItem("cart"))){
-            this.cart = JSON.parse(localStorage.getItem("cart"));
-        };
-
-        this.calculateTotalPriceAtLoading();
-
-        // If the user types a new url and has already something in the cart,
-        // it refreshes the page when he arrives at new route,
-        // and then it empties the localStorage('cart')
-        if(JSON.parse(localStorage.getItem("cart"))){
-            this.cart.forEach(element => {
-                if(element.user_id != this.restaurant.id){
-                    this.$router.go();
-                    localStorage.removeItem("cart");
-                }
-            });
-        };
     }
 };
 </script>

@@ -3060,7 +3060,28 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.slug).then(function (response) {
-        _this2.restaurant = response.data;
+        _this2.restaurant = response.data; // Only if there is something stored in the localStorage('cart')
+
+        if (JSON.parse(localStorage.getItem("cart"))) {
+          // Link the cart to the localStorage('cart')
+          _this2.cart = JSON.parse(localStorage.getItem("cart")); // If there is a plate with an id different from the restaurant.id, empty the whole localStorage('cart')
+
+          _this2.cart.forEach(function (element) {
+            console.log(element.user_id);
+            console.log(_this2.restaurant);
+
+            if (element.user_id != _this2.restaurant.id) {
+              _this2.$router.go();
+
+              localStorage.removeItem("cart");
+            }
+          }); // Everytime the pages load calculate the totalPrice
+
+
+          _this2.calculateTotalPriceAtLoading();
+        }
+
+        ;
       });
     },
     // Function that returns an API with the menu of the restaurant
@@ -3141,31 +3162,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this4 = this;
-
     this.getRestaurant();
-    this.getRestaurantMenu(); // Link the cart and the localStorage('cart') only if there is already something in the localStorage('cart')
-
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      this.cart = JSON.parse(localStorage.getItem("cart"));
-    }
-
-    ;
-    this.calculateTotalPriceAtLoading(); // If the user types a new url and has already something in the cart,
-    // it refreshes the page when he arrives at new route,
-    // and then it empties the localStorage('cart')
-
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      this.cart.forEach(function (element) {
-        if (element.user_id != _this4.restaurant.id) {
-          _this4.$router.go();
-
-          localStorage.removeItem("cart");
-        }
-      });
-    }
-
-    ;
+    this.getRestaurantMenu();
   }
 });
 
@@ -53200,15 +53198,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/pages/RestaurantDetails.vue ***!
   \**************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RestaurantDetails_vue_vue_type_template_id_7720c0e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=template&id=7720c0e8&scoped=true& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=template&id=7720c0e8&scoped=true&");
 /* harmony import */ var _RestaurantDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=script&lang=js& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _RestaurantDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _RestaurantDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _RestaurantDetails_vue_vue_type_style_index_0_id_7720c0e8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss&");
+/* empty/unused harmony star reexport *//* harmony import */ var _RestaurantDetails_vue_vue_type_style_index_0_id_7720c0e8_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss& */ "./resources/js/pages/RestaurantDetails.vue?vue&type=style&index=0&id=7720c0e8&scoped=true&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -53240,7 +53237,7 @@ component.options.__file = "resources/js/pages/RestaurantDetails.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/pages/RestaurantDetails.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
