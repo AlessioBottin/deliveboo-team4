@@ -10067,10 +10067,16 @@ a:hover {
   box-sizing: border-box;
 }
 
-img {
+.show img {
   max-width: 100%;
 }
+.show .show-image img {
+  max-width: 500px;
+}
 
-.current-image img {
+.edit img {
+  max-width: 100%;
+}
+.edit .show-image img {
   max-width: 250px;
 }

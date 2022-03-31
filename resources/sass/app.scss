@@ -3,6 +3,7 @@
 @import './partials/utilities';
 @import './partials/categories';
 
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -14,10 +15,6 @@
 
 
 
-img {
-	max-width: 100%;
-}
+@import './partials/admin/plates/_show';
+@import './partials/admin/plates/_edit';
 
-.current-image img {
-	max-width: 250px;
-}

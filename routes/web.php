@@ -30,6 +30,9 @@ Route::middleware('auth')
     // Crud Plates 
     Route::resource('plates', 'PlatesController');
 
+    // Orders Routes
+    Route::get('/orders', 'OrderController@index')->name('orders');
+
 });
 
 

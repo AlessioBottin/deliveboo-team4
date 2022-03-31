@@ -115,7 +115,6 @@
                             <h3 class="card-text justify-content-center ">Il tuo ordine</h3>
                             
                             <p>
-                            
                                 <i class="fa-solid fa-circle-exclamation"></i>
                                 Se hai un'allergia o un'intolleranza alimentare (o
                                 se una persona per la quale stai effettuando un
