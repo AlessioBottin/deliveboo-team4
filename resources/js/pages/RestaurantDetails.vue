@@ -142,11 +142,11 @@
                             </div>
                             <!-- END CART WITH ALL THE PLATES -->
 
-                            <button :class="cart.length==0 ? 'disabled-btn' : ''" class="btn payment_btn">
-                                <router-link :to="{name: 'payment', params:{cart: cart}}">
-                                    Vai al pagamento
-                                </router-link>
-                            </button>
+                            
+                            <router-link :to="{name: 'payment', params:{cart: cart}}" :class="cart.length==0 ? 'disabled-btn' : ''" class="btn payment_btn">
+                                Vai al pagamento
+                            </router-link>
+                            
 
                         </div>
                         <!-- end card content restaurant container -->

@@ -2093,27 +2093,32 @@ __webpack_require__.r(__webpack_exports__);
     authToken: {
       type: String,
       required: true
+    },
+    userCart: {
+      type: Array,
+      required: true
     }
+  },
+  data: function data() {
+    return {
+      cart: this.userCart
+    };
   },
   methods: {
     onSuccess: function onSuccess(payload) {
       var nonce = payload.nonce; // Do something great with the nonce...
 
       axios.post('/api/orders/make/payment', {
-        "token": "fake-valid-nonce",
-        "plate": [{
-          "id": 3,
-          "quantity": 10
-        }, {
-          "id": 2,
-          "quantity": 1
-        }]
+        "token": nonce,
+        "cart": this.cart
       }).then(function (response) {
         console.log(response);
       });
     },
     onError: function onError(error) {
       var message = error.message; // Whoops, an error has occured while trying to get the nonce
+
+      console.log(message);
     }
   }
 });
@@ -2671,137 +2676,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentPage: 0,
       token: '',
-      restaurants: [{
-        id: 1,
-        email: 'spizzico@gmail.com',
-        password: '12345678',
-        name: 'Spizzico',
-        address: 'via Roma 1',
-        VAT: '1234567890',
-        image_banner: 'https://fastly.4sqi.net/img/general/600x600/538579_ydRLp3WexwBwLLmft97aYO-kN9LCXMi1h9f2J7ICsR0.jpg',
-        image_logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Spizzico-logo-new.png',
-        categories: [1],
-        plates: [{
-          name: 'margherita',
-          description: 'pizza',
-          price: '10 euro',
-          visibility: true,
-          image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg'
-        }, {
-          name: 'diavola',
-          description: 'pizza',
-          price: '10 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vanityfair.it%2Fgallery%2F10-trend-della-pizza-spiegati-in-10-pizze&psig=AOvVaw34S-jjr8s2Y7dwzN789Bxn&ust=1647686198568000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCb_8e7z_YCFQAAAAAdAAAAABAD'
-        }]
-      }, {
-        id: 2,
-        email: 'zushi@gmail.com',
-        password: '12345678',
-        name: 'Zushi',
-        address: 'via Milano 1',
-        VAT: '1234567890',
-        image_banner: 'https://www.google.com/maps/uv?pb=!1s0x477f318225a09569%3A0x1d06b766063ff887!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPeVySOa5sMQr6MTA1zA8ErulQVItIqrfVfaIwi%3Dw284-h250-k-no!5szushi%20-%20Cerca%20con%20Google!15sCgIgAQ&imagekey=!1e10!2sAF1QipPeVySOa5sMQr6MTA1zA8ErulQVItIqrfVfaIwi&hl=it&sa=X&ved=2ahUKEwj517mMot32AhWJzKQKHY5dDmoQoip6BAgmEAM#',
-        image_logo: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,q_auto,w_1600,h_350,d_it:cuisines:hamburger-3.jpg/v1/it/restaurants/241983.jpg',
-        categories: [2, 3],
-        plates: [{
-          name: 'uramaki',
-          description: 'sushi',
-          price: '20 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.giallozafferano.it%2Fdulcisinforno%2Furamaki-california-maki-roll-sushi%2F&psig=AOvVaw2Fm9P54Zyp7CID36mQwbuK&ust=1647686298875000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOin2_e7z_YCFQAAAAAdAAAAABAJ'
-        }, {
-          name: 'poke',
-          description: 'poke',
-          price: '5 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Framonaincucina.com%2F2020%2F10%2F02%2Fpan-poke-street-food-tra-panini-e-poke%2F&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAJ'
-        }]
-      }, {
-        id: 3,
-        email: 'panpoke@gmail.com',
-        password: '12345678',
-        name: 'Panpoke',
-        address: 'via Genova 1',
-        VAT: '1234567890',
-        image_banner: '',
-        image_logo: '',
-        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fms-my.facebook.com%2FPaniniePoke%2Fposts%2F311712480647862&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAD',
-        categories: [3],
-        plates: [{
-          name: 'poke',
-          description: 'poke',
-          price: '5 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Framonaincucina.com%2F2020%2F10%2F02%2Fpan-poke-street-food-tra-panini-e-poke%2F&psig=AOvVaw1Ls_lakDpw_nyBOHxL4KaU&ust=1647686440215000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjBqLu8z_YCFQAAAAAdAAAAABAJ'
-        }]
-      }, {
-        id: 4,
-        email: 'fiveguys@gmail.com',
-        password: '12345678',
-        name: 'Five guys',
-        address: 'via Torino 1',
-        VAT: '1234567890',
-        image_banner: '',
-        image_logo: '',
-        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Frestaurants.fiveguys.it%2Froma-termini&psig=AOvVaw0SB2Jcmj_EcHc1C8XdhMBS&ust=1647686534196000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNiXl-i8z_YCFQAAAAAdAAAAABAD',
-        categories: [4],
-        plates: [{
-          name: 'menu hamburger',
-          description: 'hamburger e patatine',
-          price: '15 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Froma.fanpage.it%2Ffive-guys-a-roma-rimandata-lapertura-del-primo-fast-food-in-citta-prevista-per-oggi%2F&psig=AOvVaw0SB2Jcmj_EcHc1C8XdhMBS&ust=1647686534196000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNiXl-i8z_YCFQAAAAAdAAAAABAP'
-        }]
-      }, {
-        id: 5,
-        email: 'venchi@gmail.com',
-        password: '12345678',
-        name: 'Venchi',
-        address: 'via Alessandria 1',
-        VAT: '1234567890',
-        image_banner: '',
-        image_logo: '',
-        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.comunicaffe.it%2Fvenchi-cioccolato-storia-azienda%2F&psig=AOvVaw107WrcyMXqs1tFoZRPZa_P&ust=1647686630525000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPD16JW9z_YCFQAAAAAdAAAAABAD',
-        categories: [5],
-        plates: [{
-          name: 'pistacchio',
-          description: 'gelato',
-          price: '5 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD'
-        }, {
-          name: 'cioccolato',
-          description: 'gelato',
-          price: '5 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD'
-        }, {
-          name: 'limone',
-          description: 'gelato',
-          price: '5 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.davidezambelli.com%2Fricette%2Fgelato-al-pistacchio-senza-gelatiera%2F&psig=AOvVaw2fz_J9cMfxRX0cYadN3dz9&ust=1647686674883000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDgjqu9z_YCFQAAAAAdAAAAABAD'
-        }]
-      }, {
-        id: 6,
-        email: 'donerkebab@gmail.com',
-        password: '12345678',
-        name: 'Doner kebab',
-        address: 'via venezia 1',
-        VAT: '1234567890',
-        image_banner: '',
-        image_logo: '',
-        image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDoner_kebab&psig=AOvVaw0y83sKkdr6EwbGlZP5gAkW&ust=1647686788395000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi1meG9z_YCFQAAAAAdAAAAABAD',
-        categories: [6],
-        plates: [{
-          name: 'kebab',
-          description: 'kebab',
-          price: '5 euro',
-          visibility: true,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fit.m.wikipedia.org%2Fwiki%2FFile%3AD%25C3%25B6ner_Kebab%2C_Berlin%2C_2010_(01).jpg&psig=AOvVaw0y83sKkdr6EwbGlZP5gAkW&ust=1647686788395000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi1meG9z_YCFQAAAAAdAAAAABAJ'
-        }]
-      }]
+      cart: this.$route.params.cart,
+      paymentIsReady: false
     };
   },
   methods: {
@@ -2810,6 +2686,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/orders/generate').then(function (response) {
         _this.token = response.data.token;
+        _this.paymentIsReady = true;
       });
     }
   },
@@ -26626,6 +26503,25 @@ exports.push([module.i, "@charset \"UTF-8\";\n.main-color[data-v-0b8439d1] {\n  
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".btn-primary {\n  background-color: red;\n  border: 1px solid red;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBanner.vue?vue&type=style&index=0&id=a3966642&lang=scss&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBanner.vue?vue&type=style&index=0&id=a3966642&lang=scss&scoped=true& ***!
@@ -27388,6 +27284,36 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Jumbotron.vue?vue&type=style&index=0&id=0b8439d1&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Jumbotron.vue?vue&type=style&index=0&id=0b8439d1&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentForm.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -29478,7 +29404,16 @@ var render = function () {
                     _c(
                       "div",
                       { staticClass: "text-center" },
-                      [_c("PaymentForm", { attrs: { authToken: _vm.token } })],
+                      [
+                        _vm.paymentIsReady
+                          ? _c("PaymentForm", {
+                              attrs: {
+                                authToken: _vm.token,
+                                userCart: _vm.cart,
+                              },
+                            })
+                          : _vm._e(),
+                      ],
                       1
                     ),
                   ]
@@ -29987,30 +29922,19 @@ var render = function () {
                         : _vm._e(),
                       _vm._v(" "),
                       _c(
-                        "button",
+                        "router-link",
                         {
                           staticClass: "btn payment_btn",
                           class: _vm.cart.length == 0 ? "disabled-btn" : "",
+                          attrs: {
+                            to: { name: "payment", params: { cart: _vm.cart } },
+                          },
                         },
                         [
-                          _c(
-                            "router-link",
-                            {
-                              attrs: {
-                                to: {
-                                  name: "payment",
-                                  params: { cart: _vm.cart },
-                                },
-                              },
-                            },
-                            [
-                              _vm._v(
-                                "\n                                Vai al pagamento\n                            "
-                              ),
-                            ]
+                          _vm._v(
+                            "\n                            Vai al pagamento\n                        "
                           ),
-                        ],
-                        1
+                        ]
                       ),
                     ],
                     2
@@ -52652,7 +52576,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PaymentForm_vue_vue_type_template_id_51d39462___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaymentForm.vue?vue&type=template&id=51d39462& */ "./resources/js/components/PaymentForm.vue?vue&type=template&id=51d39462&");
 /* harmony import */ var _PaymentForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaymentForm.vue?vue&type=script&lang=js& */ "./resources/js/components/PaymentForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _PaymentForm_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PaymentForm.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -52660,7 +52586,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _PaymentForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _PaymentForm_vue_vue_type_template_id_51d39462___WEBPACK_IMPORTED_MODULE_0__["render"],
   _PaymentForm_vue_vue_type_template_id_51d39462___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -52689,6 +52615,22 @@ component.options.__file = "resources/js/components/PaymentForm.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaymentForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentForm.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaymentForm.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentForm_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 
@@ -53590,7 +53532,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
