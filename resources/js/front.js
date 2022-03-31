@@ -16,6 +16,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import App from './views/App.vue';
 import router from './router.js';
 
+import Vue from 'vue';
+import vueBraintree from 'vue-braintree';
+
+
+Vue.component(
+    'v-braintree',
+    require('vue-braintree/src/Payment.vue').default
+);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -26,9 +35,9 @@ import router from './router.js';
 const app = new Vue({
     el: '#root',
     render: h => h(App),
-    router
+    router,
+   
 });
 
-import vue_braintree from 'vue-braintree'
+Vue.use(vueBraintree);
 
-Vue.use(vue_braintree)

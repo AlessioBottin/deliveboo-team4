@@ -28282,6 +28282,262 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-braintree/src/Payment.vue":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-braintree/src/Payment.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Payment_vue_vue_type_template_id_0dfd717c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Payment.vue?vue&type=template&id=0dfd717c& */ "./node_modules/vue-braintree/src/Payment.vue?vue&type=template&id=0dfd717c&");
+/* harmony import */ var _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Payment.vue?vue&type=script&lang=js& */ "./node_modules/vue-braintree/src/Payment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Payment_vue_vue_type_template_id_0dfd717c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Payment_vue_vue_type_template_id_0dfd717c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "node_modules/vue-braintree/src/Payment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./node_modules/vue-braintree/src/Payment.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/vue-braintree/src/Payment.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../vue-loader/lib??vue-loader-options!./Payment.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-braintree/src/Payment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./node_modules/vue-braintree/src/Payment.vue?vue&type=template&id=0dfd717c&":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/vue-braintree/src/Payment.vue?vue&type=template&id=0dfd717c& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_0dfd717c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../vue-loader/lib??vue-loader-options!./Payment.vue?vue&type=template&id=0dfd717c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-braintree/src/Payment.vue?vue&type=template&id=0dfd717c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_0dfd717c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_0dfd717c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-braintree/src/Payment.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-braintree/src/Payment.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var braintree_web_drop_in__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! braintree-web-drop-in */ "./node_modules/braintree-web-drop-in/dist/browser/dropin.js");
+/* harmony import */ var braintree_web_drop_in__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(braintree_web_drop_in__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    authorization: {
+      required: true,
+      type: String
+    },
+    locale: {
+      type: String,
+      default: "en_US"
+    },
+    btnText: {
+      type: String,
+      default: "Pay"
+    },
+    btnClass: {
+      type: String,
+      default: "btn btn-primary"
+    },
+    paypal: {
+      type: Object,
+      default: undefined
+    },
+    paypalCredit: {
+      type: Object,
+      default: undefined
+    },
+    venmo: {
+      type: Object,
+      default: undefined
+    },
+    applePay: {
+      type: Object,
+      default: undefined
+    },
+    googlePay: {
+      type: Object,
+      default: undefined
+    },
+    translations: {
+      type: Object,
+      default: undefined
+    },
+    vaultManager: {
+      type: Boolean,
+      default: false
+    },
+    card: {
+      type: Object,
+      default: undefined
+    },
+    threeDSecure: {
+      default: false,
+      type: Boolean
+    },
+    threeDSecureParameters: {
+      required: false,
+      default: null,
+      validator: (value) => {
+        return typeof value === 'object';
+      }
+    }
+  },
+  data() {
+    return {
+      instance: null, // The DropIn Instance
+    };
+  },
+  mounted() {
+    // Create config
+    let config = {
+      authorization: this.authorization,
+      container: this.$refs.dropin,
+      locale: this.locale,
+      translations: this.translations,
+      paypal: this.paypal,
+      paypalCredit: this.paypalCredit,
+      venmo: this.venmo,
+      applePay: this.applePay,
+      googlePay: this.googlePay,
+      vaultManager: this.vaultManager,
+      card: this.card,
+      threeDSecure: this.threeDSecure
+    };
+    // Create dropin
+    braintree_web_drop_in__WEBPACK_IMPORTED_MODULE_0___default.a.create(config, (createErr, instance) => {
+      if (createErr) {
+        // An error in the create call is likely due to
+        // incorrect configuration values or network issues.
+        // An appropriate error will be shown in the UI.
+        this.$emit("loadFail", createErr);
+        return;
+      }
+      this.instance = instance;
+      // Load event
+      this.$emit("load", this.instance);
+    });
+  },
+  methods: {
+    submit (event) {
+      if (event) {
+        event.preventDefault();
+      }
+      let requestPaymentConfig = {};
+      if (this.threeDSecure === true) {
+        requestPaymentConfig.threeDSecure = this.threeDSecureParameters
+      }
+      this.instance.requestPaymentMethod(requestPaymentConfig, (err, payload) => {
+        if (err) {
+          // No payment method is available.
+          // An appropriate error will be shown in the UI.
+          this.$emit("error", err);
+          return;
+        }
+        this.$emit("success", payload);
+      });
+    }
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-braintree/src/Payment.vue?vue&type=template&id=0dfd717c&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-braintree/src/Payment.vue?vue&type=template&id=0dfd717c& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "payment" },
+    [
+      _c("div", { ref: "dropin" }),
+      _vm._v(" "),
+      _vm._t(
+        "button",
+        function () {
+          return [
+            _c("button", { class: _vm.btnClass, on: { click: _vm.submit } }, [
+              _vm._v(_vm._s(_vm.btnText)),
+            ]),
+          ]
+        },
+        { submit: _vm.submit }
+      ),
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Category.vue?vue&type=template&id=33972369&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Category.vue?vue&type=template&id=33972369&scoped=true& ***!
@@ -52074,7 +52330,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue");
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
-/* harmony import */ var vue_braintree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-braintree */ "./node_modules/vue-braintree/dist/vue-braintree.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_braintree__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-braintree */ "./node_modules/vue-braintree/dist/vue-braintree.esm.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -52090,21 +52348,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 
+
+
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('v-braintree', __webpack_require__(/*! vue-braintree/src/Payment.vue */ "./node_modules/vue-braintree/src/Payment.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
   el: '#root',
   render: function render(h) {
     return h(_views_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   },
   router: _router_js__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
-
-Vue.use(vue_braintree__WEBPACK_IMPORTED_MODULE_2__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_braintree__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 /***/ }),
 
