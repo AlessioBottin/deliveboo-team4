@@ -2963,7 +2963,28 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('http://127.0.0.1:8000/api/restaurant/' + this.$route.params.slug).then(function (response) {
-        _this2.restaurant = response.data;
+        _this2.restaurant = response.data; // Only if there is something stored in the localStorage('cart')
+
+        if (JSON.parse(localStorage.getItem("cart"))) {
+          // Link the cart to the localStorage('cart')
+          _this2.cart = JSON.parse(localStorage.getItem("cart")); // If there is a plate with an id different from the restaurant.id, empty the whole localStorage('cart')
+
+          _this2.cart.forEach(function (element) {
+            console.log(element.user_id);
+            console.log(_this2.restaurant);
+
+            if (element.user_id != _this2.restaurant.id) {
+              _this2.$router.go();
+
+              localStorage.removeItem("cart");
+            }
+          }); // Everytime the pages load calculate the totalPrice
+
+
+          _this2.calculateTotalPriceAtLoading();
+        }
+
+        ;
       });
     },
     // Function that returns an API with the menu of the restaurant
@@ -3044,31 +3065,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this4 = this;
-
     this.getRestaurant();
-    this.getRestaurantMenu(); // Link the cart and the localStorage('cart') only if there is already something in the localStorage('cart')
-
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      this.cart = JSON.parse(localStorage.getItem("cart"));
-    }
-
-    ;
-    this.calculateTotalPriceAtLoading(); // If the user types a new url and has already something in the cart,
-    // it refreshes the page when he arrives at new route,
-    // and then it empties the localStorage('cart')
-
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      this.cart.forEach(function (element) {
-        if (element.user_id != _this4.restaurant.id) {
-          _this4.$router.go();
-
-          localStorage.removeItem("cart");
-        }
-      });
-    }
-
-    ;
+    this.getRestaurantMenu();
   }
 });
 
