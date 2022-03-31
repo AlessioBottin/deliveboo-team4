@@ -2450,6 +2450,208 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PaymentPage',
@@ -28389,7 +28591,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     btnClass: {
       type: String,
-      default: "btn btn-primary"
+      default: "btn btn-default"
     },
     paypal: {
       type: Object,
@@ -29202,14 +29404,307 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "mt-5" },
-    [_c("PaymentForm", { attrs: { authToken: _vm.token } })],
-    1
-  )
+  return _c("section", [
+    _c("div", { staticClass: "container my_container" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "cards_wrapper" }, [
+        _c("div", { staticClass: "info_and_payment_cards_box" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "card my_card_wrapper my-4 box_shadow" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h4", { staticClass: "card-name" }, [
+                _vm._v("Metodo di pagamento"),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "bootstrap-basic" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "needs-validation",
+                    attrs: { novalidate: "" },
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "text-center" },
+                      [_c("PaymentForm", { attrs: { authToken: _vm.token } })],
+                      1
+                    ),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
+      ]),
+    ]),
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "payment_title my-5" }, [
+      _c("h1", [_vm._v("Controlla il tuo ordine da nome ristorante")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card my_card_wrapper mb-3 box_shadow" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "left_column" }, [
+          _c("h4", { staticClass: "card-name" }, [
+            _vm._v(
+              "\n                                Informazioni di contatto\n                            "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("form", [
+            _c(
+              "label",
+              { staticClass: "col-form-label-sm", attrs: { for: "" } },
+              [_vm._v("Nome Cognome")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "mb-3 d-flex justify-content-center align-items-center",
+              },
+              [
+                _c("i", { staticClass: "fa-solid fa-user" }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control ml-2",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Nome Cognome",
+                    "aria-label": "name",
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "col-form-label-sm", attrs: { for: "" } },
+              [_vm._v("Email")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "mb-3 d-flex justify-content-center align-items-center",
+              },
+              [
+                _c("i", { staticClass: "fa-solid fa-envelope" }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control ml-2",
+                  attrs: {
+                    type: "text",
+                    placeholder: "example@mail.com",
+                    "aria-label": "email",
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "col-form-label-sm", attrs: { for: "" } },
+              [_vm._v("Indirizzo di consegna")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row g-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col-sm-7 d-flex justify-content-center align-items-center",
+                },
+                [
+                  _c("i", { staticClass: "fa-solid fa-location-dot" }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control ml-2",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Città",
+                      "aria-label": "Città",
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "regione",
+                    "aria-label": "regione",
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "CAP",
+                    "aria-label": "Cap",
+                  },
+                }),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { position: "relative", "min-height": "200px" },
+        attrs: { "aria-live": "polite", "aria-atomic": "true" },
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "toast",
+            attrs: {
+              role: "alert",
+              "aria-live": "assertive",
+              "aria-atomic": "true",
+              "data-autohide": "false",
+            },
+          },
+          [
+            _c("div", { staticClass: "toast-header" }, [
+              _c("strong", { staticClass: "mr-auto" }, [_vm._v("Success!")]),
+              _vm._v(" "),
+              _c("small", [_vm._v("Just now")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "ml-2 mb-1 close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "toast",
+                    "aria-label": "Close",
+                  },
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×"),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "toast-body" }, [
+              _vm._v(
+                "\n                                    Next, submit the payment method nonce to your server.\n                                "
+              ),
+            ]),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "order_card_container" }, [
+      _c("div", { staticClass: "order_card card box_shadow" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("h3", { staticClass: "card-text justify-content-center " }, [
+            _vm._v("Riepilogo del tuo ordine"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "border-bottom" }, [
+            _c("p", [_vm._v("nome ristorante e via")]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("h5", [_vm._v("Carrello")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "cart-product border-bottom" }, [
+              _c("div", { staticClass: "d-flex justify-content-between " }, [
+                _c("p", [
+                  _c("strong", [_vm._v("x1")]),
+                  _vm._v(
+                    "\n                                        prodotto 1\n                                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v("10€")]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex justify-content-between " }, [
+                _c("p", [
+                  _c("strong", [_vm._v("x1")]),
+                  _vm._v(
+                    "\n                                        prodotto 1\n                                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v("10€")]),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c("h5", [_vm._v("Subtotale")]),
+              _vm._v(" "),
+              _c("h5", [_vm._v("20€")]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "cart-product border-bottom d-flex justify-content-between",
+              },
+              [
+                _c("p", [_vm._v("Spese di consegna")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("2€")]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex justify-content-between " }, [
+            _c("h4", [_vm._v("Totale:")]),
+            _vm._v(" "),
+            _c("h4", [_vm._v("10€")]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -53025,7 +53520,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
