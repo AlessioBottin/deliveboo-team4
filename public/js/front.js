@@ -29997,7 +29997,14 @@ var render = function () {
                         [
                           _c(
                             "router-link",
-                            { attrs: { to: { name: "payment" } } },
+                            {
+                              attrs: {
+                                to: {
+                                  name: "payment",
+                                  params: { cart: _vm.cart },
+                                },
+                              },
+                            },
                             [
                               _vm._v(
                                 "\n                                Vai al pagamento\n                            "

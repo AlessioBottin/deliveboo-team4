@@ -143,7 +143,7 @@
                             <!-- END CART WITH ALL THE PLATES -->
 
                             <button :class="cart.length==0 ? 'disabled-btn' : ''" class="btn payment_btn">
-                                <router-link :to="{name: 'payment'}">
+                                <router-link :to="{name: 'payment', params:{cart: cart}}">
                                     Vai al pagamento
                                 </router-link>
                             </button>
