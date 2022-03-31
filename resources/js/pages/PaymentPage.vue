@@ -1,8 +1,210 @@
 <template>
-    <div class="mt-5">
-        <PaymentForm :authToken='token' />
-    </div>
+    
 
+        <!-- start section -->
+    <section>
+       
+        <!-- start container -->
+        <div class="container my_container">
+
+            <!-- payment page title -->
+            <div class="payment_title my-5">
+                <h1>Controlla il tuo ordine da nome ristorante</h1>
+            </div>
+            
+            <!-- start cards wrapper container -->
+            <div class="cards_wrapper">
+            
+                <!-- Contact informations contact and payment methods cards box -->
+                <div class="info_and_payment_cards_box">
+        
+                    <!-- Contact informations card -->
+                    <div class="card my_card_wrapper mb-3 box_shadow">
+                    
+                        <!-- start card body -->
+                        <div class="card-body">
+
+                            <!-- start left column content -->
+                            <div class="left_column">
+
+                                <!-- card title -->
+                                <h4 class="card-name">
+                                    Informazioni di contatto
+                                </h4>
+
+                                <!-- form -->
+                                <form >
+
+                                    <label for="" class="col-form-label-sm">Nome Cognome</label>
+                                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-user"></i>
+                                        <input type="text" class="form-control ml-2" placeholder="Nome Cognome" aria-label="name">
+                                    </div>
+
+                                    <label for="" class="col-form-label-sm">Email</label>
+                                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <input type="text" class="form-control ml-2" placeholder="example@mail.com" aria-label="email">
+                                    </div>
+
+                                    <label for="" class="col-form-label-sm">Indirizzo di consegna</label>
+                                    <div class="row g-3">
+                                        <div class="col-sm-7 d-flex justify-content-center align-items-center">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            <input type="text" class="form-control ml-2" placeholder="Città" aria-label="Città">
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control" placeholder="regione" aria-label="regione">
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control" placeholder="CAP" aria-label="Cap">
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </form>
+                            
+                            </div>
+                            <!-- end left body contact -->
+
+                        </div>
+                        <!-- end card body -->
+
+                    </div>
+                    <!-- end contact informations card -->
+
+                    <!-- PAYMENT METHODS card -->
+                    <div class="card my_card_wrapper my-4 box_shadow">
+
+                        <!-- start card body -->
+                        <div class="card-body">
+
+                            <h4 class="card-name">Metodo di pagamento</h4>
+
+                            <!-- start Bootstrap inspired Braintree Hosted Fields part 1 -->
+                            <div class="bootstrap-basic">
+
+                                <!-- start form -->
+                                <form class="needs-validation" novalidate="">
+
+                                    <div class="text-center">
+                                        <PaymentForm :authToken='token' />                                
+                                    </div>
+
+                                </form>
+                                <!-- end form -->
+
+                            </div>
+                            <!-- end Bootstrap inspired Braintree Hosted Fields part 1 -->
+
+                            <!-- start Bootstrap inspired Braintree Hosted Fields part 2 -->
+                            <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+
+                                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+
+                                    <div class="toast-header">
+
+                                        <strong class="mr-auto">Success!</strong>
+                                        <small>Just now</small>
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="toast-body">
+                                        Next, submit the payment method nonce to your server.
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- end Bootstrap inspired Braintree Hosted Fields part 2 -->
+
+                        </div>
+                        <!-- end card body -->
+
+                    </div>
+                    <!-- END PAYMENT METHODS card -->
+
+                </div>
+                <!-- end contact informations contact and payment methods cards box -->
+
+                <!-- Order card container -->
+                <div class="order_card_container">
+
+                    <!-- start order card -->
+                    <div class="order_card card box_shadow">
+
+                        <!-- start card body -->
+                        <div class="card-body">
+
+                            <h3 class="card-text justify-content-center ">Riepilogo del tuo ordine</h3>
+                            
+                            <div class="border-bottom">
+                                <p>nome ristorante e via</p>
+                            </div>
+
+                            <div >
+                                <h5>Carrello</h5>
+                                <div class="cart-product border-bottom">
+
+                                    <div class="d-flex justify-content-between ">
+                                        <p>
+                                            <strong>x1</strong>
+                                            prodotto 1
+                                        </p>
+                                        <p>10€</p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between ">
+                                        <p>
+                                            <strong>x1</strong>
+                                            prodotto 1
+                                        </p>
+                                        <p>10€</p>
+                                    </div>
+                                   
+                                </div>
+
+                            </div>
+
+                            <div >
+                                <div class="d-flex justify-content-between">
+                                    <h5>Subtotale</h5>
+                                    <h5>20€</h5>
+                                </div>
+                                
+                                <div class="cart-product border-bottom d-flex justify-content-between"> 
+                                    <p>Spese di consegna</p>
+                                    <p>2€</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between ">
+                                <h4>Totale:</h4>
+                                <h4>10€</h4>
+                            </div>
+
+                        </div>
+                        <!-- end card boy -->
+                    
+                    </div>
+                    <!-- start order card -->
+                
+                </div>
+                <!-- end order card container -->
+
+            </div>
+            <!-- end cards wrapper container -->
+
+        </div>
+        <!-- end container -->
+
+    </section>
+    <!-- end section -->
 </template>
 
 <script>
