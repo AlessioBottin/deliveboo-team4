@@ -2892,6 +2892,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Jumbotron: _components_Jumbotron_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  // ! Data
   data: function data() {
     return {
       currentPage: 0,
@@ -2901,6 +2902,7 @@ __webpack_require__.r(__webpack_exports__);
       totalPrice: 0
     };
   },
+  // ! BeforeRouteLeave
   // If the user has something in the cart and he wants to leave the page,
   // he will be alerted that he will lose all the things he added to the cart
   // Otherwise, if the cart is empty, he can leave without any alert displaying
@@ -2916,6 +2918,7 @@ __webpack_require__.r(__webpack_exports__);
       next();
     }
   },
+  // ! Methods
   methods: {
     // Update the cart in the localStorage
     changeLocalstorageCart: function changeLocalstorageCart() {
@@ -3038,6 +3041,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  // ! Created
   created: function created() {
     this.getRestaurant();
     this.getRestaurantMenu();
@@ -53532,7 +53536,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

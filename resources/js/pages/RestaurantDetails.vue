@@ -184,6 +184,7 @@ export default {
     components:{
         Jumbotron
     },
+    // ! Data
     data: function() {
         return {
             currentPage: 0,
@@ -193,6 +194,7 @@ export default {
             totalPrice: 0,
         };
     },
+    // ! BeforeRouteLeave
     // If the user has something in the cart and he wants to leave the page,
     // he will be alerted that he will lose all the things he added to the cart
     // Otherwise, if the cart is empty, he can leave without any alert displaying
@@ -208,6 +210,7 @@ export default {
             next();
         }
     },
+    // ! Methods
     methods:{
         // Update the cart in the localStorage
         changeLocalstorageCart: function(){
@@ -316,6 +319,7 @@ export default {
             
         }
     },
+    // ! Created
     created: function() {
         this.getRestaurant();
         this.getRestaurantMenu();
