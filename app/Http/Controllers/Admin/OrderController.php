@@ -12,7 +12,7 @@ use App\Plate;
 class OrderController extends Controller
 {
     public function index() {
-        // poi lo modifico con gli ordini del ristorante corrente
+        poi lo modifico con gli ordini del ristorante corrente
         $all_orders = Order::all();;
 
         $orders = [];
@@ -30,10 +30,29 @@ class OrderController extends Controller
                 }
             }
         };
+        // $orders_id = [];
 
-        $data = [
-            'orders' => $orders
-        ];
+        // $user_id = Auth::user()->id;
+        
+        // $plates = Plate::all()->where('user_id', '=', $user_id);
+
+        // foreach ($plates as $plate) {
+        //     $plate_id = $plate->id;
+        //     $pushed_orders = [];
+
+        //     $order_related_plate = Order::whereHas('plates', function ($query) use($plate_id) {
+        //         $query->where('id', $plate_id);
+        //     })->get();    
+
+
+            
+        // }
+
+        
+
+        // $data = [
+        //     'orders' => $orders
+        // ];
 
         return view('admin.orders.index',$data);
     }
