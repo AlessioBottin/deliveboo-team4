@@ -12,7 +12,7 @@ class Plate extends Model
     }
 
     public function orders(){
-        return $this->belongsToMany('App\Order');
+        return $this->belongsToMany('App\Order', 'order_plate', 'order_id', 'plate_id');
     }
 
     protected $fillable = [
