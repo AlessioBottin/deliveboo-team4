@@ -37,32 +37,46 @@
                                     
                                     <!-- Name  -->
                                     <label for="name" class="col-form-label-sm">Nome Cognome</label>
-                                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                                        <i class="fa-solid fa-user"></i>
-                                        <input type="text" class="form-control ml-2" placeholder="Nome Cognome" aria-label="name" id="name" name="name" v-model="userName">
+                                    <div class="row">
+                                        <div class="mb-3 col-sm-7 d-flex justify-content-center align-items-center">
+                                            <div class="icon_container">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                            <input type="text" class="form-control ml-2" placeholder="Nome Cognome" aria-label="name" id="name" name="name" v-model="userName">
+                                        </div>
                                     </div>
 
                                     <!-- Email  -->
                                     <label for="email" class="col-form-label-sm">Email</label>
-                                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                                        <i class="fa-solid fa-envelope"></i>
-                                        <input type="text" class="form-control ml-2" placeholder="example@mail.com" aria-label="email" id="email" name="email" v-model="userEmail">
+                                    <div class="row">
+                                        <div class="mb-3 col-sm-7 d-flex justify-content-center align-items-center">
+                                            <div class="icon_container">
+                                                <i class="fa-solid fa-envelope"></i>
+                                            </div>
+                                            <input type="text" class="form-control ml-2" placeholder="example@mail.com" aria-label="email" id="email" name="email" v-model="userEmail">
+                                        </div>
                                     </div>
 
                                     <!-- Address  -->
                                     <label for="address" class="col-form-label-sm">Indirizzo di consegna</label>
                                     <div class="row g-3">
                                         <div class="col-sm-7 d-flex justify-content-center align-items-center">
-                                            <i class="fa-solid fa-location-dot"></i>
+                                            <div class="icon_container">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </div>
                                             <input type="text" class="form-control ml-2" placeholder="Indirizzo" aria-label="Indirizzo" id="address" name="address" v-model="userAddress">
                                         </div>                                        
                                     </div>
 
                                     <!-- Phone number -->
                                     <label for="phone" class="col-form-label-sm">Numero di telefono</label>
-                                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                                        <i class="fa-solid fa-envelope"></i>
-                                        <input type="text" class="form-control ml-2" aria-label="phone" id="phone" name="phone" v-model="userPhone">
+                                    <div class="row">
+                                        <div class="mb-3 col-sm-7 d-flex justify-content-center align-items-center">
+                                            <div class="icon_container">
+                                                <i class="fa-solid fa-phone"></i>
+                                            </div>
+                                            <input type="text" class="form-control ml-2" aria-label="phone" id="phone" name="phone" v-model="userPhone">
+                                        </div>
                                     </div>
                                     
                                 </form>
@@ -502,11 +516,16 @@ body {
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+
 }
 
 .braintree-hosted-fields-focused.is-invalid {
   border-color: #dc3545;
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.icon_container {
+    width: 5%;
 }
 
    
