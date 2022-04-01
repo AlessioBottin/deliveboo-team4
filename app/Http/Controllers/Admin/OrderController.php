@@ -12,47 +12,51 @@ use App\Plate;
 class OrderController extends Controller
 {
     public function index() {
+
+        // ! versione piu' lenta 
         // poi lo modifico con gli ordini del ristorante corrente
-        $all_orders = Order::all();
+        // $all_orders = Order::all();
 
+        // $orders = [];
+        // // 
+        // foreach ($all_orders as $single_order) {
+        //     $plates = $single_order->plates;
+
+        //     foreach ($plates as $plate) {
+        //         $id = $plate->user_id;
+
+        //         if($id == Auth::id()){
+        //             if(!in_array($single_order, $orders)){
+        //                 $orders[] = $single_order;
+        //             }
+        //         }
+        //     }
+        // };
         $orders = [];
-        // 
-        foreach ($all_orders as $single_order) {
-            $plates = $single_order->plates;
 
-            foreach ($plates as $plate) {
-                $id = $plate->user_id;
+        $user_id = Auth::user()->id;
+        
+        $plates = Plate::all()->where('user_id', '=', $user_id);
 
-                if($id == Auth::id()){
-                    if(!in_array($single_order, $orders)){
-                        $orders[] = $single_order;
-                    }
+        foreach ($plates as $plate) {
+
+            $plate_id = $plate->id;
+            $orders_related_plate = Order::whereHas('plates', function ($query) use($plate_id) {
+                $query->where('id', $plate_id);
+            })->get(); 
+
+            foreach ($orders_related_plate as $order) {
+                if (!in_array($order, $orders)) {
+                    $orders[] = $order;
                 }
-            }
-        };
-        // $orders_id = [];
-
-        // $user_id = Auth::user()->id;
-        
-        // $plates = Plate::all()->where('user_id', '=', $user_id);
-
-        // foreach ($plates as $plate) {
-        //     $plate_id = $plate->id;
-        //     $pushed_orders = [];
-
-        //     $order_related_plate = Order::whereHas('plates', function ($query) use($plate_id) {
-        //         $query->where('id', $plate_id);
-        //     })->get();    
-
-
-            
-        // }
+            }        
+        }
 
         
 
-        // $data = [
-        //     'orders' => $orders
-        // ];
+        $data = [
+            'orders' => $orders
+        ];
 
         return view('admin.orders.index',$data);
     }
