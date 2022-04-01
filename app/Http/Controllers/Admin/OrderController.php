@@ -10,7 +10,7 @@ use App\Plate;
 
 
 class OrderController extends Controller
-{
+{   
     public function index() {
 
         // ! versione piu' lenta 
@@ -32,27 +32,9 @@ class OrderController extends Controller
         //         }
         //     }
         // };
-        $orders = [];
-
-        $user_id = Auth::user()->id;
         
-        $plates = Plate::all()->where('user_id', '=', $user_id);
 
-        foreach ($plates as $plate) {
-
-            $plate_id = $plate->id;
-            $orders_related_plate = Order::whereHas('plates', function ($query) use($plate_id) {
-                $query->where('id', $plate_id);
-            })->get(); 
-
-            foreach ($orders_related_plate as $order) {
-                if (!in_array($order, $orders)) {
-                    $orders[] = $order;
-                }
-            }        
-        }
-
-        
+        $orders = Order::getAllMyOrders();
 
         $data = [
             'orders' => $orders
@@ -63,7 +45,7 @@ class OrderController extends Controller
 
     public function show($id) {
         $order = Order::find($id);
-
+        dd($id);
     
         $data = [
             'order' => $order
@@ -73,4 +55,9 @@ class OrderController extends Controller
         return view('admin.orders.show',$data);
     }
 
+    public function statistics() {
+        $orders = Order::getAllMyOrders();
+
+        return view('admin.orders.statistics', compact('orders'));
+    }
 }

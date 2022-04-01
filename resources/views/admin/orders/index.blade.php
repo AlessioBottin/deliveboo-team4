@@ -13,7 +13,7 @@
                     | Telefono: {{ $order->customer_phone }}
                     | Status: {{ $order->status }}
                     | Data: {{ $order->created_at }}
-                    | <a href="{{ route('admin.order_info', ['id' => $order->id]) }}">DETTAGLI</a>
+                    | <a href="{{ route('admin.order-info', ['id' => $order->id]) }}">DETTAGLI</a>
                 </li>
             @endforeach
         </ul>
