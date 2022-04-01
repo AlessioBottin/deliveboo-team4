@@ -56,7 +56,8 @@ class OrderController extends Controller
     }
 
     public function statistics() {
-        $orders = Order::getAllMyOrders();
+        $php_orders = Order::getAllMyOrders();
+        $orders = json_encode($php_orders);
 
         return view('admin.orders.statistics', compact('orders'));
     }

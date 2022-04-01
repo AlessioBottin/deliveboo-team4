@@ -10080,3 +10080,7 @@ a:hover {
 .edit .show-image img {
   max-width: 250px;
 }
+
+.statistics-page .chart {
+  width: 500px;
+}
