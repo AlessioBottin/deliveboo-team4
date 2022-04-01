@@ -23,7 +23,7 @@
                     <div class="responsive-container">
                         <div class="research-input position-relative">
                             <i class="fas fa-search"></i>
-                            <input type="text" v-model="researchInput" placeholder="Cerca per cucina o ristorante">
+                            <input type="text" @keydown="filterRestaurants()" v-model="researchInput" placeholder="Cerca per cucina o ristorante">
                         </div>          
                     </div>
                    
@@ -68,7 +68,7 @@
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurantsList" :key="index">
                                 <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.slug } }">
-                                    <div class="row">
+                                    <div v-if="restaurant.visibility === true"  class="row">
 
                                         <!-- Img  -->
                                         <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img :src="restaurant.image" :alt="restaurant.name"></div>
@@ -86,7 +86,7 @@
                                         
                                         <!-- Delivery Info  -->
                                         <div class="col-sm-12 col-md-4 delivery-info">
-                                            <p>Consegna: <span class="delivery">GRATIS</span></p>
+                                            <p>Consegna: <span class="delivery">2€</span></p>
                                         </div>
                                     </div>
                                 </router-link>
@@ -114,7 +114,7 @@ export default {
             ratingForTesting: 4,
             researchInput: '',
             restaurantsList: [],
-            categories: []
+            categories: [],
         }
     },
     methods:{
@@ -122,6 +122,9 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurants/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurantsList = response.data;
+                this.restaurantsList.forEach(element => {
+                    element['visibility'] = true;
+                });
             })
         },
         test: function(category){
@@ -133,6 +136,15 @@ export default {
             .then((response)=>{
                 this.categories = response.data;
             })
+        },
+        filterRestaurants: function(){ 
+            this.restaurantsList.forEach(element => {
+                if(!element.name.toLowerCase().includes(this.researchInput.toLowerCase())){
+                    element.visibility = false;
+                }else{
+                    element.visibility = true;
+                }
+            });
         }
     },
     created: function(){
@@ -152,6 +164,10 @@ section {
         margin-top: 125px;
     }
     .container {
+
+        .d_none{
+            display: none;
+        }
 
         // Cateogries Slider
         .categories {
