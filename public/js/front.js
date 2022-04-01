@@ -2124,6 +2124,9 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.success) {
           _this.$router.push("thankyou");
         }
+
+        ;
+        localStorage.removeItem('cart');
       });
     },
     onError: function onError(error) {
