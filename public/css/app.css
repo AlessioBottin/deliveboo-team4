@@ -10081,6 +10081,7 @@ a:hover {
   max-width: 250px;
 }
 
+<<<<<<< HEAD
 .show img {
   max-width: 100%;
 }
@@ -10088,4 +10089,8 @@ a:hover {
   display: inline-block;
   vertical-align: bottom;
   width: 50px;
+=======
+.statistics-page .chart {
+  width: 500px;
+>>>>>>> 5c7f7a7d19effac7bc0d1b3880e4d8fcb302abce
 }
