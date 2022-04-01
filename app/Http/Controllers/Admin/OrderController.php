@@ -10,26 +10,31 @@ use App\Plate;
 
 
 class OrderController extends Controller
-{
+{   
     public function index() {
-        // Prendo tutti gli ordini
-        $all_orders = Order::all();
-        // Creo un array vuoto
-        $orders = [];
-        // 
-        foreach ($all_orders as $single_order) {
-            $plates = $single_order->plates;
 
-            foreach ($plates as $plate) {
-                $id = $plate->user_id;
+        // ! versione piu' lenta 
+        // poi lo modifico con gli ordini del ristorante corrente
+        // $all_orders = Order::all();
 
-                if($id == Auth::id()){
-                    if(!in_array($single_order, $orders)){
-                        $orders[] = $single_order;
-                    }
-                }
-            }
-        };
+        // $orders = [];
+        // // 
+        // foreach ($all_orders as $single_order) {
+        //     $plates = $single_order->plates;
+
+        //     foreach ($plates as $plate) {
+        //         $id = $plate->user_id;
+
+        //         if($id == Auth::id()){
+        //             if(!in_array($single_order, $orders)){
+        //                 $orders[] = $single_order;
+        //             }
+        //         }
+        //     }
+        // };
+        
+
+        $orders = Order::getAllMyOrders();
 
         $data = [
             'orders' => $orders
@@ -48,4 +53,9 @@ class OrderController extends Controller
         return view('admin.orders.show',$data);
     }
 
+    public function statistics() {
+        $orders = Order::getAllMyOrders();
+
+        return view('admin.orders.statistics', compact('orders'));
+    }
 }
