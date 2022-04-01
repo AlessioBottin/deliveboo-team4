@@ -18,7 +18,7 @@ mix.js('resources/js/app.js', 'public/js')
     })
 
 mix.js('resources/js/front.js', 'public/js')
-mix.js('resources/js/categories.js', 'public/js')
+mix.js('resources/js/back.js', 'public/js')
 
 
 
