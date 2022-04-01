@@ -4,6 +4,8 @@
 
    @if (isset($plate))
 
+   <section class="show">
+
       <h1>{{ $plate->name }}</h1>
 
       {{-- <div class="mb-3"><strong>Slug:</strong> {{ $plate->slug }}</div> --}}
@@ -14,8 +16,8 @@
 
       <div class="mb-3"><strong>Visibility:</strong> {{ $plate->visibility ? 'visibile' : 'non visibile' }}</div>
 
-      <div>
-         <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}">
+      <div class="show-image">
+         <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}" class="current-image">
       </div>
 
       <p>{{ $plate->description }}</p>
@@ -29,6 +31,8 @@
          @method('DELETE')
          <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler cancellare questo piatto?')">Delete</button>
       </form>
+   
+   </section>
  
    @else 
       <h1>Errore la pagina non è stata trovata</h1>

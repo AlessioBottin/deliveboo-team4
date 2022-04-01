@@ -43,6 +43,7 @@ export default {
                 "form" : this.userForm
             }).then((response) => {
                 console.log(response);
+                this.$router.push("thankyou");
             })
         },
         onError (error) {

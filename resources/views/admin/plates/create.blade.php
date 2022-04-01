@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<section>
+<section class="create">
     <h1>Crea un nuovo Piatto</h1>
 
     <form action="{{ route('admin.plates.store') }}" method="post" enctype="multipart/form-data">
