@@ -2697,14 +2697,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PaymentPage',
@@ -2720,7 +2712,8 @@ __webpack_require__.r(__webpack_exports__);
       userName: '',
       userAddress: '',
       userEmail: '',
-      userPhone: '' // form: {
+      userPhone: '',
+      totalPrice: 0 // form: {
       //     userName: this.userName,
       //     userAddress: this.userAddress,
       //     userEmail: this.userEmail,
@@ -2737,10 +2730,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.token = response.data.token;
         _this.paymentIsReady = true;
       });
+    },
+    getTotalPrice: function getTotalPrice() {
+      var _this2 = this;
+
+      this.cart.forEach(function (element) {
+        _this2.totalPrice += element.price * element.quantity;
+      });
     }
   },
   created: function created() {
     this.getToken();
+    this.getTotalPrice();
   }
 });
 
@@ -29691,7 +29692,74 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(6),
+        _c("div", { staticClass: "order_card_container" }, [
+          _c("div", { staticClass: "order_card card box_shadow" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h3", { staticClass: "card-text justify-content-center " }, [
+                _vm._v("Riepilogo del tuo ordine"),
+              ]),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", [
+                _c("h5", [_vm._v("Carrello")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "cart-product border-bottom" },
+                  _vm._l(_vm.cart, function (product, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "d-flex justify-content-between ",
+                      },
+                      [
+                        _c("p", [
+                          _c("strong", [
+                            _vm._v("x" + _vm._s(product.quantity)),
+                          ]),
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(product.name) +
+                              "\n                                    "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            _vm._s(
+                              (product.price * product.quantity).toFixed(2)
+                            ) + "€"
+                          ),
+                        ]),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("div", { staticClass: "d-flex justify-content-between" }, [
+                  _c("h5", [_vm._v("Subtotale")]),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v(_vm._s(_vm.totalPrice.toFixed(2)) + "€")]),
+                ]),
+                _vm._v(" "),
+                _vm._m(7),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex justify-content-between " }, [
+                _c("h4", [_vm._v("Totale:")]),
+                _vm._v(" "),
+                _c("h4", [
+                  _vm._v(_vm._s((_vm.totalPrice + 2).toFixed(2)) + "€"),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
       ]),
     ]),
   ])
@@ -29797,74 +29865,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "order_card_container" }, [
-      _c("div", { staticClass: "order_card card box_shadow" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-text justify-content-center " }, [
-            _vm._v("Riepilogo del tuo ordine"),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "border-bottom" }, [
-            _c("p", [_vm._v("nome ristorante e via")]),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("h5", [_vm._v("Carrello")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "cart-product border-bottom" }, [
-              _c("div", { staticClass: "d-flex justify-content-between " }, [
-                _c("p", [
-                  _c("strong", [_vm._v("x1")]),
-                  _vm._v(
-                    "\n                                        prodotto 1\n                                    "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v("10€")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "d-flex justify-content-between " }, [
-                _c("p", [
-                  _c("strong", [_vm._v("x1")]),
-                  _vm._v(
-                    "\n                                        prodotto 1\n                                    "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v("10€")]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _c("h5", [_vm._v("Subtotale")]),
-              _vm._v(" "),
-              _c("h5", [_vm._v("20€")]),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "cart-product border-bottom d-flex justify-content-between",
-              },
-              [
-                _c("p", [_vm._v("Spese di consegna")]),
-                _vm._v(" "),
-                _c("p", [_vm._v("2€")]),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "d-flex justify-content-between " }, [
-            _c("h4", [_vm._v("Totale:")]),
-            _vm._v(" "),
-            _c("h4", [_vm._v("10€")]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "border-bottom" }, [
+      _c("p", [_vm._v("nome ristorante e via")]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "cart-product border-bottom d-flex justify-content-between",
+      },
+      [
+        _c("p", [_vm._v("Spese di consegna")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("2€")]),
+      ]
+    )
   },
 ]
 render._withStripped = true
