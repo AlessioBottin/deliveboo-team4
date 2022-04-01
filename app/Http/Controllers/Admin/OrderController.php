@@ -13,40 +13,29 @@ class OrderController extends Controller
 {
     public function index() {
         // poi lo modifico con gli ordini del ristorante corrente
-        $orders = Order::all();
-        
-        // dd('test');
+        $all_orders = Order::all();;
 
-        dd($orders[0]->plates());
+        $orders = [];
 
-        // $user_id = Auth::user()->id;
-   
-        // $plates = Plate::all()->where('user_id', '=', $user_id);
+        foreach ($all_orders as $single_order) {
+            $plates = $single_order->plates;
 
-        // $orders = App\Order::find(1);
+            foreach ($plates as $plate) {
+                $id = $plate->user_id;
 
-        // foreach ($orders->plates as $plate) {
-            
-        //     $plates = App\Plate::find(1)->plates()->get();
+                if($id == Auth::id()){
+                    if(!in_array($single_order, $orders)){
+                        $orders[] = $single_order;
+                    }
+                }
+            }
+        };
 
-        //     echo $plate->pivot->name;
-        // }
+        $data = [
+            'orders' => $orders
+        ];
 
-            
-        // $user_id = Auth::user()->id;
-   
-        // $orders = Order::all()->where('user_id', '=', $user_id);
-
-        // dd($user_id);
-        // dd($orders);
-
-        // $data = [
-        //     'orders' => $orders,
-        //     'plates' => $plates
-
-        // ];
-
-        return view('admin.orders.index');
+        return view('admin.orders.index',$data);
     }
 
 }

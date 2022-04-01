@@ -2121,7 +2121,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response);
 
-        _this.$router.push("thankyou");
+        if (response.data.success) {
+          _this.$router.push("thankyou");
+        }
       });
     },
     onError: function onError(error) {
@@ -2466,6 +2468,20 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PaymentForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/PaymentForm.vue */ "./resources/js/components/PaymentForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -26630,7 +26646,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".cart-product[data-v-3dc58788] {\n  padding: 20px 0;\n}\n.quantity[data-v-3dc58788] {\n  font-size: 22px;\n}\n.quantity-changer[data-v-3dc58788] {\n  font-size: 20px;\n  margin: 0 10px;\n  cursor: pointer;\n}\n.disabled[data-v-3dc58788] {\n  color: gray;\n}\n.delete-product[data-v-3dc58788] {\n  cursor: pointer;\n  position: absolute;\n  right: 70px;\n  top: 8px;\n  font-size: 20px;\n}\n.delete-product[data-v-3dc58788]:hover {\n  color: red;\n}\n.info_and_payment_cards_box[data-v-3dc58788] {\n  width: 65%;\n}\n.img_container[data-v-3dc58788] {\n  display: flex;\n  justify-content: center;\n}\n.my_container[data-v-3dc58788] {\n  margin: 100px auto 40px auto;\n  width: 100%;\n}\n.img_box[data-v-3dc58788] {\n  margin: -50px 0 0 0;\n  height: 100px;\n  width: 100px;\n  border: solid whitesmoke 4px;\n  border-radius: 20px;\n  overflow: hidden;\n  background-color: white;\n  display: flex;\n}\n.img_box img[data-v-3dc58788] {\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.my_card[data-v-3dc58788] {\n  border-radius: 15px;\n}\n.my_card_wrapper[data-v-3dc58788] {\n  border: none;\n  border-radius: 15px;\n}\n.grey_card[data-v-3dc58788] {\n  width: 65%;\n  margin: auto;\n  background-color: #f5f3f1;\n  border-radius: 10px;\n}\n.banner_container[data-v-3dc58788] {\n  line-height: 150px;\n  height: 400px;\n  -o-object-position: center;\n     object-position: center;\n}\n.banner_container img[data-v-3dc58788] {\n  height: inherit;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.menu_info[data-v-3dc58788] {\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px 0;\n}\n*[class$=_style][data-v-3dc58788]:hover {\n  text-decoration: underline;\n  text-underline-offset: 17px;\n  text-decoration-thickness: 4px;\n  -webkit-text-decoration-color: #ffce08;\n          text-decoration-color: #ffce08;\n}\n.plate_wrapper[data-v-3dc58788] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.plate_wrapper .plate_image[data-v-3dc58788] {\n  width: 25%;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.order_card[data-v-3dc58788] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: -100px;\n  border-radius: 15px;\n  margin: 0 0 -50px 0;\n  width: 100%;\n}\n.order_card p[data-v-3dc58788] {\n  font-size: 13px;\n}\n@media screen and (max-width: 650px) {\n.order_card[data-v-3dc58788] {\n    margin: 50px auto;\n}\n}\n.underlay_container[data-v-3dc58788] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  margin-bottom: 1px;\n}\n.underlay_card[data-v-3dc58788] {\n  border-radius: 15px;\n  height: 190px;\n  margin-bottom: -50px;\n  background-color: rgba(247, 94, 40, 0.9);\n  color: white;\n}\n.underlay_card p[data-v-3dc58788] {\n  font-size: 13px;\n}\n.cards_wrapper[data-v-3dc58788] {\n  display: flex;\n  justify-content: space-between;\n  width: inherit;\n}\n@media screen and (max-width: 650px) {\n.cards_wrapper[data-v-3dc58788] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: inherit;\n}\n}\n.payment_btn[data-v-3dc58788] {\n  border-radius: 30px;\n  color: #8a8786;\n  background-color: #efedea;\n  width: 100%;\n}\n.payment_btn[data-v-3dc58788]:hover {\n  background-color: #ffce08;\n  color: white;\n}\n.left_menu_list_container[data-v-3dc58788] {\n  margin: 350px 40px 0 10px;\n}\n.plate_wrapper > li[data-v-3dc58788]:hover {\n  border-left: solid 3px gray;\n  cursor: pointer;\n}\n.button_container[data-v-3dc58788] {\n  display: inline-block;\n  background-color: #efedea;\n  padding: 3px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 30px;\n  width: 100%;\n  margin: 15px auto;\n}\n*[class$=_special_btn][data-v-3dc58788]:hover {\n  color: white;\n  background-color: #ffce08;\n}\n*[class$=_special_btn][data-v-3dc58788] {\n  border-radius: 30px;\n}\n*[class$=box_shadow][data-v-3dc58788] {\n  box-shadow: 0px -1px 15px -3px #000000;\n}\n@media screen and (max-width: 1230px) {\n*[class$=grey_card_text][data-v-3dc58788] {\n    justify-content: center !important;\n}\n}\n/* Uses Bootstrap stylesheets for styling, see linked CSS*/\nbody[data-v-3dc58788] {\n  background-color: #fff;\n  padding: 15px;\n}\n.toast[data-v-3dc58788] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n  z-index: 9999;\n}\n.bootstrap-basic[data-v-3dc58788] {\n  background: white;\n}\n\n/* Braintree Hosted Fields styling classes*/\n.braintree-hosted-fields-focused[data-v-3dc58788] {\n  color: #495057;\n  background-color: #fff;\n  border-color: #80bdff;\n  outline: 0;\n  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);\n}\n.braintree-hosted-fields-focused.is-invalid[data-v-3dc58788] {\n  border-color: #dc3545;\n  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);\n}", ""]);
+exports.push([module.i, ".cart-product[data-v-3dc58788] {\n  padding: 20px 0;\n}\n.quantity[data-v-3dc58788] {\n  font-size: 22px;\n}\n.quantity-changer[data-v-3dc58788] {\n  font-size: 20px;\n  margin: 0 10px;\n  cursor: pointer;\n}\n.disabled[data-v-3dc58788] {\n  color: gray;\n}\n.delete-product[data-v-3dc58788] {\n  cursor: pointer;\n  position: absolute;\n  right: 70px;\n  top: 8px;\n  font-size: 20px;\n}\n.delete-product[data-v-3dc58788]:hover {\n  color: red;\n}\n.info_and_payment_cards_box[data-v-3dc58788] {\n  width: 65%;\n}\n.img_container[data-v-3dc58788] {\n  display: flex;\n  justify-content: center;\n}\n.my_container[data-v-3dc58788] {\n  margin: 100px auto 40px auto;\n  width: 100%;\n}\n.img_box[data-v-3dc58788] {\n  margin: -50px 0 0 0;\n  height: 100px;\n  width: 100px;\n  border: solid whitesmoke 4px;\n  border-radius: 20px;\n  overflow: hidden;\n  background-color: white;\n  display: flex;\n}\n.img_box img[data-v-3dc58788] {\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.my_card[data-v-3dc58788] {\n  border-radius: 15px;\n}\n.my_card_wrapper[data-v-3dc58788] {\n  border: none;\n  border-radius: 15px;\n}\n.grey_card[data-v-3dc58788] {\n  width: 65%;\n  margin: auto;\n  background-color: #f5f3f1;\n  border-radius: 10px;\n}\n.banner_container[data-v-3dc58788] {\n  line-height: 150px;\n  height: 400px;\n  -o-object-position: center;\n     object-position: center;\n}\n.banner_container img[data-v-3dc58788] {\n  height: inherit;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.menu_info[data-v-3dc58788] {\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px 0;\n}\n*[class$=_style][data-v-3dc58788]:hover {\n  text-decoration: underline;\n  text-underline-offset: 17px;\n  text-decoration-thickness: 4px;\n  -webkit-text-decoration-color: #ffce08;\n          text-decoration-color: #ffce08;\n}\n.plate_wrapper[data-v-3dc58788] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.plate_wrapper .plate_image[data-v-3dc58788] {\n  width: 25%;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.order_card[data-v-3dc58788] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: -100px;\n  border-radius: 15px;\n  margin: 0 0 -50px 0;\n  width: 100%;\n}\n.order_card p[data-v-3dc58788] {\n  font-size: 13px;\n}\n@media screen and (max-width: 650px) {\n.order_card[data-v-3dc58788] {\n    margin: 50px auto;\n}\n}\n.underlay_container[data-v-3dc58788] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  margin-bottom: 1px;\n}\n.underlay_card[data-v-3dc58788] {\n  border-radius: 15px;\n  height: 190px;\n  margin-bottom: -50px;\n  background-color: rgba(247, 94, 40, 0.9);\n  color: white;\n}\n.underlay_card p[data-v-3dc58788] {\n  font-size: 13px;\n}\n.cards_wrapper[data-v-3dc58788] {\n  display: flex;\n  justify-content: space-between;\n  width: inherit;\n}\n@media screen and (max-width: 650px) {\n.cards_wrapper[data-v-3dc58788] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: inherit;\n}\n}\n.payment_btn[data-v-3dc58788] {\n  border-radius: 30px;\n  color: #8a8786;\n  background-color: #efedea;\n  width: 100%;\n}\n.payment_btn[data-v-3dc58788]:hover {\n  background-color: #ffce08;\n  color: white;\n}\n.left_menu_list_container[data-v-3dc58788] {\n  margin: 350px 40px 0 10px;\n}\n.plate_wrapper > li[data-v-3dc58788]:hover {\n  border-left: solid 3px gray;\n  cursor: pointer;\n}\n.button_container[data-v-3dc58788] {\n  display: inline-block;\n  background-color: #efedea;\n  padding: 3px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 30px;\n  width: 100%;\n  margin: 15px auto;\n}\n*[class$=_special_btn][data-v-3dc58788]:hover {\n  color: white;\n  background-color: #ffce08;\n}\n*[class$=_special_btn][data-v-3dc58788] {\n  border-radius: 30px;\n}\n*[class$=box_shadow][data-v-3dc58788] {\n  box-shadow: 0px -1px 15px -3px #000000;\n}\n@media screen and (max-width: 1230px) {\n*[class$=grey_card_text][data-v-3dc58788] {\n    justify-content: center !important;\n}\n}\n/* Uses Bootstrap stylesheets for styling, see linked CSS*/\nbody[data-v-3dc58788] {\n  background-color: #fff;\n  padding: 15px;\n}\n.toast[data-v-3dc58788] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n  z-index: 9999;\n}\n.bootstrap-basic[data-v-3dc58788] {\n  background: white;\n}\n\n/* Braintree Hosted Fields styling classes*/\n.braintree-hosted-fields-focused[data-v-3dc58788] {\n  color: #495057;\n  background-color: #fff;\n  border-color: #80bdff;\n  outline: 0;\n  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);\n}\n.braintree-hosted-fields-focused.is-invalid[data-v-3dc58788] {\n  border-color: #dc3545;\n  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);\n}\n.icon_container[data-v-3dc58788] {\n  width: 5%;\n}", ""]);
 
 // exports
 
@@ -28596,7 +28612,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     btnClass: {
       type: String,
-      default: "btn btn-default"
+      default: "btn btn-primary"
     },
     paypal: {
       type: Object,
@@ -29434,44 +29450,46 @@ var render = function () {
                     [_vm._v("Nome Cognome")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "mb-3 d-flex justify-content-center align-items-center",
-                    },
-                    [
-                      _c("i", { staticClass: "fa-solid fa-user" }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.userName,
-                            expression: "userName",
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "mb-3 col-sm-7 d-flex justify-content-center align-items-center",
+                      },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.userName,
+                              expression: "userName",
+                            },
+                          ],
+                          staticClass: "form-control ml-2",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Nome Cognome",
+                            "aria-label": "name",
+                            id: "name",
+                            name: "name",
                           },
-                        ],
-                        staticClass: "form-control ml-2",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Nome Cognome",
-                          "aria-label": "name",
-                          id: "name",
-                          name: "name",
-                        },
-                        domProps: { value: _vm.userName },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.userName = $event.target.value
+                          domProps: { value: _vm.userName },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.userName = $event.target.value
+                            },
                           },
-                        },
-                      }),
-                    ]
-                  ),
+                        }),
+                      ]
+                    ),
+                  ]),
                   _vm._v(" "),
                   _c(
                     "label",
@@ -29482,44 +29500,46 @@ var render = function () {
                     [_vm._v("Email")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "mb-3 d-flex justify-content-center align-items-center",
-                    },
-                    [
-                      _c("i", { staticClass: "fa-solid fa-envelope" }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.userEmail,
-                            expression: "userEmail",
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "mb-3 col-sm-7 d-flex justify-content-center align-items-center",
+                      },
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.userEmail,
+                              expression: "userEmail",
+                            },
+                          ],
+                          staticClass: "form-control ml-2",
+                          attrs: {
+                            type: "text",
+                            placeholder: "example@mail.com",
+                            "aria-label": "email",
+                            id: "email",
+                            name: "email",
                           },
-                        ],
-                        staticClass: "form-control ml-2",
-                        attrs: {
-                          type: "text",
-                          placeholder: "example@mail.com",
-                          "aria-label": "email",
-                          id: "email",
-                          name: "email",
-                        },
-                        domProps: { value: _vm.userEmail },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.userEmail = $event.target.value
+                          domProps: { value: _vm.userEmail },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.userEmail = $event.target.value
+                            },
                           },
-                        },
-                      }),
-                    ]
-                  ),
+                        }),
+                      ]
+                    ),
+                  ]),
                   _vm._v(" "),
                   _c(
                     "label",
@@ -29538,7 +29558,7 @@ var render = function () {
                           "col-sm-7 d-flex justify-content-center align-items-center",
                       },
                       [
-                        _c("i", { staticClass: "fa-solid fa-location-dot" }),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -29580,43 +29600,45 @@ var render = function () {
                     [_vm._v("Numero di telefono")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "mb-3 d-flex justify-content-center align-items-center",
-                    },
-                    [
-                      _c("i", { staticClass: "fa-solid fa-envelope" }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.userPhone,
-                            expression: "userPhone",
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "mb-3 col-sm-7 d-flex justify-content-center align-items-center",
+                      },
+                      [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.userPhone,
+                              expression: "userPhone",
+                            },
+                          ],
+                          staticClass: "form-control ml-2",
+                          attrs: {
+                            type: "text",
+                            "aria-label": "phone",
+                            id: "phone",
+                            name: "phone",
                           },
-                        ],
-                        staticClass: "form-control ml-2",
-                        attrs: {
-                          type: "text",
-                          "aria-label": "phone",
-                          id: "phone",
-                          name: "phone",
-                        },
-                        domProps: { value: _vm.userPhone },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.userPhone = $event.target.value
+                          domProps: { value: _vm.userPhone },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.userPhone = $event.target.value
+                            },
                           },
-                        },
-                      }),
-                    ]
-                  ),
+                        }),
+                      ]
+                    ),
+                  ]),
                 ]),
               ]),
             ]),
@@ -29661,12 +29683,12 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _vm._m(5),
             ]),
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(6),
       ]),
     ]),
   ])
@@ -29678,6 +29700,38 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "payment_title my-5" }, [
       _c("h1", [_vm._v("Controlla il tuo ordine da nome ristorante")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon_container" }, [
+      _c("i", { staticClass: "fa-solid fa-user" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon_container" }, [
+      _c("i", { staticClass: "fa-solid fa-envelope" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon_container" }, [
+      _c("i", { staticClass: "fa-solid fa-location-dot" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon_container" }, [
+      _c("i", { staticClass: "fa-solid fa-phone" }),
     ])
   },
   function () {
@@ -53653,7 +53707,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel-projects\deliveboo-team4\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
