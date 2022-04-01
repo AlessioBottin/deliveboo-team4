@@ -39,13 +39,11 @@ class OrderController extends Controller
     }
 
     public function show($id) {
-        $order = Order::find($id);
-
-    
-        $data = [
-            'order' => $order
-        ];
+        $orders = Order::find($id);
         
+        $data = [
+            'order' => $orders,
+        ];
 
         return view('admin.orders.show',$data);
     }
