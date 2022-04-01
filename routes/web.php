@@ -32,7 +32,7 @@ Route::middleware('auth')
 
     // Orders Routes
     Route::get('/orders', 'OrderController@index')->name('orders');
-
+    Route::get('/orders/{id}', 'OrderController@show')->name('order_info');
 });
 
 

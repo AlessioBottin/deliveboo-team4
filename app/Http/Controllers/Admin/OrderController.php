@@ -12,11 +12,11 @@ use App\Plate;
 class OrderController extends Controller
 {
     public function index() {
-        // poi lo modifico con gli ordini del ristorante corrente
-        $all_orders = Order::all();;
-
+        // Prendo tutti gli ordini
+        $all_orders = Order::all();
+        // Creo un array vuoto
         $orders = [];
-
+        // 
         foreach ($all_orders as $single_order) {
             $plates = $single_order->plates;
 
@@ -36,6 +36,18 @@ class OrderController extends Controller
         ];
 
         return view('admin.orders.index',$data);
+    }
+
+    public function show($id) {
+        $order = Order::find($id);
+
+    
+        $data = [
+            'order' => $order
+        ];
+        
+
+        return view('admin.orders.show',$data);
     }
 
 }
