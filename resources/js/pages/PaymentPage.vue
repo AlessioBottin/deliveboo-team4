@@ -176,20 +176,12 @@
                                 <h5>Carrello</h5>
                                 <div class="cart-product border-bottom">
 
-                                    <div class="d-flex justify-content-between ">
+                                    <div v-for="(product,index) in cart" :key="index" class="d-flex justify-content-between ">
                                         <p>
-                                            <strong>x1</strong>
-                                            prodotto 1
+                                            <strong>x{{product.quantity}}</strong>
+                                            {{product.name}}
                                         </p>
-                                        <p>10€</p>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between ">
-                                        <p>
-                                            <strong>x1</strong>
-                                            prodotto 1
-                                        </p>
-                                        <p>10€</p>
+                                        <p>{{(product.price * product.quantity).toFixed(2)}}€</p>
                                     </div>
                                    
                                 </div>
@@ -199,7 +191,7 @@
                             <div >
                                 <div class="d-flex justify-content-between">
                                     <h5>Subtotale</h5>
-                                    <h5>20€</h5>
+                                    <h5>{{totalPrice.toFixed(2)}}€</h5>
                                 </div>
                                 
                                 <div class="cart-product border-bottom d-flex justify-content-between"> 
@@ -210,7 +202,7 @@
 
                             <div class="d-flex justify-content-between ">
                                 <h4>Totale:</h4>
-                                <h4>10€</h4>
+                                <h4>{{(totalPrice + 2).toFixed(2)}}€</h4>
                             </div>
 
                         </div>
@@ -250,6 +242,7 @@ export default {
             userAddress: '',
             userEmail: '',
             userPhone: '',
+            totalPrice: 0,
             // form: {
             //     userName: this.userName,
             //     userAddress: this.userAddress,
@@ -265,10 +258,16 @@ export default {
                 this.token = response.data.token;
                 this.paymentIsReady = true;
             })
-        }      
+        } ,
+        getTotalPrice: function(){
+            this.cart.forEach(element => {
+                this.totalPrice += element.price * element.quantity;
+            });
+        }     
     },
     created: function() {
         this.getToken();
+        this.getTotalPrice();
     }
 };
 </script>

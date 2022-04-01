@@ -45,7 +45,8 @@ export default {
                 console.log(response);
                 if (response.data.success) {
                     this.$router.push("thankyou");
-                }
+                };
+                localStorage.removeItem('cart');
             })
         },
         onError (error) {
