@@ -33,6 +33,7 @@ Route::middleware('auth')
     // Orders Routes
     Route::get('/orders', 'OrderController@index')->name('orders');
     Route::get('/orders/{id}', 'OrderController@show')->name('order-info');
+    Route::get('/order/statistics', 'OrderController@statistics')->name('orders-statistics');
 });
 
 

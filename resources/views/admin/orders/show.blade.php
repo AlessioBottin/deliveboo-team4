@@ -22,7 +22,7 @@
                     <td><div class="show-orders-image"> <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}"> </div></td>
                     <td>{{ $plate->name }}</td>
                     <td>{{ ($plate->pivot->quantity) }}</td>
-                    <td>{{ $plate->price }}€</td>                    
+                    <td>{{ $plate->price }}€</td>                   
                 </tr>
                 @endforeach
 

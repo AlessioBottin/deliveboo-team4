@@ -198,7 +198,6 @@ section {
                     }
                 }
 
-                
                 .responsive-container {
                     width: 75%;
 
