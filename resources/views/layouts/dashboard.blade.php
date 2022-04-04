@@ -41,28 +41,44 @@
             <nav class="col-md-2 d-none d-md-block bg-light sidebar py-4" style="background-color: #ffce08;">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
+
+                        {{-- Dashboard  --}}
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.home') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 Dashboard
                             </a>
                         </li>
+
+                        {{-- All Plates  --}}
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.plates.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 Tutti i Piatti
                             </a>
                         </li>
+
+                        {{-- Create Plate  --}}
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.plates.create') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 Crea Piatto
                             </a>
                         </li>
+
+                        {{-- Order List  --}}
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('admin.orders') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 Lista Ordini
+                            </a>
+                        </li>
+
+                        {{-- Order Statistics  --}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('admin.orders-statistics') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                Statistiche degli Ordini
                             </a>
                         </li>
                     </ul>
@@ -71,7 +87,11 @@
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
-                @yield('content')
+                <div id="app">
+                    @yield('content')
+                </div>
+
+                <script src="{{asset('js/back.js')}}"></script>
             </main>
         </div>
     </div>

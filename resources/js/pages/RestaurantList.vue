@@ -23,7 +23,7 @@
                     <div class="responsive-container">
                         <div class="research-input position-relative">
                             <i class="fas fa-search"></i>
-                            <input type="text" v-model="researchInput" placeholder="Cerca per cucina o ristorante">
+                            <input type="text" @keyup="filterRestaurants()" v-model="researchInput" placeholder="Cerca per cucina o ristorante">
                         </div>          
                     </div>
                    
@@ -39,7 +39,16 @@
                         <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
                         fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
                         <ul class="categories-aside">
+<<<<<<< HEAD
                             <li v-for="(category,n) in categories" :key="n" @click="test(category)" class="category mb-4 shadow_box d-flex justify-content-between">
+=======
+                            <li 
+                                v-for="(category,n) in categories" :key="n" 
+                                @click="clickCategoryFilters(category)" 
+                                class="category mb-4 d-flex justify-content-between"
+                                :class="{isCategoryActive: category.isCategoryActive}"
+                            >
+>>>>>>> e06134d3fa71ce23fb8b88f46768012b7dc77411
                                 <!-- Al click sulla categoria deve essere settato il filtro  -->
                                 <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
                                 
@@ -66,7 +75,7 @@
 
                         <!-- list  -->
                         <ul class="list">
-                            <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurantsList" :key="index">
+                            <li class="restaurant-card container-fluid" v-for="(restaurant, index) in filteredArray" :key="index" v-if="restaurant.visibility === true">
                                 <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.slug } }">
                                     <div class="row  d-flex">
 
@@ -86,7 +95,7 @@
                                         
                                         <!-- Delivery Info  -->
                                         <div class="col-sm-12 col-md-4 delivery-info">
-                                            <p>Consegna: <span class="delivery">GRATIS</span></p>
+                                            <p>Consegna: <span class="delivery">2€</span></p>
                                         </div>
                                     </div>
                                 </router-link>
@@ -114,25 +123,77 @@ export default {
             ratingForTesting: 4,
             researchInput: '',
             restaurantsList: [],
-            categories: []
+            filteredArray: [],
+            categories: [],
+            clickedCategories: []
         }
     },
     methods:{
+        // Get restaurants based on the slug in the route
         getRestaurantsList: function(){
             axios.get('http://127.0.0.1:8000/api/restaurants/' + this.$route.params.slug)
             .then((response)=>{
                 this.restaurantsList = response.data;
+                this.restaurantsList.forEach(element => {
+                    element['visibility'] = true;
+                });
+                this.filteredArray = this.restaurantsList;
             })
         },
-        test: function(category){
-            this.$router.push({name:'restaurant-list', params: {slug: category.slug}}); 
-            this.getRestaurantsList();
+        // Change which restaurants to show at categories click
+        clickCategoryFilters: function(category){
+            // Update clicked and active categories
+            category.isCategoryActive = !category.isCategoryActive;
+            this.clickedCategories = [];
+            // IF the clicked category is active, add it to the clickedCategories array
+            this.categories.forEach(cat => {
+                if(cat.isCategoryActive){
+                    this.clickedCategories.push(cat)
+                }
+            });
+
+            // Foreach restaurant
+            this.restaurantsList.forEach(element => {
+                // Save its categories into an array
+                let categoriesPerRestaurant = element.categories
+                // If there are some clicked categories check that at least one of them is in the "categoriesPerRestaurant" array
+                if(this.clickedCategories.length > 0){
+                    this.clickedCategories.forEach(e => {
+                        let isInArray = categoriesPerRestaurant.some(function(singleCategory){
+                            return singleCategory.slug == e.slug
+                        })
+                        // If the restaurant hasn't at least one category in the "clickedCategories" array and its visibility is true
+                        // Change its visibility into false
+                        // Otherwise (there is a correspondence in the "clickedCategories" array) change it into true
+                        if(!isInArray && element.visibility){
+                            element.visibility = false;
+                        }else{
+                            element.visibility = true;
+                        }
+                    });
+                // If no filters are applied, all the restaurants are visible
+                }else{
+                    element.visibility = true
+                }
+            });
         },
+        // Get all the categories for the filter
         getCategoriesForSlider: function(){
             axios.get('http://127.0.0.1:8000/api/categories')
             .then((response)=>{
                 this.categories = response.data;
             })
+        },
+        // Filter restaurants by search input
+        filterRestaurants: function(){ 
+            this.restaurantsList.forEach(element => {
+                if(!element.name.toLowerCase().includes(this.researchInput.toLowerCase())){
+                    element.visibility = false;
+                }else{
+                    element.visibility = true;
+                }
+            });
+            this.filteredArray = this.restaurantsList.filter((element) => element.visibility === true)
         }
     },
     created: function(){
@@ -153,10 +214,22 @@ export default {
 }
 section {
     margin-top: 98px;
+<<<<<<< HEAD
+=======
+    .isCategoryActive{
+        background-color: $main_color;
+        color: white;
+    }
+
+>>>>>>> e06134d3fa71ce23fb8b88f46768012b7dc77411
     @media screen and (max-width: 768px) {
         margin-top: 125px;
     }
     .container {
+
+        .d_none{
+            display: none;
+        }
 
         // Cateogries Slider
         .categories {
@@ -187,7 +260,6 @@ section {
                     }
                 }
 
-                
                 .responsive-container {
                     width: 75%;
 
@@ -253,9 +325,13 @@ section {
                             border-radius: 15px;
                             border: 1px solid $main_color; 
                             display: inline-block;
+<<<<<<< HEAD
                             background-color: $main_color;
                             font-weight: 700;
                             text-transform: capitalize;
+=======
+                            cursor: pointer;
+>>>>>>> e06134d3fa71ce23fb8b88f46768012b7dc77411
 
                             &:hover {
                                 background-color: white;

@@ -6,25 +6,57 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Order;
+use App\Plate;
+
 
 class OrderController extends Controller
-{
+{   
     public function index() {
+
+        // ! versione piu' lenta 
         // poi lo modifico con gli ordini del ristorante corrente
-        $orders = Order::all();
+        // $all_orders = Order::all();
 
-        // $user_id = Auth::user()->id;
-   
-        // $orders = Order::all()->where('user_id', '=', $user_id);
+        // $orders = [];
+        // // 
+        // foreach ($all_orders as $single_order) {
+        //     $plates = $single_order->plates;
 
-        // dd($user_id);
-        // dd($orders);
+        //     foreach ($plates as $plate) {
+        //         $id = $plate->user_id;
+
+        //         if($id == Auth::id()){
+        //             if(!in_array($single_order, $orders)){
+        //                 $orders[] = $single_order;
+        //             }
+        //         }
+        //     }
+        // };
+        
+
+        $orders = Order::getAllMyOrders();
 
         $data = [
             'orders' => $orders
         ];
 
-        return view('admin.orders.index', $data);
+        return view('admin.orders.index',$data);
     }
 
+    public function show($id) {
+        $orders = Order::find($id);
+        
+        $data = [
+            'order' => $orders,
+        ];
+
+        return view('admin.orders.show',$data);
+    }
+
+    public function statistics() {
+        $php_orders = Order::getAllMyOrders();
+        $orders = json_encode($php_orders);
+
+        return view('admin.orders.statistics', compact('orders'));
+    }
 }

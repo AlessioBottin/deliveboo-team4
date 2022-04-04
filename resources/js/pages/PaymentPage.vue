@@ -33,52 +33,72 @@
                                 </h4>
 
                                 <!-- form -->
-                                <form >
-                                    
+                                <form class="was-validated">
                                     <!-- Name  -->
                                     <label for="name" class="col-form-label-sm">Nome Cognome</label>
-                                    <div class="row">
-                                        <div class="mb-3 col-sm-7 d-flex justify-content-center align-items-center">
-                                            <div class="icon_container">
+                                        <div class="mb-3 d-flex">
+                                            <div class="icon_container d-flex justify-content-start align-items-start mt-2 mr-1">
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
-                                            <input type="text" class="form-control ml-2" placeholder="Nome Cognome" aria-label="name" id="name" name="name" v-model="userName">
-                                        </div>
-                                    </div>
+                                            <div class="d-flex flex-column w-100">
+                                                <input type="text" class="form-control" placeholder="Nome Cognome" aria-label="name" id="name" name="name" v-model="userName" required>
+                                                <div class="valid-feedback">Compilato correttamente!</div>
+                                                <div class="invalid-feedback">Per favore compila questo campo.</div>
+                                            </div>                                       
+                                        </div>                                      
+                                    
 
                                     <!-- Email  -->
                                     <label for="email" class="col-form-label-sm">Email</label>
-                                    <div class="row">
-                                        <div class="mb-3 col-sm-7 d-flex justify-content-center align-items-center">
-                                            <div class="icon_container">
+                                        <div class="mb-3 d-flex">
+                                            <div class="icon_container d-flex justify-content-start align-items-start mt-2 mr-1">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </div>
-                                            <input type="text" class="form-control ml-2" placeholder="example@mail.com" aria-label="email" id="email" name="email" v-model="userEmail">
-                                        </div>
-                                    </div>
+                                            <div class="d-flex flex-column w-100">
+                                                <input type="text" class="form-control" placeholder="example@mail.com" aria-label="email" id="email" name="email" v-model="userEmail" required>
+                                                <div class="valid-feedback">Compilato correttamente!</div>
+                                                <div class="invalid-feedback">Per favore compila questo campo.</div>
+                                            </div>                                       
+                                        </div>  
+                                    
 
                                     <!-- Address  -->
                                     <label for="address" class="col-form-label-sm">Indirizzo di consegna</label>
-                                    <div class="row g-3">
-                                        <div class="col-sm-7 d-flex justify-content-center align-items-center">
-                                            <div class="icon_container">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                            </div>
-                                            <input type="text" class="form-control ml-2" placeholder="Indirizzo" aria-label="Indirizzo" id="address" name="address" v-model="userAddress">
-                                        </div>                                        
+                                    
+                                    <div class="mb-3 d-flex">
+                                        <div class="icon_container d-flex justify-content-start align-items-start mt-2 mr-1">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <div class="d-flex flex-column w-100">
+                                            <input type="text" class="form-control" placeholder="Indirizzo di consegna" aria-label="Indirizzo" id="address" name="address" v-model="userAddress" required>
+                                            <div class="valid-feedback">Compilato correttamente!</div>
+                                            <div class="invalid-feedback">Per favore compila questo campo.</div>
+                                        </div>                                                                        
                                     </div>
+
 
                                     <!-- Phone number -->
                                     <label for="phone" class="col-form-label-sm">Numero di telefono</label>
-                                    <div class="row">
-                                        <div class="mb-3 col-sm-7 d-flex justify-content-center align-items-center">
-                                            <div class="icon_container">
-                                                <i class="fa-solid fa-phone"></i>
-                                            </div>
-                                            <input type="text" class="form-control ml-2" aria-label="phone" id="phone" name="phone" v-model="userPhone">
+                                    <div class="mb-3 d-flex">
+                                        <div class="icon_container d-flex justify-content-start align-items-start mt-2 mr-1">
+                                            <i class="fa-solid fa-phone"></i>
                                         </div>
+                                        <div class="d-flex flex-column w-100">
+                                            <input type="text" class="form-control" aria-label="phone" id="phone" name="phone" v-model="userPhone" placeholder="Numero di telefono" required>
+                                            <div class="valid-feedback">Compilato correttamente!</div>
+                                            <div class="invalid-feedback">Per favore compila questo campo.</div>
+                                        </div>                                                                        
+                                    </div>  
+
+                                    <div class="form-group form-check mt-5 ml-3">
+                                    <label class="form-check-label mr-3">
+                                        <input class="form-check-input" type="checkbox" name="checkbox" required> Accetto Termini e Condizioni.
+                                        <div class="valid-feedback">Selezionato.</div>
+                                        <div class="invalid-feedback">Seleziona per proseguire.</div>
+                                    </label>
                                     </div>
-                                    
+
+
                                 </form>
                             
                             </div>
@@ -104,7 +124,7 @@
                                 <!-- start form -->
                                 <form class="needs-validation" novalidate="">
 
-                                    <div class="text-center">
+                                    <div class="">
                                         <PaymentForm 
                                         :authToken='token' 
                                         :userCart="cart" 
@@ -124,29 +144,7 @@
                             </div>
                             <!-- end Bootstrap inspired Braintree Hosted Fields part 1 -->
 
-                            <!-- start Bootstrap inspired Braintree Hosted Fields part 2 -->
-                            <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-
-                                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
-
-                                    <div class="toast-header">
-
-                                        <strong class="mr-auto">Success!</strong>
-                                        <small>Just now</small>
-                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-
-                                    </div>
-
-                                    <div class="toast-body">
-                                        Next, submit the payment method nonce to your server.
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!-- end Bootstrap inspired Braintree Hosted Fields part 2 -->
+                           
 
                         </div>
                         <!-- end card body -->
@@ -176,20 +174,12 @@
                                 <h5>Carrello</h5>
                                 <div class="cart-product border-bottom">
 
-                                    <div class="d-flex justify-content-between ">
+                                    <div v-for="(product,index) in cart" :key="index" class="d-flex justify-content-between ">
                                         <p>
-                                            <strong>x1</strong>
-                                            prodotto 1
+                                            <strong>x{{product.quantity}}</strong>
+                                            {{product.name}}
                                         </p>
-                                        <p>10€</p>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between ">
-                                        <p>
-                                            <strong>x1</strong>
-                                            prodotto 1
-                                        </p>
-                                        <p>10€</p>
+                                        <p>{{(product.price * product.quantity).toFixed(2)}}€</p>
                                     </div>
                                    
                                 </div>
@@ -199,7 +189,7 @@
                             <div >
                                 <div class="d-flex justify-content-between">
                                     <h5>Subtotale</h5>
-                                    <h5>20€</h5>
+                                    <h5>{{totalPrice.toFixed(2)}}€</h5>
                                 </div>
                                 
                                 <div class="cart-product border-bottom d-flex justify-content-between"> 
@@ -210,7 +200,7 @@
 
                             <div class="d-flex justify-content-between ">
                                 <h4>Totale:</h4>
-                                <h4>10€</h4>
+                                <h4>{{(totalPrice + 2).toFixed(2)}}€</h4>
                             </div>
 
                         </div>
@@ -250,12 +240,7 @@ export default {
             userAddress: '',
             userEmail: '',
             userPhone: '',
-            // form: {
-            //     userName: this.userName,
-            //     userAddress: this.userAddress,
-            //     userEmail: this.userEmail,
-            //     userPhone: this.userPhone
-            // }
+            totalPrice: 0,
         };
     },
     methods: {
@@ -265,10 +250,16 @@ export default {
                 this.token = response.data.token;
                 this.paymentIsReady = true;
             })
-        }      
+        } ,
+        getTotalPrice: function(){
+            this.cart.forEach(element => {
+                this.totalPrice += element.price * element.quantity;
+            });
+        }     
     },
     created: function() {
         this.getToken();
+        this.getTotalPrice();
     }
 };
 </script>
@@ -303,6 +294,7 @@ export default {
     .info_and_payment_cards_box{
         width: 65%;
     }
+
 
     .img_container {
         display: flex;
@@ -402,6 +394,12 @@ export default {
         .order_card{
             margin: 50px auto;
         }
+        .info_and_payment_cards_box{
+            width: 95%;
+        }
+        h1 {
+            font-size: 24px;
+        }
     }
     
 
@@ -423,7 +421,6 @@ export default {
         }
     }
 
-
     .cards_wrapper {
         display: flex;
         justify-content: space-between;
@@ -439,18 +436,6 @@ export default {
         }
     }
 
-
-    .payment_btn {
-        border-radius: 30px;
-        color: #8a8786;
-        background-color: #efedea;
-        width: 100%;
-    }
-
-    .payment_btn:hover {
-        background-color: #ffce08;
-        color: white;
-    }
 
     .left_menu_list_container {
         margin: 350px 40px 0 10px;

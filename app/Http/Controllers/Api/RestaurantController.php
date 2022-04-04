@@ -21,6 +21,10 @@ class RestaurantController extends Controller
     public function loadCategories(){
         $categories = Category::all()->take(10);
 
+        foreach ($categories as $category) {
+            $category['isCategoryActive'] = false;
+        }
+
         return response()->json($categories);
     }
 
@@ -43,7 +47,7 @@ class RestaurantController extends Controller
                 }
             }
         }
-        
+
         return response()->json($correct_users);
     }
 

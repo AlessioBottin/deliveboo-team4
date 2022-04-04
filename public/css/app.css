@@ -10085,3 +10085,16 @@ a:hover {
 .edit .show-image img {
   max-width: 250px;
 }
+
+.statistics-page .chart {
+  width: 500px;
+}
+
+.show img {
+  max-width: 100%;
+}
+.show .show-orders-image {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 50px;
+}

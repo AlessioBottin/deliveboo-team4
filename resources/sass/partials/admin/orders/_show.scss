@@ -1,0 +1,15 @@
+.show {
+	img {
+		max-width: 100%;
+	}
+	
+	// .show-orders-image img {
+	// 	width: 50px;
+	// }
+
+    .show-orders-image {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 50px;
+    }
+}

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+
 class Plate extends Model
 {
     public function user(){
@@ -12,7 +13,7 @@ class Plate extends Model
     }
 
     public function orders(){
-        return $this->belongsToMany('App\Order');
+        return $this->belongsToMany('App\Order')->withPivot('quantity');
     }
 
     protected $fillable = [
