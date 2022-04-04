@@ -61,7 +61,7 @@
                         <!-- Results Info  -->
                         <div class="results-info d-flex justify-content-between">
                             <!-- <span class="n-results">{{restaurantsList.length}} ristoranti aperti</span> -->
-                            <div class="order">
+                            <div class="order mb-3">
                                 <span class="order-by">Ordina per: Rating</span>
                                 <span class="order-by-icon"><i class="fas fa-sort-amount-down"></i></span>
                             </div>
@@ -318,15 +318,14 @@ section {
                             border-radius: 15px;
                             border: 1px solid $main_color; 
                             display: inline-block;
-                            background-color: $main_color;
+                            background-color: white;
                             font-weight: 700;
                             text-transform: capitalize;
                             cursor: pointer;
 
                             &:hover {
-                                background-color: white;
+                                background-color: $main_color;
                                 color: black;
-                    
                             }
 
                             .check {
