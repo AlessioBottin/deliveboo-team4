@@ -39,16 +39,12 @@
                         <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
                         fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
                         <ul class="categories-aside">
-<<<<<<< HEAD
-                            <li v-for="(category,n) in categories" :key="n" @click="test(category)" class="category mb-4 shadow_box d-flex justify-content-between">
-=======
                             <li 
                                 v-for="(category,n) in categories" :key="n" 
                                 @click="clickCategoryFilters(category)" 
                                 class="category mb-4 d-flex justify-content-between"
                                 :class="{isCategoryActive: category.isCategoryActive}"
                             >
->>>>>>> e06134d3fa71ce23fb8b88f46768012b7dc77411
                                 <!-- Al click sulla categoria deve essere settato il filtro  -->
                                 <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
                                 
@@ -214,14 +210,11 @@ export default {
 }
 section {
     margin-top: 98px;
-<<<<<<< HEAD
-=======
     .isCategoryActive{
         background-color: $main_color;
         color: white;
     }
 
->>>>>>> e06134d3fa71ce23fb8b88f46768012b7dc77411
     @media screen and (max-width: 768px) {
         margin-top: 125px;
     }
@@ -325,13 +318,10 @@ section {
                             border-radius: 15px;
                             border: 1px solid $main_color; 
                             display: inline-block;
-<<<<<<< HEAD
                             background-color: $main_color;
                             font-weight: 700;
                             text-transform: capitalize;
-=======
                             cursor: pointer;
->>>>>>> e06134d3fa71ce23fb8b88f46768012b7dc77411
 
                             &:hover {
                                 background-color: white;
