@@ -44,19 +44,18 @@ class OrderController extends Controller
     }
 
     public function show($id) {
-        $order = Order::find($id);
-        dd($id);
-    
-        $data = [
-            'order' => $order
-        ];
+        $orders = Order::find($id);
         
+        $data = [
+            'order' => $orders,
+        ];
 
         return view('admin.orders.show',$data);
     }
 
     public function statistics() {
-        $orders = Order::getAllMyOrders();
+        $php_orders = Order::getAllMyOrders();
+        $orders = json_encode($php_orders);
 
         return view('admin.orders.statistics', compact('orders'));
     }

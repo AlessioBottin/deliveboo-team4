@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
-import Chart from './components/Chart.vue';
-Vue.component('Chart', Chart);
+import BarChart from './components/BarChart.vue';
+Vue.component('barchart', BarChart);
 
 var app = new Vue({
    el: '#app',

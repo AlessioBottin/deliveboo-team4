@@ -60,9 +60,19 @@ export default {
 
 
 <style lang="scss" >
+@import '../../sass/app';
 // test
 .btn-primary {
-    background-color: red;
-    border: 1px solid red;
+    background-color: $main_color;
+    border: 1px solid $main_color;
+    color: black;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: $main_color;
+    border: 1px solid $main_color;
+    color: white;
+    width: 100%;
 }
 </style>

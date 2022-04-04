@@ -194,7 +194,7 @@ class PlatesController extends Controller
     // Validation Rules 
     public function getValidationRules($_isImgRequired) {
 
-        $_isImgRequired ? $imageRules = 'required|image|max:512' : $imageRules = 'image|max:512';
+        $_isImgRequired ? $imageRules = 'required|image|max:5120' : $imageRules = 'image|max:512';
 
         return [
             'name' => 'required|max:70',
