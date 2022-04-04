@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1>HomePage con categorie inserite</h1>
+    <h1 class="text-center">Benvenuto nella tua dashboard personale</h1>
 @endsection
 

@@ -26524,7 +26524,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })
