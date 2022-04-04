@@ -81,7 +81,7 @@
                                         <!-- Restaurant Info  -->
                                         <div class="col-sm-12 col-md-6 restaurant-info">
                                             <h4 class="mb-0">{{restaurant.name}}</h4>
-                                            <span class="restaurant-categories">Categorie: Dolci, Gelato</span>
+                                            <span class="restaurant-categories">Categorie: <span v-for="(category,index) in restaurant.categories" :key="index">{{category.name + ' - '}}</span></span>
                                             <div class="rating d-flex">
                                                 <span class="stars d-inline-block" v-for="star in ratingForTesting" :key="star"><i class="fa-solid fa-star"></i></span>
                                                 <span class="gray-stars d-inline-block" v-for="star in (5 - ratingForTesting)" :key="star+restaurant.name"><i class="fa-solid fa-star"></i></span>
@@ -374,8 +374,11 @@ section {
                             
                             
                             // Image 
-                            .restaurant-img {        
+                            .restaurant-img {     
+                                max-height: 100px;
+                                overflow: hidden;
                                 img {
+                                    max-height: 100px;
                                     width: 100%;
                                     display: inline-block;
                                     border-radius: 10px;                            
