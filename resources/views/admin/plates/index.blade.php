@@ -11,7 +11,7 @@
                         <div class="card mt-4">
                             
                             <div>
-                                <img src="{{ asset('storage/' . $plate->image)}}" alt="{{ $plate->name}}" class="card-img-top">
+                                <img src="{{ $plate->image}}" alt="{{ $plate->name}}" class="card-img-top">
                             </div>
                              
                             <div class="card-body">

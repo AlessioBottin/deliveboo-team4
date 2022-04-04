@@ -17,7 +17,7 @@
       <div class="mb-3"><strong>Visibility:</strong> {{ $plate->visibility ? 'visibile' : 'non visibile' }}</div>
 
       <div class="show-image">
-         <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}" class="current-image">
+         <img src="{{ $plate->image}}" alt="{{ $plate->name}}" class="current-image">
       </div>
 
       <p>{{ $plate->description }}</p>
