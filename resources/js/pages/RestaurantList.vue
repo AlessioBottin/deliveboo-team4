@@ -14,7 +14,7 @@
                 <div class="advanced-research d-md-flex justify-content-md-between">
 
                     <!-- User Location  -->
-                    <div class="user-location d-sm-flex d-md-block justify-content-sm-between">
+                    <div class="user-location shadow_box d-sm-flex d-md-block justify-content-sm-between">
                         <i class="fas fa-map-marker-alt"></i> <span>Via Corso, Roma 00187</span>
                         <router-link class="change-zone" :to="{ name: 'home' }">Aree Coperte</router-link>
                     </div>
@@ -61,7 +61,7 @@
                         <!-- Results Info  -->
                         <div class="results-info d-flex justify-content-between">
                             <!-- <span class="n-results">{{restaurantsList.length}} ristoranti aperti</span> -->
-                            <div class="order">
+                            <div class="order mb-3">
                                 <span class="order-by">Ordina per: Rating</span>
                                 <span class="order-by-icon"><i class="fas fa-sort-amount-down"></i></span>
                             </div>
@@ -73,7 +73,7 @@
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in filteredArray" :key="index" v-if="restaurant.visibility === true">
                                 <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.slug } }">
-                                    <div class="row">
+                                    <div class="row  d-flex">
 
                                         <!-- Img  -->
                                         <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img :src="restaurant.image" :alt="restaurant.name"></div>
@@ -202,11 +202,17 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/app';
 
+.shadow_box {
+    -webkit-box-shadow: 0px -1px 15px -5px #000000;
+    -moz-box-shadow: 0px -1px 15px -5px #000000;
+    -o-box-shadow: 0px -1px 15px -5px #000000;
+    box-shadow: 0px -1px 15px -5px #000000;
+}
 section {
     margin-top: 98px;
     .isCategoryActive{
-        background-color: $main_color;
-        color: white;
+        background-color: green !important;
+        color: white !important;
     }
 
     @media screen and (max-width: 768px) {
@@ -312,12 +318,14 @@ section {
                             border-radius: 15px;
                             border: 1px solid $main_color; 
                             display: inline-block;
+                            background-color: white;
+                            font-weight: 700;
+                            text-transform: capitalize;
                             cursor: pointer;
 
                             &:hover {
                                 background-color: $main_color;
-                                color: white;
-                    
+                                color: black;
                             }
 
                             .check {
@@ -361,6 +369,9 @@ section {
                             -o-box-shadow: 0px -1px 15px -5px #000000;
                             box-shadow: 0px -1px 15px -5px #000000;
                             margin-bottom: 20px;
+                            background-color: white;
+                            overflow: hidden;
+                            
                             
                             // Image 
                             .restaurant-img {        
