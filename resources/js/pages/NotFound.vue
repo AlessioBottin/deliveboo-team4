@@ -2,12 +2,15 @@
     <section class="not_found_page">
         <div class="container">
             <div class="not_found_message_container">
-                <h1>OOPS! Pagina non trovata!</h1>
-                <button class="btn btn-outline-warning">return-test</button>
-            </div>
-            
-            <!-- <router-link class="nav-link" :to="{ name: 'blog' }">Torna al blog per leggere contenuti interessanti</router-link> -->
-            
+                <h1>
+                    <i class="fa-solid fa-cog fa-spin" style="--fa-animation-duration: 15s;"></i>
+                    OOPS! Pagina non trovata!
+                </h1>
+                <router-link class="change-zone" :to="{ name: 'home' }">
+                    <button class="btn btn-warning">Ritorna alla Home</button>
+                </router-link>
+                
+            </div>  
         </div>
     </section>
 </template>
@@ -35,6 +38,15 @@ export default {
     bottom: 0;
     left: 50%;
     text-align: center;
+}
+
+h1 {
+    display: inline-block;
+}
+
+.btn-warning:hover {
+    background-color: white;
+   
 }
 
 </style>

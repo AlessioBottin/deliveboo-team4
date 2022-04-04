@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Api\Orders;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
-use App\Plate;
 use App\Http\Requests\Orders\OrderRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewOrderRestaurantNotification;
+use App\Mail\NewOrderClientNotification;
 use App\Order;
+use App\Plate;
+use App\User;
+
 
 class OrderController extends Controller
 {
@@ -63,8 +68,18 @@ class OrderController extends Controller
 
             // ! SAVING DATA IN ORDER_PLATE TABLE
             $new_array = [];
-            
+            $owner_email = "";
             foreach ($plates_array as $new_plate) {
+                // $new_plate->user_id
+                // dd($new_plate);
+
+                $plate = Plate::findOrfail($new_plate['id']);
+
+                // dd($plate->user_id);
+
+                $user = User:: findOrfail($plate->user_id);
+                // dd($user->email);
+
                 $new_row = [
                     'order_id' => $new_order->id,
                     'plate_id' => $new_plate['id'],
@@ -72,9 +87,17 @@ class OrderController extends Controller
                 ];
                 $new_array[] = $new_row;
             };
-
+            
             $new_order->plates()->sync($new_array);
             // ! END SAVING DATA IN ORDER_PLATE TABLE
+            // dd($new_order);
+
+            // Email to restaurant
+            Mail::to($user->email)->send(new NewOrderRestaurantNotification($new_order));
+            
+            // Email to client
+            // dd($userForm['customer_email']);
+            Mail::to($userForm['customer_email'])->send(new NewOrderClientNotification());
 
             return response()->json($data,200);
 

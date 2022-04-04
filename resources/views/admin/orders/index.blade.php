@@ -24,7 +24,7 @@
                 @foreach ($orders as $order)
                 <tr>
                     <th scope="row">{{ $order->id }}</th>
-                    <td>{{ $order->total_price }}</td>
+                    <td>{{ $order->total_price }}€</td>
                     <td>{{ $order->customer_name }}</td>
                     <td>{{ $order->customer_address }}</td>
                     <td>{{ $order->customer_email }}</td>

@@ -6,16 +6,20 @@ img {
 // Ul reset 
 ul {
     list-style-type: none;
+    li {
+        cursor: pointer;
+    }
 }
 
 // A reset 
 a {
     color: inherit;
     text-decoration: none;
-
+    cursor: pointer;
     &:hover {
         color: inherit;
         text-decoration: none;
+        cursor: pointer;
     }
 }
 
