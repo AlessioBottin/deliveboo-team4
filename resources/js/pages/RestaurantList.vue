@@ -211,8 +211,8 @@ export default {
 section {
     margin-top: 98px;
     .isCategoryActive{
-        background-color: $main_color;
-        color: white;
+        background-color: green !important;
+        color: white !important;
     }
 
     @media screen and (max-width: 768px) {
