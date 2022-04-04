@@ -17,6 +17,16 @@
         @error('name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        {{-- Plate Image  --}}
+        <div class="mb-3">
+            <label for="image" class="form-label">Immagine</label>
+            <input type="text" class="form-control" id="image" name="image">
+        </div>
+
+        @error('image')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         
         {{-- Plate Desc  --}}
         <div class="mb-3">
@@ -69,17 +79,9 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        {{-- Plate Image  --}}
-        <div class="mb-3">
-            <label for="image" class="form-label">Immagine</label>
-            <input type="file" id="image" name="image">
+        <div>
+            <button type="submit" class="btn btn-primary">Crea</button>
         </div>
-
-        @error('image')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        <button type="submit" class="btn btn-primary">Crea</button>
     </form>
 </section>
 @endsection

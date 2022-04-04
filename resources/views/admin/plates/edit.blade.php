@@ -21,6 +21,16 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
+                {{-- Plate Image --}}
+                <div class="mb-3">
+                    <label for="image" class="form-label">Immagine</label>
+                    <input type="text" class="form-control" id="image" name="image" value="{{ old('name', $plate->image) }}">
+                </div>
+
+                @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
                 {{-- Plate Desc  --}}
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrizione</label>
@@ -71,23 +81,6 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
-
-                <div class="mb-3">
-                    <label for="image" class="form-label">Immagine</label>
-                    <input type="file" id="image" name="image">
-                </div>
-                
-                @if ($plate->image)
-                    <div class="show-image">
-                        Immagine attuale: 
-                        <img src="{{ asset('storage/' .  $plate->image)}}" alt="{{ $plate->name}}">
-                    </div>
-                @endif
-
-                @error('image')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
             
                 <button type="submit" class="btn btn-primary">Modifica</button>
             </form>

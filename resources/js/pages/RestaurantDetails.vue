@@ -70,7 +70,7 @@
                                 <div
                                 v-for="(plate, index) in restaurantMenu"
                                 :key="index"
-                                class="card my_card my-3 p-1"
+                                class="card my_card my-3 p-3"
                                 >
 
                                     <div class="plate_wrapper">

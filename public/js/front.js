@@ -30165,7 +30165,7 @@ var render = function () {
                             "div",
                             {
                               key: index,
-                              staticClass: "card my_card my-3 p-1",
+                              staticClass: "card my_card my-3 p-3",
                             },
                             [
                               _c("div", { staticClass: "plate_wrapper" }, [

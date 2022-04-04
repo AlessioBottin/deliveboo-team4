@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 use App\Plate;
 
@@ -62,11 +63,8 @@ class PlatesController extends Controller
 
         $new_plate = new Plate();
         $new_plate->fill($form_data);
-        
-        $new_plate->slug = Plate::generateSlug($new_plate->name);
-        $img_path = Storage::put('plate_images', $form_data['image']);
 
-        $new_plate->image = $img_path;
+        $new_plate->slug = Str::slug($form_data['name'], '-');
 
         $new_plate->user_id = $user_id;
 
@@ -154,17 +152,17 @@ class PlatesController extends Controller
             $plate->slug = Plate::generateSlug($form_data['name']);
         }
 
-        if(isset($form_data['image'])) {
-            //Cancello il file vecchio
-            if($plate->image) {
-                Storage::delete($plate->image);
-            }    
-            //Faccio l'upload del nuovo file
-            $img_path = Storage::put('plate_images', $form_data['image']);
+        // if(isset($form_data['image'])) {
+        //     //Cancello il file vecchio
+        //     if($plate->image) {
+        //         Storage::delete($plate->image);
+        //     }    
+        //     //Faccio l'upload del nuovo file
+        //     $img_path = Storage::put('plate_images', $form_data['image']);
     
-            //Salvo nel form data il path del nuovo file
-            $form_data['image'] = $img_path;
-        }
+        //     //Salvo nel form data il path del nuovo file
+        //     $form_data['image'] = $img_path;
+        // }
 
         $plate->update($form_data);
 
@@ -194,7 +192,7 @@ class PlatesController extends Controller
     // Validation Rules 
     public function getValidationRules($_isImgRequired) {
 
-        $_isImgRequired ? $imageRules = 'required|image|max:5120' : $imageRules = 'image|max:512';
+        $_isImgRequired ? $imageRules = 'required|string|max:255' : $imageRules = 'string|max:255';
 
         return [
             'name' => 'required|max:70',
