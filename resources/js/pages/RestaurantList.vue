@@ -14,7 +14,7 @@
                 <div class="advanced-research d-md-flex justify-content-md-between">
 
                     <!-- User Location  -->
-                    <div class="user-location d-sm-flex d-md-block justify-content-sm-between">
+                    <div class="user-location shadow_box d-sm-flex d-md-block justify-content-sm-between">
                         <i class="fas fa-map-marker-alt"></i> <span>Via Corso, Roma 00187</span>
                         <router-link class="change-zone" :to="{ name: 'home' }">Aree Coperte</router-link>
                     </div>
@@ -39,7 +39,7 @@
                         <!-- IMPORTANTE Aggiungere con l API la richiesta di categorie e 
                         fare la scrematura delle piu' importanti con il js cosi i calcoli li fa il pc dello user  -->
                         <ul class="categories-aside">
-                            <li v-for="(category,n) in categories" :key="n" @click="test(category)" class="category mb-4 d-flex justify-content-between">
+                            <li v-for="(category,n) in categories" :key="n" @click="test(category)" class="category mb-4 shadow_box d-flex justify-content-between">
                                 <!-- Al click sulla categoria deve essere settato il filtro  -->
                                 <!-- La classe active sull'icona della spunta deve essere implementata quando si aggiunge il filtro  -->
                                 
@@ -68,7 +68,7 @@
                         <ul class="list">
                             <li class="restaurant-card container-fluid" v-for="(restaurant, index) in restaurantsList" :key="index">
                                 <router-link :to="{ name: 'restaurant-details', params: { slug: restaurant.slug } }">
-                                    <div class="row">
+                                    <div class="row  d-flex">
 
                                         <!-- Img  -->
                                         <div class="col-sm-12 col-md-2 mb-sm-1 mb-md-0 restaurant-img"><img :src="restaurant.image" :alt="restaurant.name"></div>
@@ -145,9 +145,14 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/app';
 
+.shadow_box {
+    -webkit-box-shadow: 0px -1px 15px -5px #000000;
+    -moz-box-shadow: 0px -1px 15px -5px #000000;
+    -o-box-shadow: 0px -1px 15px -5px #000000;
+    box-shadow: 0px -1px 15px -5px #000000;
+}
 section {
     margin-top: 98px;
-
     @media screen and (max-width: 768px) {
         margin-top: 125px;
     }
@@ -248,10 +253,13 @@ section {
                             border-radius: 15px;
                             border: 1px solid $main_color; 
                             display: inline-block;
+                            background-color: $main_color;
+                            font-weight: 700;
+                            text-transform: capitalize;
 
                             &:hover {
-                                background-color: $main_color;
-                                color: white;
+                                background-color: white;
+                                color: black;
                     
                             }
 
@@ -296,6 +304,9 @@ section {
                             -o-box-shadow: 0px -1px 15px -5px #000000;
                             box-shadow: 0px -1px 15px -5px #000000;
                             margin-bottom: 20px;
+                            background-color: white;
+                            overflow: hidden;
+                            
                             
                             // Image 
                             .restaurant-img {        
