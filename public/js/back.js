@@ -122,9 +122,6 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register(chart_js__WEBPACK_IMPORT
     Bar: vue_chartjs_legacy__WEBPACK_IMPORTED_MODULE_0__["Bar"]
   },
   props: {
-    orderData: {
-      type: Array
-    },
     chartId: {
       type: String,
       "default": 'bar-chart'
@@ -159,17 +156,59 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register(chart_js__WEBPACK_IMPORT
   data: function data() {
     return {
       chartData: {
-        labels: ['January', 'February', 'March'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-          data: [40, 20, 12]
+          data: this.getOrdersData()
         }]
       },
       chartOptions: {
         responsive: true
       }
     };
+  },
+  methods: {
+    getOrdersData: function getOrdersData() {
+      var orders = this.$attrs['orderdata'];
+      var monthlyOrders = [];
+      var thisMonthOrders = 0;
+
+      var _loop = function _loop(i) {
+        thisMonthOrders = 0;
+        orders.forEach(function (order) {
+          var date = new Date(order.created_at);
+          var month = date.getMonth() + 1;
+          console.log(i);
+          console.log(month);
+
+          if (month === i + 1) {
+            console.log(order);
+            thisMonthOrders++;
+          } else {
+            console.log('no');
+          }
+
+          monthlyOrders[i] = thisMonthOrders;
+        });
+      };
+
+      for (var i = 0; i < 12; i++) {
+        _loop(i);
+      }
+
+      console.log(monthlyOrders);
+      return monthlyOrders;
+    }
   }
-});
+}); // date = new Date(order.created_at);
+// year = date.getFullYear();
+// month = date.getMonth()+1;
+// dt = date.getDate();
+// if (dt < 10) {
+//   dt = '0' + dt;
+// }
+// if (month < 10) {
+//   month = '0' + month;
+// }
 
 /***/ }),
 
@@ -26524,7 +26563,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })

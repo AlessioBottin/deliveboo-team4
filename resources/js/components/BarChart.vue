@@ -24,9 +24,6 @@ export default {
   name: 'BarChart',
   components: { Bar },
   props: {
-    orderData: {
-      type: Array
-    },
     chartId: {
       type: String,
       default: 'bar-chart'
@@ -56,18 +53,59 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data: function() {
     return {
       chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
+        labels: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+        datasets: [ { data: this.getOrdersData() } ]
       },
       chartOptions: {
         responsive: true
-      }
+      },
     }
-  }
+  }, 
+  methods: {
+    getOrdersData: function() {
+      let orders = this.$attrs['orderdata'];
+      
+      let monthlyOrders = [];
+      let thisMonthOrders = 0;
+      
+      for (let i = 0; i < 12; i++) {
+        thisMonthOrders = 0;
+
+        orders.forEach(order => {
+          let date = new Date(order.created_at);
+          let month = date.getMonth()+1;
+
+          console.log(i);
+          console.log(month);
+          if (month === i+1) {
+            console.log(order);
+            thisMonthOrders++
+          } else {
+            console.log('no');
+          }
+          monthlyOrders[i] = thisMonthOrders; 
+        });
+        
+      }
+      console.log(monthlyOrders);
+      return monthlyOrders;
+    }
+  }     
 }
+// date = new Date(order.created_at);
+// year = date.getFullYear();
+// month = date.getMonth()+1;
+// dt = date.getDate();
+
+// if (dt < 10) {
+//   dt = '0' + dt;
+// }
+// if (month < 10) {
+//   month = '0' + month;
+// }
 </script>
 
 <style lang="scss" scoped>
