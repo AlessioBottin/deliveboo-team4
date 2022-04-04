@@ -97,6 +97,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_chartjs_legacy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs/legacy */ "./node_modules/vue-chartjs/legacy/index.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.esm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 //
 //
 //
@@ -122,9 +124,6 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register(chart_js__WEBPACK_IMPORT
     Bar: vue_chartjs_legacy__WEBPACK_IMPORTED_MODULE_0__["Bar"]
   },
   props: {
-    orderData: {
-      type: Array
-    },
     chartId: {
       type: String,
       "default": 'bar-chart'
@@ -159,17 +158,101 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register(chart_js__WEBPACK_IMPORT
   data: function data() {
     return {
       chartData: {
-        labels: ['January', 'February', 'March'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-          data: [40, 20, 12]
+          data: this.getOrdersData(),
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 1,
+          label: 'Orders Per Month'
         }]
       },
       chartOptions: {
         responsive: true
       }
     };
+  },
+  methods: {
+    getOrdersData: function getOrdersData() {
+      var _this = this;
+
+      // Versione Vendite Mensili 
+      if (this.$attrs['version'] === 'monthlysales') {
+        var _ret = function () {
+          var orders = _this.$attrs['orderdata'];
+          var monthlyOrders = [];
+          var thisMonthOrders = 0;
+
+          var _loop = function _loop(i) {
+            thisMonthOrders = 0;
+            orders.forEach(function (order) {
+              var date = new Date(order.created_at);
+              var month = date.getMonth() + 1;
+
+              if (month === i + 1) {
+                thisMonthOrders++;
+              }
+
+              monthlyOrders[i] = thisMonthOrders;
+            });
+          };
+
+          for (var i = 0; i < 12; i++) {
+            _loop(i);
+          }
+
+          return {
+            v: monthlyOrders
+          };
+        }();
+
+        if (_typeof(_ret) === "object") return _ret.v;
+      } // Versione ricavi mensili 
+
+
+      if (this.$attrs['version'] === 'monthlyrevenue') {
+        var _ret2 = function () {
+          var orders = _this.$attrs['orderdata'];
+          var monthlyRevenue = [];
+          var thisMonthRevenue = 0;
+
+          var _loop2 = function _loop2(i) {
+            thisMonthRevenue = 0;
+            orders.forEach(function (order) {
+              var date = new Date(order.created_at);
+              var month = date.getMonth() + 1;
+
+              if (month === i + 1) {
+                thisMonthRevenue += parseFloat(order.total_price);
+              }
+
+              monthlyRevenue[i] = thisMonthRevenue;
+            });
+          };
+
+          for (var i = 0; i < 12; i++) {
+            _loop2(i);
+          }
+
+          return {
+            v: monthlyRevenue
+          };
+        }();
+
+        if (_typeof(_ret2) === "object") return _ret2.v;
+      }
+    }
   }
-});
+}); // date = new Date(order.created_at);
+// year = date.getFullYear();
+// month = date.getMonth()+1;
+// dt = date.getDate();
+// if (dt < 10) {
+//   dt = '0' + dt;
+// }
+// if (month < 10) {
+//   month = '0' + month;
+// }
 
 /***/ }),
 
@@ -26524,7 +26607,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Gianluca\Repository\mamp\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\deliveboo-team4\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })

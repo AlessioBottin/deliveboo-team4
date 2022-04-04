@@ -12,8 +12,6 @@
                     </router-link>
                 </div>
             </div>
-
-
         </div>
     </div>
     
@@ -35,15 +33,18 @@ export default {
 // ! Scrollbar customization
 ::-webkit-scrollbar{
     height: 10px;
+    
 }
 ::-webkit-scrollbar-track{
     background: white;
     border-radius: 15px;
+    
 }
 ::-webkit-scrollbar-thumb{
     background: lighten(#ffce08, 10%);
     border-radius: 15px;
     border: 1px solid white;
+    
 }
 
 ::-webkit-scrollbar-thumb:hover{
